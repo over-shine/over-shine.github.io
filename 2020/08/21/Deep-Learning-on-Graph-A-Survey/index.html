@@ -323,13 +323,13 @@
 <div align=center><img src="GNN2.PNG"></div>
 
 <h2 id="2-Notations-And-Preliminaries"><a href="#2-Notations-And-Preliminaries" class="headerlink" title="2. Notations And Preliminaries"></a>2. Notations And Preliminaries</h2><ul>
-<li>图：$G=(V,E), V={v_1,v_2,\ldots,v_N},N=|V|,E\subseteq V\times V,M=|E|$，$N$代表节点数，$M$代表边数</li>
+<li>图：$G=(V,E), V=\{v_1,v_2,\ldots,v_N\},N=|V|,E\subseteq V\times V,M=|E|$，$N$代表节点数，$M$代表边数</li>
 <li>邻接矩阵：$A\in \mathbb{R}^{N\times N}$，在这篇论文中主要考虑无符号图，因此 $A(i,j)\ge 0$</li>
 <li>边特征和节点特征：$F^E,F^V$</li>
 <li>在本文中，大写字母代表矩阵，小写字母代表向量，卷曲字母代表函数如 $\mathcal{F}(\cdot)$</li>
 <li>一个无向图的拉普拉斯矩阵：$L=D-A$，$D$ 是一个对角矩阵，代表每个节点的度，$A$ 是邻接矩阵；拉普拉斯矩阵的特征分解表示为 $L=Q\Lambda Q^T,\Lambda \in\mathbb{R}^{N\times N}$</li>
 <li>转移矩阵：$P=D^{-1}A$，$P(i,j)$ 代表从节点 $v_i$ 随机游走到节点 $v_j$ 的概率</li>
-<li>节点的K步邻居：$\mathcal{N}_k={j|\mathcal{D}(i,j)\leq k}$，其中 $\mathcal{D}(i,j)$ 是节点 $v_i$ 到节点 $v_j$ 的最短距离，即 $\mathcal{N}_k$ 是从节点 $v_i$ 可以在 k 步内到达节点 $v_j$ 的节点集合。</li>
+<li>节点的K步邻居：$\mathcal{N}_k=\{j|\mathcal{D}(i,j)\leq k\}$，其中 $\mathcal{D}(i,j)$ 是节点 $v_i$ 到节点 $v_j$ 的最短距离，即 $\mathcal{N}_k$ 是从节点 $v_i$ 可以在 k 步内到达节点 $v_j$ 的节点集合。</li>
 <li>深度学习模型：$H^l$ 代表层，$f_l$ 代表 $l$ 层的维度， $\sigma(x)$ 代表激活函数，一般的元素非线性激活函数表示为 $\rho(\cdot)$，$\Theta$ 代表模型的参数，$s$ 代表采样大小。</li>
 </ul>
 <p>在图上深度学习模型的任务可以大致分为两类：</p>
@@ -373,7 +373,7 @@
 <script type="math/tex; mode=display">\mathbf{u}^{\prime}=Q\Theta(\Lambda)Q^T\mathbf{u}=\sum_{k=0}^K\theta_kQ\mathcal{T}_k(\tilde{\Lambda})Q^T\mathbf{u}\\=\sum_{k=0}^K\theta_k\mathcal{T}_k(\tilde{L})\mathbf{u}=\sum_{k=0}^K\theta_k\bar{\mathbf{u}}_k\tag{11}</script><p>其中，$\bar{\mathbf{u}}_k=\mathcal{T}_k(\tilde{L})\mathbf{u},\;\tilde{L}=2L/\lambda_{max}-\mathbf{I}$，使用切比雪夫多项式的递推关系 $\mathcal{T}_k(x)=2x\mathcal{T}_{k-1}(x)-\mathcal{T}_{k-2}$ 和 $\mathcal{T}_0(x)=1,\;\mathcal{T}_1(x)=x$，$\bar{\mathbf{u}}_k$ 也可以递归计算：</p>
 <script type="math/tex; mode=display">\bar{\mathbf{u}}_k=2\tilde{L}\bar{\mathbf{u}}_{k-1}-\bar{\mathbf{u}}_{k-2}\tag{12}</script><p>其中，$\bar{\mathbf{u}}_0=\mathbf{u},\;\bar{\mathbf{u}}_1=\tilde{L}\mathbf{u}$。现在，因为仅需要计算稀疏矩阵 $\tilde{L}$ 的矩阵乘法和一些矢量，所以当使用稀疏矩阵乘法时，时间复杂度变为 $O(KM)$，其中 $M,K$ 分别是边的数量和多项式的阶数，即时间复杂度相对于边数是线性的。可以看出，这样的多项式滤波器是严格 $K$ 局部化的：在一次卷积之后，节点 $v_i$ 的表示将仅受其 $K$ 阶领域 $\mathcal{N}_K(i)$。有趣的是，该思想在网络嵌入中被独立使用以保持高阶邻近度。为了简洁，我们省略了细节。</p>
 <p>“Semi-supervised classification with graph convolutional networks”仅使用一阶邻居进一步简化了滤波器：</p>
-<script type="math/tex; mode=display">h_i^{l+1}=\rho\left(\sum_{j\in\tilde{\mathcal{N}}_i}\frac{h_j^l\Theta^l}{\sqrt{\tilde{\mathbf{D}}(i,i)\tilde{\mathbf{D}}(j,j)}}\right)\tag{13}</script><p>其中，$h_i^l\in\mathbb{R}^{f_l}$ 是节点 $v_i$ 在第 $l$ 层的隐藏表示，$\tilde{\mathbf{D}}=\mathbf{D}+\mathbf{I},\;\tilde{\mathcal{N}}(i)=\mathcal{N}(i)\cup{i}$，这可以等效地以矩阵形式重写为以下公式：</p>
+<script type="math/tex; mode=display">h_i^{l+1}=\rho\left(\sum_{j\in\tilde{\mathcal{N}}_i}\frac{h_j^l\Theta^l}{\sqrt{\tilde{\mathbf{D}}(i,i)\tilde{\mathbf{D}}(j,j)}}\right)\tag{13}</script><p>其中，$h_i^l\in\mathbb{R}^{f_l}$ 是节点 $v_i$ 在第 $l$ 层的隐藏表示，$\tilde{\mathbf{D}}=\mathbf{D}+\mathbf{I},\;\tilde{\mathcal{N}}(i)=\mathcal{N}(i)\cup\{i\}$，这可以等效地以矩阵形式重写为以下公式：</p>
 <script type="math/tex; mode=display">\mathbf{H}^{l+1}=\rho\left(\tilde{\mathbf{D}}^{-\frac{1}{2}}\tilde{\mathbf{A}}\tilde{\mathbf{D}}^{-\frac{1}{2}}\mathbf{H}^l\Theta^l\right)\tag{14}</script><p>其中，$\tilde{\mathbf{A}}=\mathbf{A}+\mathbf{I}$，即添加自连接，作者通过设置 $K=1$ 这一个细小的改变表明公式（14）是公式（9）的一种特殊形式。然后，作者认为，如图3所示，堆叠足够数量的层具有类似于ChebNet的建模能力，但会带来更好的结果。</p>
 <div align=center><img src="GNN6.PNG"></div>
 
@@ -399,7 +399,7 @@
 \mathbf{m}_{i}^{l+1}= \text { AGGREGATE }^{l}\left(\left\{\mathbf{h}_{j}^{l}, \forall j \in \mathcal{N}(i)\right\}\right)\\
 \mathbf{h}_{i}^{l+1}=\rho\left(\mathbf{\Theta}^{l}\left[\mathbf{h}_{i}^{l}, \mathbf{m}_{i}^{l+1}\right]\right)
 \end{array}\tag{22}</script><p>其中，$[\cdot,\cdot]$ 表示级联操作，$\text{AGGREGATE}(\cdot)$ 表示聚合函数。作者推荐了三个聚合函数：按元素的均值，LSTM和最大池化如下：</p>
-<script type="math/tex; mode=display">\text { AGGREGATE }^{l}=\max \left\{\rho\left(\Theta_{\text {pool }} \mathbf{h}_{j}^{l}+\mathbf{b}_{\text {pool }}\right), \forall j \in \mathcal{N}(i)\right\}\tag{23}</script><p>其中，$\Theta_{pool},\;\mathbf{b}_{pool}$ 是要学习的参数，$\max{\cdot}$ 是逐元素取最大值。对于 LSTM 聚合函数，因为需要对邻居排序，作者才用了随机排序。</p>
+<script type="math/tex; mode=display">\text { AGGREGATE }^{l}=\max \left\{\rho\left(\Theta_{\text {pool }} \mathbf{h}_{j}^{l}+\mathbf{b}_{\text {pool }}\right), \forall j \in \mathcal{N}(i)\right\}\tag{23}</script><p>其中，$\Theta_{pool},\;\mathbf{b}_{pool}$ 是要学习的参数，$\max\{\cdot\}$ 是逐元素取最大值。对于 LSTM 聚合函数，因为需要对邻居排序，作者才用了随机排序。</p>
 <p>混合模型网络（MoNet）【“Geometric deep learning on graphs and manifolds using mixture model cnns”】还尝试使用“模板匹配”将现有的GCN模型以及用于歧管的CNN统一到一个通用框架中：</p>
 <script type="math/tex; mode=display">h_{i k}^{l+1}=\sum_{j \in \mathcal{N}(i)} \mathcal{F}_{k}^{l}(\mathbf{u}(i, j)) \mathbf{h}_{j}^{l}, k=1, \ldots, f_{l+1}\tag{24}</script><p>其中，$\mathbf{u}(i,j)$ 是节点对 $(v_i,v_j)$ 的伪坐标，$\mathcal{F}_k^l(\mathbf{u})$ 是要学习的参数函数，$h_{ik}^l$ 是 $h_i^l$ 的第 $k$ 维，换句话说，$\mathcal{F}_k^l(\mathbf{u})$ 用作组合领域的加权内核。然后，MoNet采用了以下高斯内核：</p>
 <script type="math/tex; mode=display">\mathcal{F}_{k}^{l}(\mathbf{u})=\exp \left(-\frac{1}{2}\left(\mathbf{u}-\boldsymbol{\mu}_{k}^{l}\right)^{T}\left(\boldsymbol{\Sigma}_{k}^{l}\right)^{-1}\left(\mathbf{u}-\boldsymbol{\mu}_{k}^{l}\right)\right)\tag{25}</script><p>其中，$\mu_k^l,\;\sum_k^l$ 分别是均值向量和对角协方差矩阵。伪坐标是度数，如Kipf和Welling 【“Semi-supervised classification with graph convolutional networks”】，即</p>
@@ -523,13 +523,13 @@ $$\alpha_{i j}^{l}=\frac{\exp \left(\text { LeakyReLU }\left(\mathcal{F}\left(\m
 \mathrm{KL}\left(\mathrm{h}_{j} \| \mathrm{h}_{i}\right)<\mathrm{KL}\left(\mathrm{h}_{j^{\prime}} \| \mathrm{h}_{i}\right) \\
 \forall i, \forall j, \forall j^{\prime} \text { s.t. } d(i, j)<d\left(i, j^{\prime}\right)
 \end{array}\tag{50}</script><p>其中，$d(i,j)$ 是节点 $v_i$ 到节点 $v_j$ 的最短距离，$\mathbf{KL}(q(\cdot)|p(\cdot))$ 是 $q(\cdot)$ 和 $p(\cdot)$ 之间的Kullback-Leibler（KL）散度【“On information and sufficiency”】。换句话说，约束条件确保节点表示之间的KL散度具有与图距离相同的相对顺序。 但是，因为公式（50）难以优化，因此采用了基于能量的损失【“A tutorial on energy-based learning”】：</p>
-<script type="math/tex; mode=display">\mathcal{L}=\sum_{\left(i, j, j^{\prime}\right) \in \mathcal{D}}\left(E_{i j}^{2}+\exp ^{-E_{i j^{\prime}}}\right)\tag{51}</script><p>其中，$\mathcal{D}={(i,j,j^{\prime})|d(i,j)&lt;d(i,j^{\prime})},E_{ij}=\mathbf{KL}(\mathbf{h}_j|\mathbf{h}_i)$。作者进一步提出了一种无偏的采样策略，以加快训练过程。</p>
+<script type="math/tex; mode=display">\mathcal{L}=\sum_{\left(i, j, j^{\prime}\right) \in \mathcal{D}}\left(E_{i j}^{2}+\exp ^{-E_{i j^{\prime}}}\right)\tag{51}</script><p>其中，$\mathcal{D}=\{(i,j,j^{\prime})|d(i,j)&lt;d(i,j^{\prime})\},E_{ij}=\mathbf{KL}(\mathbf{h}_j|\mathbf{h}_i)$。作者进一步提出了一种无偏的采样策略，以加快训练过程。</p>
 <h3 id="5-2-Variational-Autoencoders"><a href="#5-2-Variational-Autoencoders" class="headerlink" title="5.2 Variational Autoencoders"></a>5.2 Variational Autoencoders</h3><p>与上述自动编码器不同，变异自动编码器（VAE）是将降维与生成模型结合在一起的另一种深度学习方法。 它的潜在好处包括容忍噪声和学习平滑表示【“Auto-encoding variational bayes”】。 VAE首先被引入VGAEs【“Variational graph auto-encoders”】中的图形数据，其中解码器是一个简单的线性乘积：</p>
 <script type="math/tex; mode=display">p(\mathbf{A} | \mathbf{H})=\prod_{i, j=1}^{N} \sigma\left(\mathbf{h}_{i} \mathbf{h}_{j}^{T}\right)\tag{52}</script><p>其中假定节点表示遵循高斯分布 $q(\mathbf{h}_i|\mathbf{M},\sum)= \mathcal{N}(\mathbf{h}_i|\mathbf{M}(i; :), diag(\sum(i; :)))$。 对于均值和方差矩阵的编码器，作者还采用了Kipf和Welling提出的GCN【“Semi-supervised classification with graph convolutional networks”】：</p>
 <script type="math/tex; mode=display">\mathbf{M}=G C N_{\mathrm{M}}\left(\mathbf{F}^{V}, \mathbf{A}\right), \log \mathbf{\Sigma}=G C N_{\Sigma}\left(\mathbf{F}^{V}, \mathbf{A}\right)\tag{53}</script><p>然后，通过最小化变分下界来学习模型参数【“Auto-encoding variational bayes”】：</p>
 <script type="math/tex; mode=display">\mathcal{L}=\mathbb{E}_{q\left(\mathbf{H} | \mathbf{F}^{V}, \mathbf{A}\right)}[\log p(\mathbf{A} | \mathbf{H})]-\operatorname{KL}\left(q\left(\mathbf{H} | \mathbf{F}^{V}, \mathbf{A}\right) \| p(\mathbf{H})\right)\tag{54}</script><p>但这个方法要求重构整个图，所以复杂度为 $O(N^2)$。</p>
 <p>受SDNE和G2G的推动，DVNE [103]为图数据提出了另一个VAE，该图也将每个节点都表示为高斯分布。 与现有的采用KLdivergence作为度量的工作不同，DVNE使用Wasserstein距离[114]来保留节点相似性的传递性。 与SDNE和G2G相似，DVNE在其目标函数中还保留了一阶和二阶接近度：</p>
-<script type="math/tex; mode=display">\min _{\Theta} \sum_{\left(i, j, j^{\prime}\right) \in \mathcal{D}}\left(E_{i j}^{2}+\exp ^{-E_{i j^{\prime}}}\right)+\alpha \mathcal{L}_{2}\tag{55}</script><p>其中，$E_{ij}=W_2(\mathbf{h}_j|\mathbf{h}_i)$ 是两个高斯分布 $\mathbf{h}_i,\mathbf{h}_j$之间的第二个Wasserstein距离。$D = {(i, j, j^{\prime})|j\in\mathcal{N}(i), j^{\prime}\notin \mathcal{N}(i)}$是一组对应于一阶接近度的秩损失的三元组。 构损失定义如下：</p>
+<script type="math/tex; mode=display">\min _{\Theta} \sum_{\left(i, j, j^{\prime}\right) \in \mathcal{D}}\left(E_{i j}^{2}+\exp ^{-E_{i j^{\prime}}}\right)+\alpha \mathcal{L}_{2}\tag{55}</script><p>其中，$E_{ij}=W_2(\mathbf{h}_j|\mathbf{h}_i)$ 是两个高斯分布 $\mathbf{h}_i,\mathbf{h}_j$之间的第二个Wasserstein距离。$D = \{(i, j, j^{\prime})|j\in\mathcal{N}(i), j^{\prime}\notin \mathcal{N}(i)\}$是一组对应于一阶接近度的秩损失的三元组。 构损失定义如下：</p>
 <script type="math/tex; mode=display">\mathcal{L}_{2}=\inf _{q(\mathbf{Z} | \mathbf{P})} \mathbb{E}_{p(\mathbf{P})} \mathbb{E}_{q(\mathbf{Z} | \mathbf{P})}\|\mathbf{P} \odot(\mathbf{P}-\mathcal{G}(\mathbf{Z}))\|_{2}^{2}\tag{56}</script><p>其中，$\mathbf{P}$ 是转移矩阵，$\mathbf{Z}$ 代表对 $\mathbf{H}$ 的采样。框架如图9所示。使用这种方法，可以将目标函数最小化，就像在常规VAE中重新参数化技巧一样【“Auto-encoding variational bayes”】。</p>
 <div align=center><img src="GNN13.png"></div>
 
@@ -982,11 +982,11 @@ $$\alpha_{i j}^{l}=\frac{\exp \left(\text { LeakyReLU }\left(\mathcal{F}\left(\m
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1256,6 +1256,22 @@ $$\alpha_{i j}^{l}=\frac{\exp \left(\text { LeakyReLU }\left(\mathcal{F}\left(\m
     });
   </script>
   
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 
 </html>

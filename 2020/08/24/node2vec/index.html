@@ -321,7 +321,7 @@
     \frac{1}{p},& \mathbf{if}\ d_{tx}=0\\
     1, &\mathbf{if}\ d_{tx}=1\\
     \frac{1}{q},&\mathbf{if}\ d_{tx}=2
-\end{cases}</script><p>其中，$d_{tx}$ 代表节点 $t$ 和 $x$ 之间的最短路径，$d_{tx}$ 必须在 ${0,1,2}$ 中，两个参数就足够进行采样了。参数 $p$ 和 $q$ 控制探索和离开邻域的速度。</p>
+\end{cases}</script><p>其中，$d_{tx}$ 代表节点 $t$ 和 $x$ 之间的最短路径，$d_{tx}$ 必须在 $\{0,1,2\}$ 中，两个参数就足够进行采样了。参数 $p$ 和 $q$ 控制探索和离开邻域的速度。</p>
 <p>参数 $p$ 控制访问已访问过的直接邻居的可能性，当 $p&gt;\max(q,1)$ 设为较大的值时，保证在接下来的两步中只有很小的可能访问已访问过的节点（除了节点没有其它邻居）。这种策略鼓励在采样时，适当探索并且避免2-hop冗余。如果 $p&lt;\min(q, 1)$ 很小，那么将会在源节点 $u$ 的局部游走。</p>
 <p>参数 $q$ 允许搜索向内和向外的不同节点。如果 $q&gt;1$，那么随机游走会偏向节点 $t$。在我们的样本包含一个小的局部性内的节点的意义上，这样的行走可获取相对于行走中的起始节点的基础图的局部视图，并近似 BFS 行为。如果 $q&lt;1$，则步行更倾向于访问距离节点 $t$ 更远的节点。 这种行为反映了DFS，DFS鼓励向外探索。</p>
 <h2 id="2-4-node2vec算法"><a href="#2-4-node2vec算法" class="headerlink" title="2.4 node2vec算法"></a>2.4 node2vec算法</h2><div align=center><img src="node2vec.png"/></div>
@@ -717,11 +717,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -991,6 +991,22 @@
     });
   </script>
   
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 
 </html>
