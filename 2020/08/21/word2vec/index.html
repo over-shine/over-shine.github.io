@@ -313,8 +313,8 @@
 <div align=center><img src="Tf-IDF.png"/></div>
 
 <p>下面是一些与TF-IDF相关的术语：</p>
-<script type="math/tex; mode=display">TF=\frac{单词\ t\ 在某个文档出现的次数}{该文档中的单词总数}</script><p>如$ TF(This,document1)=\frac{1}{8}$，它表示单词对文档的贡献，即与文档相关的单词应经常出现。</p>
-<script type="math/tex; mode=display">IDF=\log(\frac{语料库中的文档数N}{语料库中出现单词\ t\ 的文档数n})</script><p>如$ IDF(This)=\log(\frac{2}{2})=0$，$IDF(Messi)=\log(\frac{2}{1})=0.301$</p>
+<script type="math/tex; mode=display">TF=\frac{单词\ t\ 在某个文档出现的次数}{该文档中的单词总数}</script><p>如$\ TF(This,document1)=\frac{1}{8}$，它表示单词对文档的贡献，即与文档相关的单词应经常出现。</p>
+<script type="math/tex; mode=display">IDF=\log(\frac{语料库中的文档数N}{语料库中出现单词\ t\ 的文档数n})</script><p>如$\ IDF(This)=\log(\frac{2}{2})=0$，$IDF(Messi)=\log(\frac{2}{1})=0.301$</p>
 <p>理想情况下，如果一个单词出现在所有文档中，则该单词可能与特定文档无关。但是，如果它出现在一部分文档中，则该单词可能与其所在的文档有些相关。</p>
 <script type="math/tex; mode=display">TF-IDF(This,document1)=\frac{1}{8}*0=0</script><script type="math/tex; mode=display">TF-IDF(This,Document2)=\frac{1}{5}*0=0</script><script type="math/tex; mode=display">TF-IDF(Messi,Document1)=\frac{4}{8}*0.301=0.15</script><p>如上所见，对于Document1，TF-IDF方法严重惩罚了单词’This’，但为’Messi’分配了更大的权重。因此，从整个语料库的上下文来看，“Messi”对于Document1来说是一个重要的词。</p>
 <h3 id="1-3-Co-Occurrence-Matrix-with-a-fixed-context-window"><a href="#1-3-Co-Occurrence-Matrix-with-a-fixed-context-window" class="headerlink" title="1.3 Co-Occurrence Matrix with a fixed context window"></a>1.3 Co-Occurrence Matrix with a fixed context window</h3><p>伟大的想法 -相似的词往往会在一起出现，并且具有类似的上下文-例如，苹果是一种水果。芒果是一种水果。苹果和芒果倾向于具有相似的背景，即水果。</p>
@@ -834,11 +834,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1108,22 +1108,6 @@
     });
   </script>
   
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 
 </html>
