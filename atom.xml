@@ -6,7 +6,7 @@
   <link href="https://over-shine.github.io/atom.xml" rel="self"/>
   
   <link href="https://over-shine.github.io/"/>
-  <updated>2021-05-22T16:33:18.829Z</updated>
+  <updated>2021-11-02T06:28:34.355Z</updated>
   <id>https://over-shine.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vcpkg安装tensorflow采坑经验</title>
+    <link href="https://over-shine.github.io/2021/10/31/vcpkg%E5%AE%89%E8%A3%85tensorflow%E9%87%87%E5%9D%91%E7%BB%8F%E9%AA%8C/"/>
+    <id>https://over-shine.github.io/2021/10/31/vcpkg%E5%AE%89%E8%A3%85tensorflow%E9%87%87%E5%9D%91%E7%BB%8F%E9%AA%8C/</id>
+    <published>2021-10-31T14:50:11.000Z</published>
+    <updated>2021-11-02T06:28:34.355Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="vcpkg-安装-tensorflow-cc-采坑记录"><a href="#vcpkg-安装-tensorflow-cc-采坑记录" class="headerlink" title="vcpkg 安装 tensorflow-cc 采坑记录"></a>vcpkg 安装 tensorflow-cc 采坑记录</h1><p>注意：安装tensorflow-cc需要保证磁盘最少有150G左右的空闲空间</p><h2 id="设置HTTP-S-PROXY"><a href="#设置HTTP-S-PROXY" class="headerlink" title="设置HTTP(S)_PROXY"></a>设置HTTP(S)_PROXY</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vcpkg env</span><br><span class="line">set HTTPS_PROXY&#x3D;http:&#x2F;&#x2F;127.0.0.1:10809&#x2F;</span><br><span class="line">set HTTP_PROXY&#x3D;http:&#x2F;&#x2F;127.0.0.1:10809&#x2F;</span><br></pre></td></tr></table></figure><p>这里的端口号在自己电脑网络中查看代理</p><h2 id="设置git的https-proxy"><a href="#设置git的https-proxy" class="headerlink" title="设置git的https_proxy"></a>设置git的https_proxy</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global https.proxy https:&#x2F;&#x2F;127.0.0.1:1080</span><br></pre></td></tr></table></figure><p>通过如下命令可以查看是否设置成功</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global --list</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;vcpkg-安装-tensorflow-cc-采坑记录&quot;&gt;&lt;a href=&quot;#vcpkg-安装-tensorflow-cc-采坑记录&quot; class=&quot;headerlink&quot; title=&quot;vcpkg 安装 tensorflow-cc 采坑记录&quot;&gt;&lt;/a&gt;vcpkg</summary>
+      
+    
+    
+    
+    
+    <category term="Error" scheme="https://over-shine.github.io/tags/Error/"/>
+    
+    <category term="tensorflow" scheme="https://over-shine.github.io/tags/tensorflow/"/>
+    
+    <category term="c++" scheme="https://over-shine.github.io/tags/c/"/>
+    
+  </entry>
   
   <entry>
     <title>论文贡献记录</title>
@@ -280,9 +306,9 @@
     <category term="论文" scheme="https://over-shine.github.io/categories/%E8%AE%BA%E6%96%87/"/>
     
     
-    <category term="GNN" scheme="https://over-shine.github.io/tags/GNN/"/>
-    
     <category term="DL" scheme="https://over-shine.github.io/tags/DL/"/>
+    
+    <category term="GNN" scheme="https://over-shine.github.io/tags/GNN/"/>
     
   </entry>
   
