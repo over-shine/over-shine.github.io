@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://over-shine.github.io/2021/05/17/%E8%AE%BA%E6%96%87%E8%B4%A1%E7%8C%AE%E8%AE%B0%E5%BD%95/img1.png">
 <meta property="article:published_time" content="2021-05-17T03:49:37.000Z">
-<meta property="article:modified_time" content="2021-05-17T06:04:41.706Z">
+<meta property="article:modified_time" content="2021-05-22T16:33:18.829Z">
 <meta property="article:author" content="程序猪-渔枫">
 <meta property="article:tag" content="NLP">
 <meta name="twitter:card" content="summary">
@@ -262,7 +262,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">143字</span>
+      <span class="post-count">530字</span>
     </span>
   </span>
 
@@ -283,9 +283,27 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h1 id="论文贡献记录"><a href="#论文贡献记录" class="headerlink" title="论文贡献记录"></a>论文贡献记录</h1><h2 id="Extracting-multiple-relations-in-one-pass-with-pre-trained-transformers论文"><a href="#Extracting-multiple-relations-in-one-pass-with-pre-trained-transformers论文" class="headerlink" title="Extracting multiple-relations in one-pass with pre-trained transformers论文"></a>Extracting multiple-relations in one-pass with pre-trained transformers<a href="https://arxiv.org/pdf/1905.08284.pdf%22">论文</a></h2><h3 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h3><h2 id="A-Novel-Document-Level-Relation-Extraction-Method-Based-on-BERT-and-Entity-Information论文"><a href="#A-Novel-Document-Level-Relation-Extraction-Method-Based-on-BERT-and-Entity-Information论文" class="headerlink" title="A Novel Document-Level Relation Extraction Method Based on BERT and Entity Information论文"></a>A Novel Document-Level Relation Extraction Method Based on BERT and Entity Information<a href="https://ieeexplore.ieee.org/iel7/6287639/8948470/09098945.pdf">论文</a></h2><h3 id="贡献-1"><a href="#贡献-1" class="headerlink" title="贡献"></a>贡献</h3><ol>
-<li>首先，我们提出了一种实体掩码方法（将每个不同实体用不同的special token替代），可以将实体的身份和类型信息引入模型.<img src="img1.png" alt=""></li>
+<li>首先，我们提出了一种实体掩码方法（将每个不同实体用不同的special token替代），可以将实体的身份和类型信息引入模型.<img src="img1.png" alt="">。</li>
 <li>提出了一个基于BERT的“one-pass”模型，该模型通过使用所提出的实体掩码方法来引入实体信息，并且所提出的模型在DocRed数据集上实现了最先进的性能。</li>
 </ol>
+<h2 id="DocRED-A-Large-Scale-Document-Level-Relation-Extraction-Dataset论文"><a href="#DocRED-A-Large-Scale-Document-Level-Relation-Extraction-Dataset论文" class="headerlink" title="DocRED: A Large-Scale Document-Level Relation Extraction Dataset论文"></a>DocRED: A Large-Scale Document-Level Relation Extraction Dataset<a href="https://arxiv.org/pdf/1906.06127">论文</a></h2><h3 id="DocRED数据集特点"><a href="#DocRED数据集特点" class="headerlink" title="DocRED数据集特点"></a>DocRED数据集特点</h3><ol>
+<li>DocRED包含5053个Wikipedia文档中注释的132375个实体和56354个关系事实，使其成为最大的带有人类注释的文档级RE数据集。</li>
+<li>由于DocRED中至少40.7％的关系事实只能从多个句子中提取，因此DocRED要求阅读文档中的多个句子以识别实体并通过综合文档的所有信息来推断它们之间的关系。 这将DocRED与那些句子级RE数据集区分开来。</li>
+<li>我们还提供了大规模的远程监督数据，以支持弱监督的RE研究。</li>
+</ol>
+<h3 id="人工注释数据收集步骤"><a href="#人工注释数据收集步骤" class="headerlink" title="人工注释数据收集步骤"></a>人工注释数据收集步骤</h3><ol>
+<li>为Wikipedia文档生成远程监督的注释。</li>
+<li>注释文档中的所有命名实体和共指信息。</li>
+<li>将命名实体链接到Wikidata项目。</li>
+<li>标注关系和相应的支持证据。</li>
+</ol>
+<p>步骤2和4需要按照下面的步骤迭代处理3次：</p>
+<ol>
+<li>使用命名实体识别（NER）模型来生成命名实体，或使用远程监督和RE模型推荐关系。</li>
+<li>来生成命名实体。</li>
+<li>查看并进一步修改第二遍的注释结果，以获得更好的准确性和一致性。</li>
+</ol>
+<p>为了确保注释器训练有素，采用了有原则的训练程序，并且注释器必须在对数据集进行注释之前通过测试任务。 并且只有经过精心选择的有经验的注释器才有资格进行第三遍注释。</p>
 
     
 
@@ -455,7 +473,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E8%B4%A1%E7%8C%AE%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">论文贡献记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Extracting-multiple-relations-in-one-pass-with-pre-trained-transformers%E8%AE%BA%E6%96%87"><span class="toc-number">1.1.</span> <span class="toc-text">Extracting multiple-relations in one-pass with pre-trained transformers论文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A1%E7%8C%AE"><span class="toc-number">1.1.1.</span> <span class="toc-text">贡献</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Novel-Document-Level-Relation-Extraction-Method-Based-on-BERT-and-Entity-Information%E8%AE%BA%E6%96%87"><span class="toc-number">1.2.</span> <span class="toc-text">A Novel Document-Level Relation Extraction Method Based on BERT and Entity Information论文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A1%E7%8C%AE-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">贡献</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E8%B4%A1%E7%8C%AE%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">论文贡献记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Extracting-multiple-relations-in-one-pass-with-pre-trained-transformers%E8%AE%BA%E6%96%87"><span class="toc-number">1.1.</span> <span class="toc-text">Extracting multiple-relations in one-pass with pre-trained transformers论文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A1%E7%8C%AE"><span class="toc-number">1.1.1.</span> <span class="toc-text">贡献</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Novel-Document-Level-Relation-Extraction-Method-Based-on-BERT-and-Entity-Information%E8%AE%BA%E6%96%87"><span class="toc-number">1.2.</span> <span class="toc-text">A Novel Document-Level Relation Extraction Method Based on BERT and Entity Information论文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A1%E7%8C%AE-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">贡献</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DocRED-A-Large-Scale-Document-Level-Relation-Extraction-Dataset%E8%AE%BA%E6%96%87"><span class="toc-number">1.3.</span> <span class="toc-text">DocRED: A Large-Scale Document-Level Relation Extraction Dataset论文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DocRED%E6%95%B0%E6%8D%AE%E9%9B%86%E7%89%B9%E7%82%B9"><span class="toc-number">1.3.1.</span> <span class="toc-text">DocRED数据集特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%BA%E5%B7%A5%E6%B3%A8%E9%87%8A%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.3.2.</span> <span class="toc-text">人工注释数据收集步骤</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
