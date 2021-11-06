@@ -10,12 +10,12 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="From Count Vectors to Word2VecWord Embeddings可以广义的分为以下两种：  Frequency based Embedding. Prediction based Embedding.">
+  <meta name="description" content="From Count Vectors to Word2Vec">
 <meta property="og:type" content="article">
 <meta property="og:title" content="word2vec">
 <meta property="og:url" content="https://over-shine.github.io/2020/08/21/word2vec/index.html">
 <meta property="og:site_name" content="吃了睡的程序猪">
-<meta property="og:description" content="From Count Vectors to Word2VecWord Embeddings可以广义的分为以下两种：  Frequency based Embedding. Prediction based Embedding.">
+<meta property="og:description" content="From Count Vectors to Word2Vec">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://over-shine.github.io/2020/08/21/word2vec/count-vector.png">
 <meta property="og:image" content="https://over-shine.github.io/2020/08/21/word2vec/Tf-IDF.png">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://over-shine.github.io/2020/08/21/word2vec/skip.png">
 <meta property="og:image" content="https://over-shine.github.io/2020/08/21/word2vec/SG.png">
 <meta property="article:published_time" content="2020-08-21T14:15:45.000Z">
-<meta property="article:modified_time" content="2020-08-24T04:56:11.656Z">
+<meta property="article:modified_time" content="2021-11-06T06:40:17.087Z">
 <meta property="article:author" content="程序猪-渔枫">
 <meta property="article:tag" content="NLP">
 <meta property="article:tag" content="word2vec">
@@ -293,12 +293,13 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="From-Count-Vectors-to-Word2Vec"><a href="#From-Count-Vectors-to-Word2Vec" class="headerlink" title="From Count Vectors to Word2Vec"></a>From Count Vectors to Word2Vec</h1><p>Word Embeddings可以广义的分为以下两种：</p>
+    <h1 id="From-Count-Vectors-to-Word2Vec"><a href="#From-Count-Vectors-to-Word2Vec" class="headerlink" title="From Count Vectors to Word2Vec"></a>From Count Vectors to Word2Vec</h1><a id="more"></a>
+<p>Word Embeddings可以广义的分为以下两种：</p>
 <ol>
 <li>Frequency based Embedding.</li>
 <li>Prediction based Embedding.</li>
 </ol>
-<a id="more"></a>
+<!-- more -->
 <h2 id="1-Frequency-based-Embedding"><a href="#1-Frequency-based-Embedding" class="headerlink" title="1. Frequency based Embedding"></a>1. Frequency based Embedding</h2><p>给予频率的Word Embedding可以分为以下三种：</p>
 <ol>
 <li>Count Vector.</li>
@@ -313,10 +314,15 @@
 <div align=center><img src="Tf-IDF.png"/></div>
 
 <p>下面是一些与TF-IDF相关的术语：</p>
-<script type="math/tex; mode=display">TF=\frac{单词\ t\ 在某个文档出现的次数}{该文档中的单词总数}</script><p>如$ TF(This,document1)=\frac{1}{8}$，它表示单词对文档的贡献，即与文档相关的单词应经常出现。</p>
-<script type="math/tex; mode=display">IDF=\log(\frac{语料库中的文档数N}{语料库中出现单词\ t\ 的文档数n})</script><p>如$ IDF(This)=\log(\frac{2}{2})=0$，$IDF(Messi)=\log(\frac{2}{1})=0.301$</p>
+<script type="math/tex; mode=display">
+TF=\frac{单词\ t\ 在某个文档出现的次数}{该文档中的单词总数}</script><p>如$ TF(This,document1)=\frac{1}{8}$，它表示单词对文档的贡献，即与文档相关的单词应经常出现。</p>
+<script type="math/tex; mode=display">
+IDF=\log(\frac{语料库中的文档数N}{语料库中出现单词\ t\ 的文档数n})</script><p>如$ IDF(This)=\log(\frac{2}{2})=0$，$IDF(Messi)=\log(\frac{2}{1})=0.301$</p>
 <p>理想情况下，如果一个单词出现在所有文档中，则该单词可能与特定文档无关。但是，如果它出现在一部分文档中，则该单词可能与其所在的文档有些相关。</p>
-<script type="math/tex; mode=display">TF-IDF(This,document1)=\frac{1}{8}*0=0</script><script type="math/tex; mode=display">TF-IDF(This,Document2)=\frac{1}{5}*0=0</script><script type="math/tex; mode=display">TF-IDF(Messi,Document1)=\frac{4}{8}*0.301=0.15</script><p>如上所见，对于Document1，TF-IDF方法严重惩罚了单词’This’，但为’Messi’分配了更大的权重。因此，从整个语料库的上下文来看，“Messi”对于Document1来说是一个重要的词。</p>
+<script type="math/tex; mode=display">
+TF-IDF(This,document1)=\frac{1}{8}*0=0</script><script type="math/tex; mode=display">
+TF-IDF(This,Document2)=\frac{1}{5}*0=0</script><script type="math/tex; mode=display">
+TF-IDF(Messi,Document1)=\frac{4}{8}*0.301=0.15</script><p>如上所见，对于Document1，TF-IDF方法严重惩罚了单词’This’，但为’Messi’分配了更大的权重。因此，从整个语料库的上下文来看，“Messi”对于Document1来说是一个重要的词。</p>
 <h3 id="1-3-Co-Occurrence-Matrix-with-a-fixed-context-window"><a href="#1-3-Co-Occurrence-Matrix-with-a-fixed-context-window" class="headerlink" title="1.3 Co-Occurrence Matrix with a fixed context window"></a>1.3 Co-Occurrence Matrix with a fixed context window</h3><p>伟大的想法 -相似的词往往会在一起出现，并且具有类似的上下文-例如，苹果是一种水果。芒果是一种水果。苹果和芒果倾向于具有相似的背景，即水果。</p>
 <p>一对单词w1和w2的共现是它们在上下文窗口中一起出现的次数。</p>
 <p>对于如下上下文窗口为2（实际整个窗口大小为2*2+1=5）的共现矩阵：</p>
@@ -340,14 +346,18 @@
 <h4 id="1-3-3-共现矩阵的缺点"><a href="#1-3-3-共现矩阵的缺点" class="headerlink" title="1.3.3 共现矩阵的缺点"></a>1.3.3 共现矩阵的缺点</h4><ol>
 <li>它需要大量内存来存储共现矩阵。但是，可以通过将矩阵分解到系统外（例如在Hadoop集群等中）来解决此问题，并可以将其保存下来。</li>
 </ol>
-<h2 id="2-Word2vec（Prediction-based-Vector）"><a href="#2-Word2vec（Prediction-based-Vector）" class="headerlink" title="2. Word2vec（Prediction based Vector）"></a>2. Word2vec（Prediction based Vector）</h2><h3 id="2-1-N-Gram统计语言模型"><a href="#2-1-N-Gram统计语言模型" class="headerlink" title="2.1 N-Gram统计语言模型"></a>2.1 N-Gram统计语言模型</h3><script type="math/tex; mode=display">\begin{aligned}
+<h2 id="2-Word2vec（Prediction-based-Vector）"><a href="#2-Word2vec（Prediction-based-Vector）" class="headerlink" title="2. Word2vec（Prediction based Vector）"></a>2. Word2vec（Prediction based Vector）</h2><h3 id="2-1-N-Gram统计语言模型"><a href="#2-1-N-Gram统计语言模型" class="headerlink" title="2.1 N-Gram统计语言模型"></a>2.1 N-Gram统计语言模型</h3><script type="math/tex; mode=display">
+\begin{aligned}
   S1&="The\  cat\  jumped\  over\  the \ puddle."\\
   S2&="stock \ boil\  fish\  is \ toy"
 \end{aligned}</script><h4 id="2-1-1-Unigram-Model-1-gram"><a href="#2-1-1-Unigram-Model-1-gram" class="headerlink" title="2.1.1 Unigram Model(1-gram)"></a>2.1.1 Unigram Model(1-gram)</h4><p>这里，我们可以在给定的包含n个单词的序列得出一个如下的概率：</p>
-<script type="math/tex; mode=display">P(S)=P(w_1,w_2,\ldots,w_n)</script><p>我们可以通过假设序列中每个单词出现是完全独立的，并采用一元语言模型来计算这个概率：</p>
-<script type="math/tex; mode=display">P(S)=P(w_1,w_2,\ldots,w_n)=\prod_{i=1}^nP(w_i)</script><p>因此，对于上面两个句子$S1$和$S2$，$P(S1)$应该是一个高概率（$S1$是一个有效的句子），$P(S2)$应该是一个低概率（$S2$是一个无效的句子）</p>
+<script type="math/tex; mode=display">
+P(S)=P(w_1,w_2,\ldots,w_n)</script><p>我们可以通过假设序列中每个单词出现是完全独立的，并采用一元语言模型来计算这个概率：</p>
+<script type="math/tex; mode=display">
+P(S)=P(w_1,w_2,\ldots,w_n)=\prod_{i=1}^nP(w_i)</script><p>因此，对于上面两个句子$S1$和$S2$，$P(S1)$应该是一个高概率（$S1$是一个有效的句子），$P(S2)$应该是一个低概率（$S2$是一个无效的句子）</p>
 <h4 id="2-1-2-Bigram-Model-2-gram"><a href="#2-1-2-Bigram-Model-2-gram" class="headerlink" title="2.1.2 Bigram Model(2-gram)"></a>2.1.2 Bigram Model(2-gram)</h4><p>在现实中，一个单词出现在一个句子中是高度依赖于前面的单词序列的，所以Unigram Model太武断了，并不能很好的计算句子有效的概率，所以提出了Bigram Model。Bigram Model假设一个单词的出现高度依赖于它前面的那个单词，概率的计算公式如下：</p>
-<script type="math/tex; mode=display">P(S)=P(w_1,w_2,\ldots,w_n)=\prod_{i=2}^nP(w_i|w_{i-1})</script><p>Bigram Model也有缺陷，因为它只是关注了与单词紧邻的那个单词，并没有考虑到整个句子，但这种计算概率的方法使我们走的更远。</p>
+<script type="math/tex; mode=display">
+P(S)=P(w_1,w_2,\ldots,w_n)=\prod_{i=2}^nP(w_i|w_{i-1})</script><p>Bigram Model也有缺陷，因为它只是关注了与单词紧邻的那个单词，并没有考虑到整个句子，但这种计算概率的方法使我们走的更远。</p>
 <p>Word2vec不是单个算法，而是两种技术的组合-CBOW（连续词袋）和Skip-gram模型。这两个都是浅层神经网络，它们将单词映射到目标变量，目标变量也是单词。这两种技术都学习用作词向量表示的权重。让我们分别讨论这两种方法，并直观地了解它们的工作原理。</p>
 <h3 id="2-2-CBOW（连续词袋）模型"><a href="#2-2-CBOW（连续词袋）模型" class="headerlink" title="2.2 CBOW（连续词袋）模型"></a>2.2 CBOW（连续词袋）模型</h3><p>CBOW的工作方式是在给定上下文的情况下倾向于预测单词的概率。上下文可以是单个单词或一组单词。但为简单起见，我将使用单个上下文词并尝试预测单个目标词。</p>
 <p>假设我们有一个语料库C =“Hey, this is sample corpus using only one context word.”并且我们定义了一个上下文窗口1。可以将该语料库转换为CBOW模型的训练集，如下所示。输入如下所示。下图右侧的矩阵包含左侧输入的one-hot编码。</p>
@@ -381,8 +391,10 @@
 
 <p><strong>我们把计算步骤细化为如下步骤：</strong></p>
 <ol>
-<li>生成上下文窗口为m的one-hot编码词向量，$x^{(c-j)}$是维度为$V$的one-hot编码向量：<script type="math/tex; mode=display">(x^{(c-m)}, \cdots,x^{(c-1)},x^{(c+1)},\cdots,x^{(c+m)}\in R^{|V|})</script></li>
-<li>取得上下文单词的word embeddings:<script type="math/tex; mode=display">(v_{c-m}=\mathcal{V} x^{(c-m)},v_{c-m+1}=\mathcal{V} x^{(c-m+1)},\cdots,v_{c+m}=\mathcal{V} x^{(c+m)})</script></li>
+<li>生成上下文窗口为m的one-hot编码词向量，$x^{(c-j)}$是维度为$V$的one-hot编码向量：<script type="math/tex; mode=display">
+(x^{(c-m)}, \cdots,x^{(c-1)},x^{(c+1)},\cdots,x^{(c+m)}\in R^{|V|})</script></li>
+<li>取得上下文单词的word embeddings:<script type="math/tex; mode=display">
+(v_{c-m}=\mathcal{V} x^{(c-m)},v_{c-m+1}=\mathcal{V} x^{(c-m+1)},\cdots,v_{c+m}=\mathcal{V} x^{(c+m)})</script></li>
 <li>对word embeddings取均值 $ \hat{v}=\frac{\sum_{j=-m}^{j=m}v_{c+j}}{2m}\in R^n$;</li>
 <li>生成分数向量 $z=\mathcal{U}\hat\in R^{|V|}$ 。相似单词点乘越高，它将会促进相似单词更加接近以获得更高分数；</li>
 <li>将分数转成概率 $\hat{y}=softmax(z)\in R^{|V|}$;</li>
@@ -390,9 +402,12 @@
 </ol>
 <p><strong>怎么获得 $\mathcal{V}$ 和 $\mathcal{U}$ 这两个矩阵?</strong></p>
 <p>我们使用交叉熵 $H(\hat{y},y)$作为代价函数:</p>
-<script type="math/tex; mode=display">H(\hat{y},y)=-\sum_{j=1}^{|V|}y_i\log(\hat{y_i})</script><p>让我们关注当前的情况，即$y$是一个one-hot向量。 因此，我们知道上述损失简化为：</p>
-<script type="math/tex; mode=display">H(\hat{y},y)=-y_i\log(\hat{y_i})</script><p>我们生成了优化的目标函数：</p>
-<script type="math/tex; mode=display">\begin{aligned}
+<script type="math/tex; mode=display">
+H(\hat{y},y)=-\sum_{j=1}^{|V|}y_i\log(\hat{y_i})</script><p>让我们关注当前的情况，即$y$是一个one-hot向量。 因此，我们知道上述损失简化为：</p>
+<script type="math/tex; mode=display">
+H(\hat{y},y)=-y_i\log(\hat{y_i})</script><p>我们生成了优化的目标函数：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
     minimize \ J&=-\log P(w_c|w_{c-m},\cdots,w_{c-1},w_{c+1},\cdots,w_{c+m})\\
     & =-\log P(\mathcal{u}_c|\hat{\mathcal{v}})\\
     &=-\log\frac{exp^{(\mathcal{u}_c^T\hat{\mathcal{v}})}}{\sum_{j=1}^{|V|}exp^(\mathcal{u}_j^T\hat{\mathcal{v}})}\\
@@ -411,14 +426,14 @@
 
 下面是一次上下文输入的skip-gram计算流程：
 
- 1. 红色的行是对应于输入的one-hot向量的隐藏激活。它基本上是复制的输入隐藏矩阵的相应行；
- 2. 黄色矩阵是隐藏层和输出层之间的权重；
- 3. 通过隐藏层激活和隐藏层-输出层权重的矩阵乘法获得蓝色矩阵，产生两个上下文向量（根据上下文窗口大小而定）；
- 4. 蓝色矩阵的每一行分别转换为其softmax概率，如绿色框所示；
- 5. 灰度矩阵包含两个上下文词（目标）的一个one-hot向量（目标单词的one-hot向量）；
- 6. 通过从元素矩阵的绿色矩阵（输出）的第一行减去灰色矩阵（目标）的第一行来计算误差。对于下一行重复此过程。因此，对于n个 目标上下文词，我们将具有n个误差向量；
- 7. 对所有误差向量取逐个元素的和，以获得最终误差向量；
- 8. 该误差向量被传播回以更新权重。
+1. 红色的行是对应于输入的one-hot向量的隐藏激活。它基本上是复制的输入隐藏矩阵的相应行；
+2. 黄色矩阵是隐藏层和输出层之间的权重；
+3. 通过隐藏层激活和隐藏层-输出层权重的矩阵乘法获得蓝色矩阵，产生两个上下文向量（根据上下文窗口大小而定）；
+4. 蓝色矩阵的每一行分别转换为其softmax概率，如绿色框所示；
+5. 灰度矩阵包含两个上下文词（目标）的一个one-hot向量（目标单词的one-hot向量）；
+6. 通过从元素矩阵的绿色矩阵（输出）的第一行减去灰色矩阵（目标）的第一行来计算误差。对于下一行重复此过程。因此，对于n个 目标上下文词，我们将具有n个误差向量；
+7. 对所有误差向量取逐个元素的和，以获得最终误差向量；
+8. 该误差向量被传播回以更新权重。
 
 #### 2.3.1 Skip-Gram训练过程
 
@@ -822,6 +837,18 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">DL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GNN</a>
               </li>
              
@@ -831,10 +858,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">DL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -851,10 +874,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
               </li>
              
               <li class="article-tag-list-item">

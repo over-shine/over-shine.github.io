@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="hexo + yilia-plus + mathjax 显示数学公式1. 使用 Kramed 代替 hexo 自带的 Marked12npm uninstall hexo-renderer-marked --savenpm install hexo-renderer-kramed --save">
+  <meta name="description" content="hexo + yilia-plus + mathjax 显示数学公式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo搭配mathjax注意事项">
 <meta property="og:url" content="https://over-shine.github.io/2020/08/22/hexo%E6%90%AD%E9%85%8Dmathjax%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/index.html">
 <meta property="og:site_name" content="吃了睡的程序猪">
-<meta property="og:description" content="hexo + yilia-plus + mathjax 显示数学公式1. 使用 Kramed 代替 hexo 自带的 Marked12npm uninstall hexo-renderer-marked --savenpm install hexo-renderer-kramed --save">
+<meta property="og:description" content="hexo + yilia-plus + mathjax 显示数学公式">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-22T06:56:56.000Z">
-<meta property="article:modified_time" content="2020-08-24T05:01:29.285Z">
+<meta property="article:modified_time" content="2021-11-06T06:39:28.204Z">
 <meta property="article:author" content="程序猪-渔枫">
 <meta property="article:tag" content="Error">
 <meta property="article:tag" content="hexo">
@@ -261,7 +261,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">541字</span>
+      <span class="post-count">542字</span>
     </span>
   </span>
 
@@ -281,17 +281,29 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="hexo-yilia-plus-mathjax-显示数学公式"><a href="#hexo-yilia-plus-mathjax-显示数学公式" class="headerlink" title="hexo + yilia-plus + mathjax 显示数学公式"></a>hexo + yilia-plus + mathjax 显示数学公式</h1><h2 id="1-使用-Kramed-代替-hexo-自带的-Marked"><a href="#1-使用-Kramed-代替-hexo-自带的-Marked" class="headerlink" title="1. 使用 Kramed 代替 hexo 自带的 Marked"></a>1. 使用 Kramed 代替 hexo 自带的 Marked</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>更改/node_modules/hexo-renderer-kramed/lib/renderer.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatText</span>(<span class="params">text</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Fit kramed&#x27;s rule: $$ + \1 + $$</span></span><br><span class="line">    <span class="keyword">return</span> text.replace(<span class="regexp">/`\$(.*?)\$`/g</span>, <span class="string">&#x27;$$$$$1$$$$&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatText</span>(<span class="params">text</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> text;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="2-停止使用-hexo-math-并安装-mathjax"><a href="#2-停止使用-hexo-math-并安装-mathjax" class="headerlink" title="2. 停止使用 hexo-math 并安装 mathjax"></a>2. 停止使用 hexo-math 并安装 mathjax</h2><p>如果你已经安装 hexo-math, 请卸载它,然后安装 hexo-renderer-mathjax 包<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-math --save</span><br><span class="line">npm install hexo-renderer-mathjax --save</span><br></pre></td></tr></table></figure><br><strong>注意：</strong> 由于一些原因，当使用yilia-plus主题时，使用mathjax会报错，如果仍要使用mathjax，根据 yilia-plus作者 <a target="_blank" rel="noopener" href="https://github.com/JoeyBling">JoeyBling</a>提供的解决方案，需要进入 node_modules/hexo-renderer-mathjax文件夹执行如下代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall ejs -S</span><br><span class="line"><span class="comment"># 安装最新版ejs</span></span><br><span class="line">npm i ejs@latest -S</span><br></pre></td></tr></table></figure></p>
+    <h1 id="hexo-yilia-plus-mathjax-显示数学公式"><a href="#hexo-yilia-plus-mathjax-显示数学公式" class="headerlink" title="hexo + yilia-plus + mathjax 显示数学公式"></a>hexo + yilia-plus + mathjax 显示数学公式</h1><a id="more"></a>
+<h2 id="1-使用-Kramed-代替-hexo-自带的-Marked"><a href="#1-使用-Kramed-代替-hexo-自带的-Marked" class="headerlink" title="1. 使用 Kramed 代替 hexo 自带的 Marked"></a>1. 使用 Kramed 代替 hexo 自带的 Marked</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure>
+<p>更改/node_modules/hexo-renderer-kramed/lib/renderer.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatText</span>(<span class="params">text</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Fit kramed&#x27;s rule: $$ + \1 + $$</span></span><br><span class="line">    <span class="keyword">return</span> text.replace(<span class="regexp">/`\$(.*?)\$`/g</span>, <span class="string">&#x27;$$$$$1$$$$&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatText</span>(<span class="params">text</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> text;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-停止使用-hexo-math-并安装-mathjax"><a href="#2-停止使用-hexo-math-并安装-mathjax" class="headerlink" title="2. 停止使用 hexo-math 并安装 mathjax"></a>2. 停止使用 hexo-math 并安装 mathjax</h2><p>如果你已经安装 hexo-math, 请卸载它,然后安装 hexo-renderer-mathjax 包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-math --save</span><br><span class="line">npm install hexo-renderer-mathjax --save</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 由于一些原因，当使用yilia-plus主题时，使用mathjax会报错，如果仍要使用mathjax，根据 yilia-plus作者 <a target="_blank" rel="noopener" href="https://github.com/JoeyBling">JoeyBling</a>提供的解决方案，需要进入 node_modules/hexo-renderer-mathjax文件夹执行如下代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall ejs -S</span><br><span class="line"><span class="comment"># 安装最新版ejs</span></span><br><span class="line">npm i ejs@latest -S</span><br></pre></td></tr></table></figure>
 <h2 id="3-更改默认转义规则"><a href="#3-更改默认转义规则" class="headerlink" title="3. 更改默认转义规则"></a>3. 更改默认转义规则</h2><p>因为 hexo 默认的转义规则会将一些字符进行转义，所以我们需要对默认的规则进行修改.<br>对文件 node_modules/kramed/lib/rules/inline.js 参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/frone/article/details/81170627">半路出家的coder</a>进行如下更改：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">escape</span>: <span class="regexp">/^\\([\\`*&#123;&#125;\[\]()#$+\-.!_&gt;])/</span>,</span><br><span class="line"><span class="comment">//修改为</span></span><br><span class="line"><span class="built_in">escape</span>: <span class="regexp">/^\\([`*\[\]()# +\-.!_&gt;])/</span>,</span><br><span class="line"></span><br><span class="line">em: <span class="regexp">/^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/</span>,</span><br><span class="line"><span class="comment">//修改为</span></span><br><span class="line">em: <span class="regexp">/^\*((?:\*\*|[\s\S])+?)\*(?!\*)/</span>,</span><br></pre></td></tr></table></figure>
 <p>我只是修改了上面的 <strong>em</strong> 项，这一项好像对应的是行内公式转义问题，我没有更改 <strong>escape</strong> 项，可以正常显示。</p>
-<h2 id="4-配置-Mathjax"><a href="#4-配置-Mathjax" class="headerlink" title="4. 配置 Mathjax"></a>4. 配置 Mathjax</h2><p>在文件 node_modules\hexo-renderer-mathjax\mathjax.html 中添加如下一行代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script id=<span class="string">&quot;MathJax-script&quot;</span> <span class="keyword">async</span> src=<span class="string">&quot;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
-<p>注意，我之前查了很多网上的 hexo 配置 Mathjax 的文章，它们在该文件中加入的代码通常是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span> <span class="keyword">async</span> src=<span class="string">&quot;cdn.mathjax.org/mathjax/latest/MathJax.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure><br>但是这行代码仅在本地（即执行hexo s时）可以渲染 tex 数学公式，但是部署到 github 后就不能渲染 tex 数学公式了，所以强烈推荐使用第一种代码，这是<a target="_blank" rel="noopener" href="https://github.com/mathjax/MathJax-src">Mathjax官网给出的url</a>。</p>
-<p>最后在你使用的主题中添加<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mathjax:</span> </span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># 是不是没页都使用mathjax</span></span><br><span class="line">  <span class="attr">perpage:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
-<p>最后执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure><br>这时打开博客就能看到渲染效果了，渲染很快哦。</p>
+<h2 id="4-配置-Mathjax"><a href="#4-配置-Mathjax" class="headerlink" title="4. 配置 Mathjax"></a>4. 配置 Mathjax</h2><p>在文件 node_modules\hexo-renderer-mathjax\mathjax.html 中添加如下一行代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script id=<span class="string">&quot;MathJax-script&quot;</span> <span class="keyword">async</span> src=<span class="string">&quot;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>注意，我之前查了很多网上的 hexo 配置 Mathjax 的文章，它们在该文件中加入的代码通常是</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span> <span class="keyword">async</span> src=<span class="string">&quot;cdn.mathjax.org/mathjax/latest/MathJax.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>但是这行代码仅在本地（即执行hexo s时）可以渲染 tex 数学公式，但是部署到 github 后就不能渲染 tex 数学公式了，所以强烈推荐使用第一种代码，这是<a target="_blank" rel="noopener" href="https://github.com/mathjax/MathJax-src">Mathjax官网给出的url</a>。</p>
+<p>最后在你使用的主题中添加</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mathjax:</span> </span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># 是不是没页都使用mathjax</span></span><br><span class="line">  <span class="attr">perpage:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>最后执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>这时打开博客就能看到渲染效果了，渲染很快哦。</p>
 
     
 
@@ -668,6 +680,18 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">DL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GNN</a>
               </li>
              
@@ -677,10 +701,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">DL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -697,10 +717,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
               </li>
              
               <li class="article-tag-list-item">

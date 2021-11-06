@@ -10,18 +10,18 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="vcpkg 安装 tensorflow-cc 采坑记录注意：安装tensorflow-cc需要保证磁盘最少有150G左右的空闲空间 设置HTTP(S)_PROXY123vcpkg envset HTTPS_PROXY&#x3D;http:&#x2F;&#x2F;127.0.0.1:10809&#x2F;set HTTP_PROXY&#x3D;http:&#x2F;&#x2F;127.0.0.1:1">
+  <meta name="description" content="vcpkg 安装 tensorflow-cc 采坑记录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vcpkg安装tensorflow采坑经验">
 <meta property="og:url" content="https://over-shine.github.io/2021/10/31/vcpkg%E5%AE%89%E8%A3%85tensorflow%E9%87%87%E5%9D%91%E7%BB%8F%E9%AA%8C/index.html">
 <meta property="og:site_name" content="吃了睡的程序猪">
-<meta property="og:description" content="vcpkg 安装 tensorflow-cc 采坑记录注意：安装tensorflow-cc需要保证磁盘最少有150G左右的空闲空间 设置HTTP(S)_PROXY123vcpkg envset HTTPS_PROXY&#x3D;http:&#x2F;&#x2F;127.0.0.1:10809&#x2F;set HTTP_PROXY&#x3D;http:&#x2F;&#x2F;127.0.0.1:1">
+<meta property="og:description" content="vcpkg 安装 tensorflow-cc 采坑记录">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-31T14:50:11.000Z">
-<meta property="article:modified_time" content="2021-11-02T06:28:34.355Z">
+<meta property="article:modified_time" content="2021-11-06T06:40:39.225Z">
 <meta property="article:author" content="程序猪-渔枫">
-<meta property="article:tag" content="Error">
 <meta property="article:tag" content="tensorflow">
+<meta property="article:tag" content="Error">
 <meta property="article:tag" content="c++">
 <meta name="twitter:card" content="summary">
   
@@ -282,7 +282,8 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="vcpkg-安装-tensorflow-cc-采坑记录"><a href="#vcpkg-安装-tensorflow-cc-采坑记录" class="headerlink" title="vcpkg 安装 tensorflow-cc 采坑记录"></a>vcpkg 安装 tensorflow-cc 采坑记录</h1><p>注意：安装tensorflow-cc需要保证磁盘最少有150G左右的空闲空间</p>
+    <h1 id="vcpkg-安装-tensorflow-cc-采坑记录"><a href="#vcpkg-安装-tensorflow-cc-采坑记录" class="headerlink" title="vcpkg 安装 tensorflow-cc 采坑记录"></a>vcpkg 安装 tensorflow-cc 采坑记录</h1><a id="more"></a>
+<p>注意：安装tensorflow-cc需要保证磁盘最少有150G左右的空闲空间</p>
 <h2 id="设置HTTP-S-PROXY"><a href="#设置HTTP-S-PROXY" class="headerlink" title="设置HTTP(S)_PROXY"></a>设置HTTP(S)_PROXY</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vcpkg env</span><br><span class="line">set HTTPS_PROXY&#x3D;http:&#x2F;&#x2F;127.0.0.1:10809&#x2F;</span><br><span class="line">set HTTP_PROXY&#x3D;http:&#x2F;&#x2F;127.0.0.1:10809&#x2F;</span><br></pre></td></tr></table></figure>
 <p>这里的端口号在自己电脑网络中查看代理</p>
 <h2 id="设置git的https-proxy"><a href="#设置git的https-proxy" class="headerlink" title="设置git的https_proxy"></a>设置git的https_proxy</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global https.proxy https:&#x2F;&#x2F;127.0.0.1:1080</span><br></pre></td></tr></table></figure>
@@ -346,11 +347,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Error</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">tensorflow</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">tensorflow</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Error</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -424,6 +425,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2021/11/06/Dropout/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Dropout
+        
+      </div>
+    </a>
   
   
     <a href="/2021/05/17/%E8%AE%BA%E6%96%87%E8%B4%A1%E7%8C%AE%E8%AE%B0%E5%BD%95/" id="article-nav-older" class="article-nav-link-wrap">
@@ -654,6 +664,18 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">DL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GNN</a>
               </li>
              
@@ -663,10 +685,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">DL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -683,10 +701,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
               </li>
              
               <li class="article-tag-list-item">
