@@ -56,9 +56,9 @@
     
     
     
-    <category term="tensorflow" scheme="https://over-shine.github.io/tags/tensorflow/"/>
-    
     <category term="Error" scheme="https://over-shine.github.io/tags/Error/"/>
+    
+    <category term="tensorflow" scheme="https://over-shine.github.io/tags/tensorflow/"/>
     
     <category term="c++" scheme="https://over-shine.github.io/tags/c/"/>
     
