@@ -325,13 +325,13 @@
 <p>为了解决上述问题，我们建议使用 $||\alpha f(x)||$（这是等式(3)中加权的转换向量的标准欧几里得范数（长度））作为一种分析注意力模块行为的新颖方法。 与之前仅观察到注意力权重的研究不同，我们分析 $||\alpha f(x)||$ 和 $||f(x)||$ 的行为，并获得对注意力模块工作原理的更深入了解。 与以前的基于权重的分析相比，我们将这种建议的分析注意力模块的方式称为基于范数的分析。</p>
 <p>在实验部分（第4和第5节）中，我们经验表明，通过使用基于范数的分析而不是基于权重的分析，可以对注意力模块的行为获得更直观和有意义的观察结果。 值得注意的是，我们的基于规范的分析可以自然地扩展到Transformer，BERT等中实现的多头注意模块，因为多头注意模块是注意模块的自然扩展，并且它是线性的可分解的，即，注意头（注意模块）平行布置，并且多头注意力模块的输出是所有注意力头的输出矢量的总和。</p>
 <h2 id="四、试验1：BERT"><a href="#四、试验1：BERT" class="headerlink" title="四、试验1：BERT"></a>四、试验1：BERT</h2><p>首先，我们初步展示了先前忽略的影响因子，即转换后的向量的范数，它可能影响BERT中注意力模块分析的结果。然后，我们使用基于范数的分析方法重新测试了曾经在BERT中使用基于权重的分析方法的结果。最终，我们引入了曾经BERT被忽略的属性。</p>
-<p><strong>通用设置：</strong> 效仿之前的研究，我们分析了预训练的拥有12层神经网络和12个注意力头的bert-base-uncased模型的注意力模块。我们使用了论文<a href="https://www.aclweb.org/anthology/W19-4828/">“What Does BERT Look At? An Analysis of BERT’s Attention”</a>提供的数据。这个数据包含了从 Wikipedia 提取的992条句子，每个句子以 [CLS] paragraph1 [SEP] paragraph2 [SEP] 的形式包含两个连续的段落。每个句子包含最多128个token，平均每个句子包含122个token。</p>
+<p><strong>通用设置：</strong> 效仿之前的研究，我们分析了预训练的拥有12层神经网络和12个注意力头的bert-base-uncased模型的注意力模块。我们使用了论文<a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/W19-4828/">“What Does BERT Look At? An Analysis of BERT’s Attention”</a>提供的数据。这个数据包含了从 Wikipedia 提取的992条句子，每个句子以 [CLS] paragraph1 [SEP] paragraph2 [SEP] 的形式包含两个连续的段落。每个句子包含最多128个token，平均每个句子包含122个token。</p>
 <h3 id="4-1-f-x-是否有影响？"><a href="#4-1-f-x-是否有影响？" class="headerlink" title="4.1 $f(x)$ 是否有影响？"></a>4.1 $f(x)$ 是否有影响？</h3><p>$|\alpha f(x)|$ 和 $\alpha$ 有什么不同作为一个初步的证明，我们分析了 $|f(x)|$ 变量的系数。基于公式 (3)，如果 $|f(x)|$ 是一个定值，权重 $\alpha$ 可能是 $|\alpha f(x)|$ 的一个好的近似逼近。也就是说，如果 $|f(x)|$ 是一个常量，那么我们基于范数的分析是不值得应用的。</p>
 <p>所有数据首先输入到模型，然后计算 $|f(x)|$ 变量的系数。表1显示变量系数的平均值时0.22，$|f(x)|$ 的值通常在平均值的 0.78 倍和 1.22 倍之间变化。因此，$\alpha$ 和 $|\alpha f(x)|$ 之间的不同可以归咎到 $|f(x)|$ 的散度上，它促使我们在分析注意力模块时将 $|f(x)|$ 考虑进去。附件 A 显示了 $|x|$ 和仿射变换 $f$ 的影响。</p>
 <h3 id="4-2-重新检测先前关注的现象"><a href="#4-2-重新检测先前关注的现象" class="headerlink" title="4.2 重新检测先前关注的现象"></a>4.2 重新检测先前关注的现象</h3><p>在这一部分，通过使用我们基于范数的分析方法，我们重新调查了曾经基于权重的报告的BERT的关注情况。</p>
-<p><strong>设置：</strong> 首先，把数据输入BERT，然后获取每个注意力头的 $\alpha$ 和 $|\alpha f(x)|$，按照<a href="https://www.aclweb.org/anthology/W19-4828/">“What Does BERT Look At? An Analysis of BERT’s Attention”</a>，我们报告了下面的类型： [CLS] 、[SEP]、句号、逗号和其它token。</p>
+<p><strong>设置：</strong> 首先，把数据输入BERT，然后获取每个注意力头的 $\alpha$ 和 $|\alpha f(x)|$，按照<a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/W19-4828/">“What Does BERT Look At? An Analysis of BERT’s Attention”</a>，我们报告了下面的类型： [CLS] 、[SEP]、句号、逗号和其它token。</p>
 <p><strong>结果：</strong> 图三展示了 $\alpha$ 和 $|\alpha f(x)|$ 完全不同的趋势，图3(a) 显示特殊token（[SEP]、[CLS]和标点）的词向量获得非常大的注意力权重。然而，这样的观察是不直观的，因为这些标记按期望不具有如此的语言信息并且对于预训练任务（即，MLM和NSP）没有太大用处。但是，这种趋势确实与基于权重的分析报告一致。相反，我们基于范数的方法引入了一个直观的观察，那些特殊 token 的词向量的贡献通常很小（图3(b)）。</p>
-<p><a href="https://www.aclweb.org/anthology/W19-4828/">“What Does BERT Look At? An Analysis of BERT’s Attention”</a> 假设：如果在输入向量中没有必要的信息，则 BERT 为保证出现在任何输入序列中的[SEP]令牌分配较大的权重，而不通过注意模块合并任何其他信息。请注意，注意力模块的约束条件是注意力权重之和为1.0（请参见公式2）。<a href="https://www.aclweb.org/anthology/W19-4828/">“What Does BERT Look At? An Analysis of BERT’s Attention”</a> 称这个操作为“<strong>no-op</strong>”（无操作）。这个假设令人信服，但是，仍然不清楚分配给此类特殊 token 的强大关注权重如何收集任何东西。我们基于范数的分析表明，该数量实际上很小（图3b），这支持了BERT进行“no-op”的解释。</p>
+<p><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/W19-4828/">“What Does BERT Look At? An Analysis of BERT’s Attention”</a> 假设：如果在输入向量中没有必要的信息，则 BERT 为保证出现在任何输入序列中的[SEP]令牌分配较大的权重，而不通过注意模块合并任何其他信息。请注意，注意力模块的约束条件是注意力权重之和为1.0（请参见公式2）。<a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/W19-4828/">“What Does BERT Look At? An Analysis of BERT’s Attention”</a> 称这个操作为“<strong>no-op</strong>”（无操作）。这个假设令人信服，但是，仍然不清楚分配给此类特殊 token 的强大关注权重如何收集任何东西。我们基于范数的分析表明，该数量实际上很小（图3b），这支持了BERT进行“no-op”的解释。</p>
 <p><strong>分析 $\alpha$ 和 $|f(x)|$ 之间的关系：</strong></p>
 
     
@@ -715,7 +715,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">DL</a>
+                <a href="javascript:void(0)" class="js-tag color1">Error</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -723,11 +727,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Error</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color3">DL</a>
               </li>
              
               <li class="article-tag-list-item">

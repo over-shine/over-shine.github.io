@@ -306,9 +306,9 @@
     <category term="论文" scheme="https://over-shine.github.io/categories/%E8%AE%BA%E6%96%87/"/>
     
     
-    <category term="DL" scheme="https://over-shine.github.io/tags/DL/"/>
-    
     <category term="GNN" scheme="https://over-shine.github.io/tags/GNN/"/>
+    
+    <category term="DL" scheme="https://over-shine.github.io/tags/DL/"/>
     
   </entry>
   
