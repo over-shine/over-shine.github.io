@@ -10,17 +10,17 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Recurrent Neural NetworkRNN神经网络结构">
+  <meta name="description" content="Recurrent Neural Network">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Recurrent Neural Network">
 <meta property="og:url" content="https://over-shine.github.io/2020/08/21/Recurrent-Neural-Network/index.html">
 <meta property="og:site_name" content="吃了睡的程序猪">
-<meta property="og:description" content="Recurrent Neural NetworkRNN神经网络结构">
+<meta property="og:description" content="Recurrent Neural Network">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://over-shine.github.io/2020/08/21/Recurrent-Neural-Network/RNN.png">
 <meta property="og:image" content="https://over-shine.github.io/2020/08/21/Recurrent-Neural-Network/RNNs.png">
 <meta property="article:published_time" content="2020-08-21T14:03:07.000Z">
-<meta property="article:modified_time" content="2020-08-24T04:57:59.084Z">
+<meta property="article:modified_time" content="2021-11-06T06:58:16.419Z">
 <meta property="article:author" content="程序猪-渔枫">
 <meta property="article:tag" content="DL">
 <meta property="article:tag" content="RNN">
@@ -264,7 +264,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">399字</span>
+      <span class="post-count">400字</span>
     </span>
   </span>
 
@@ -284,9 +284,9 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="Recurrent-Neural-Network"><a href="#Recurrent-Neural-Network" class="headerlink" title="Recurrent Neural Network"></a>Recurrent Neural Network</h1><h2 id="RNN神经网络结构"><a href="#RNN神经网络结构" class="headerlink" title="RNN神经网络结构"></a>RNN神经网络结构</h2><div align=center><img src="RNN.png"/></div>
+    <h1 id="Recurrent-Neural-Network"><a href="#Recurrent-Neural-Network" class="headerlink" title="Recurrent Neural Network"></a>Recurrent Neural Network</h1><a id="more"></a>
+<h2 id="RNN神经网络结构"><a href="#RNN神经网络结构" class="headerlink" title="RNN神经网络结构"></a>RNN神经网络结构</h2><div align=center><img src="RNN.png"/></div>
 
-<a id="more"></a>
 <p>由上图可以看出：一个典型的RNN网络包含一个输入x,一个输出h和一个神经网络单元A。和普通的神经网络不同的是,RNN网络的神经网络单元A与自身也存在一个回路。这种网络结构就揭示RNN的实质:上一个时刻的网络状态信息将会作用于下一个时刻的网络状态。RNN网络以时间序列展开成如下形式:</p>
 <div align=center><img src="RNNs.png"/></div>
 
@@ -294,7 +294,10 @@
 <p><strong>下面是在一个循环神经元中的步骤：</strong></p>
 <ol>
 <li>在一个时间点输入数据$X_t$；</li>
-<li>根据上一个时间点状态$h_{(t-1)}$和当前输入数据$X_t$计算$h_{(t)}=f(h_{(t-1),X_t})$，详细计算公式如下：<script type="math/tex; mode=display">h_{(t)}=W_{(h)}h_{(t-1)}+W_{(x)}X_t</script><script type="math/tex; mode=display">\begin{aligned}
+<li><p>根据上一个时间点状态$h_{(t-1)}$和当前输入数据$X_t$计算$h_{(t)}=f(h_{(t-1),X_t})$，详细计算公式如下：</p>
+<script type="math/tex; mode=display">
+h_{(t)}=W_{(h)}h_{(t-1)}+W_{(x)}X_t</script><script type="math/tex; mode=display">
+\begin{aligned}
     &W_{(h)}: 上一个时间点状态和当前时间点的权重参数\\
  &W_x: 当前时间点输入权重
 \end{aligned}</script></li>
@@ -685,11 +688,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">DL</a>
+                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
+                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,11 +704,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
+                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
+                <a href="javascript:void(0)" class="js-tag color3">DL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -714,6 +717,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -726,14 +737,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">word2vec</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
               </li>
             
             <div class="clearfix"></div>

@@ -10,12 +10,12 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Deep Learning on Graph: A Survey基于现有模型的模型架构和训练策略，我们将其分为五类：图递归神经网络，图卷积网络，图自动编码器，图强化学习和图对抗方法">
+  <meta name="description" content="Deep Learning on Graph: A Survey">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Deep Learning on Graph: A Survey">
 <meta property="og:url" content="https://over-shine.github.io/2020/08/21/Deep-Learning-on-Graph-A-Survey/index.html">
 <meta property="og:site_name" content="吃了睡的程序猪">
-<meta property="og:description" content="Deep Learning on Graph: A Survey基于现有模型的模型架构和训练策略，我们将其分为五类：图递归神经网络，图卷积网络，图自动编码器，图强化学习和图对抗方法">
+<meta property="og:description" content="Deep Learning on Graph: A Survey">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://over-shine.github.io/2020/08/21/Deep-Learning-on-Graph-A-Survey/GNN1.PNG">
 <meta property="og:image" content="https://over-shine.github.io/2020/08/21/Deep-Learning-on-Graph-A-Survey/GNN2.PNG">
@@ -35,10 +35,10 @@
 <meta property="og:image" content="https://over-shine.github.io/2020/08/21/Deep-Learning-on-Graph-A-Survey/GNN16.png">
 <meta property="og:image" content="https://over-shine.github.io/2020/08/21/Deep-Learning-on-Graph-A-Survey/GNN17.png">
 <meta property="article:published_time" content="2020-08-21T14:11:17.000Z">
-<meta property="article:modified_time" content="2020-08-24T05:03:29.528Z">
+<meta property="article:modified_time" content="2021-11-06T06:55:07.620Z">
 <meta property="article:author" content="程序猪-渔枫">
-<meta property="article:tag" content="DL">
 <meta property="article:tag" content="GNN">
+<meta property="article:tag" content="DL">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://over-shine.github.io/2020/08/21/Deep-Learning-on-Graph-A-Survey/GNN1.PNG">
   
@@ -288,7 +288,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">57分</span>
+      <span class="post-count">58分</span>
     </span>
   </span>
 </div>
@@ -299,8 +299,9 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="Deep-Learning-on-Graph-A-Survey"><a href="#Deep-Learning-on-Graph-A-Survey" class="headerlink" title="Deep Learning on Graph: A Survey"></a>Deep Learning on Graph: A Survey</h1><p>基于现有模型的模型架构和训练策略，我们将其分为五类：<strong>图递归神经网络</strong>，<strong>图卷积网络</strong>，<strong>图自动编码器</strong>，<strong>图强化学习</strong>和<strong>图对抗方法</strong></p>
-<a id="more"></a>
+    <h1 id="Deep-Learning-on-Graph-A-Survey"><a href="#Deep-Learning-on-Graph-A-Survey" class="headerlink" title="Deep Learning on Graph: A Survey"></a>Deep Learning on Graph: A Survey</h1><a id="more"></a>
+<p>基于现有模型的模型架构和训练策略，我们将其分为五类：<strong>图递归神经网络</strong>，<strong>图卷积网络</strong>，<strong>图自动编码器</strong>，<strong>图强化学习</strong>和<strong>图对抗方法</strong></p>
+<!-- more -->
 <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><p>在近些年，怎样利用深度学习分析图数据吸引了大量研究人员的注意，但是在应用深度学习框架到图上仍然存在一些挑战，如下：</p>
 <ul>
 <li><strong>图的不规则框架</strong>：图具有不规则结构，因此很难将一些基本的数学运算概括为图</li>
@@ -319,7 +320,7 @@
 <li><strong>图强化学习（Graph RL）</strong>：Graph RL 定义了基于图形的动作和奖励，以在遵循约束的同时获得图形任务的反馈。</li>
 <li><strong>图对抗方法</strong>：图对抗方法采用对抗训练技术来增强基于图的模型的泛化能力，并通过对抗攻击来测试其健壮性。</li>
 </ul>
-<p>基于以下高级区别，我们在表1中总结了这些类别的一些主要特征。  </p>
+<p>基于以下高级区别，我们在表1中总结了这些类别的一些主要特征。</p>
 <div align=center><img src="GNN2.PNG"></div>
 
 <h2 id="2-Notations-And-Preliminaries"><a href="#2-Notations-And-Preliminaries" class="headerlink" title="2. Notations And Preliminaries"></a>2. Notations And Preliminaries</h2><ul>
@@ -342,13 +343,17 @@
 <div align=center><img src="GNN3.PNG"></div>
 
 <h3 id="3-1-Nodel-level-RNN"><a href="#3-1-Nodel-level-RNN" class="headerlink" title="3.1 Nodel-level RNN"></a>3.1 Nodel-level RNN</h3><p><strong>node-level RNN</strong> 也称为GNN。它的思想很简单：为了编码图结构信息，每个节点 $v_i$ 都由一个低维状态向量 $s_i$ 表示，受RNN启发，Graph RNN定义如下：</p>
-<script type="math/tex; mode=display">s_i=\sum_{j\in\mathcal{N}(i)}\mathcal{F}(s_i,s_j,F_i^V,F_j^V,F_{i,j}^E)\tag{1}</script><p>其中，$\mathcal{F}(\cdot)$ 是一个可学习的参数方程。当得到 $s_i$ 后经过下面函数得到最终的输出：</p>
-<script type="math/tex; mode=display">\hat{y}_i=\mathcal{O}(s_i, F_i^V)\tag{2}</script><p>对于以图为中心的任务，【“The graph neural network model”】的作者建议添加一个具有唯一属性的特殊节点来表示整个图。 为了学习模型参数，采用下面的半监督方法：迭代求解方程（1），使用Jacobi方法到稳定点，使用Almeida-Pineda算法执行一个梯度下降步骤，以最小化特定于任务的目标函数，例如， 回归任务的预测值和真实性；然后，重复此过程，直到收敛为止。</p>
+<script type="math/tex; mode=display">
+s_i=\sum_{j\in\mathcal{N}(i)}\mathcal{F}(s_i,s_j,F_i^V,F_j^V,F_{i,j}^E)\tag{1}</script><p>其中，$\mathcal{F}(\cdot)$ 是一个可学习的参数方程。当得到 $s_i$ 后经过下面函数得到最终的输出：</p>
+<script type="math/tex; mode=display">
+\hat{y}_i=\mathcal{O}(s_i, F_i^V)\tag{2}</script><p>对于以图为中心的任务，【“The graph neural network model”】的作者建议添加一个具有唯一属性的特殊节点来表示整个图。 为了学习模型参数，采用下面的半监督方法：迭代求解方程（1），使用Jacobi方法到稳定点，使用Almeida-Pineda算法执行一个梯度下降步骤，以最小化特定于任务的目标函数，例如， 回归任务的预测值和真实性；然后，重复此过程，直到收敛为止。</p>
 <p>在等式中使用两个简单方程式（1）和（2），GNN扮演着两个重要角色。回想起来，GNN统一了一些用于处理图数据的早期方法，例如<strong>递归神经网络和马尔可夫链</strong>。展望未来，GNN的基本概念具有深远的启发：正如后面将要展示的，<strong>许多效果最好的的GCNs实际上具有类似于公式（1）的公式，并遵循在直接节点邻域内交换信息的相同框架。 实际上，GNNs和GCNs可以统一为一些通用框架，一个GNN等同于使用相同层来达到稳定状态的GCN</strong>。第4节将提供更多讨论。</p>
-<p>尽管从概念上讲它们很重要，但是GNNs仍然有一些缺点。首先，<strong>要确保公式（1）具有唯一解，$\mathcal{F}(\cdot)$ 必须满足压缩映射</strong> ，即 $\exist\mu, 0&lt;\mu&lt;1$这样<script type="math/tex">\forall x,y ,||\mathcal{F}(x)-\mathcal{y}||\leq\mu||x-y||\tag{3}</script></p>
-<p>直观地，<strong>“压缩映射”要求任意两点之间的距离只能在 $\mathcal{F}(\cdot)$ 操作之后“压缩”，这严重限制了建模能力</strong>。其次，由于需要<strong>多次迭代才能在梯度下降步骤之间达到稳定状态，因此GNN的计算量很大</strong>。由于这些缺点以及可能缺乏计算能力（例如，图形处理单元GPU在当时未被广泛用于深度学习）和缺乏研究兴趣，因此GNN并没有成为一般研究的重点。</p>
+<p>尽管从概念上讲它们很重要，但是GNNs仍然有一些缺点。首先，<strong>要确保公式（1）具有唯一解，$\mathcal{F}(\cdot)$ 必须满足压缩映射</strong> ，即 $\exist\mu, 0&lt;\mu&lt;1$这样</p>
+<script type="math/tex; mode=display">
+\forall x,y ,||\mathcal{F}(x)-\mathcal{y}||\leq\mu||x-y||\tag{3}</script><p>直观地，<strong>“压缩映射”要求任意两点之间的距离只能在 $\mathcal{F}(\cdot)$ 操作之后“压缩”，这严重限制了建模能力</strong>。其次，由于需要<strong>多次迭代才能在梯度下降步骤之间达到稳定状态，因此GNN的计算量很大</strong>。由于这些缺点以及可能缺乏计算能力（例如，图形处理单元GPU在当时未被广泛用于深度学习）和缺乏研究兴趣，因此GNN并没有成为一般研究的重点。</p>
 <p>GNNs的显著改进是带有以下修改的<strong>门控图序列神经网络（GGS-NNs)</strong>【“Gated graph sequence neural networks”】。最重要的是，作者使用GRU替换了公式中的递归定义，从而消除了“压缩映射”要求并支持现代优化技术。 具体来说，等式（1）修改如下：</p>
-<script type="math/tex; mode=display">s_i^{(t)}=(1-z_i^{(t)})\odot s_i^{(t-1)}+z_i^{(t)}\odot\tilde{s_i}^{(t)}\tag{4}</script><p>其中，$z$ 通过更新门计算，$\tilde{s}$ 是待更新的候选者，$t$ 是伪时间， 其次，作者提议使用在序列上运行几个这样的网络来产生序列输出，并表明它们的方法可以应用于基于序列的任务，例如程序验证。</p>
+<script type="math/tex; mode=display">
+s_i^{(t)}=(1-z_i^{(t)})\odot s_i^{(t-1)}+z_i^{(t)}\odot\tilde{s_i}^{(t)}\tag{4}</script><p>其中，$z$ 通过更新门计算，$\tilde{s}$ 是待更新的候选者，$t$ 是伪时间， 其次，作者提议使用在序列上运行几个这样的网络来产生序列输出，并表明它们的方法可以应用于基于序列的任务，例如程序验证。</p>
 <p><strong>SSE</strong>【“Learning steadystates of iterative algorithms over graphs”】采用了与公式（4）相似的方法，在计算时没有使用 GRU ，而是采用随机定点梯度下降法来加快训练过程。该方案基本上是在使用局部邻域计算稳态节点状态与优化模型参数之间进行交替，两种计算都是在随机小批次中进行的。</p>
 <h3 id="3-2-Graph-level-RNN"><a href="#3-2-Graph-level-RNN" class="headerlink" title="3.2 Graph-level RNN"></a>3.2 Graph-level RNN</h3><p>在本小节中，我们回顾了如何应用RNN捕获图级别的模式，例如动态图的时间模式或图粒度不同级别的顺序模式。在图级别的RNN中，对整个图使用RNN来对图的状态编码，而不是对每个节点使用RNN学习节点状态。</p>
 <p><strong>“Graph Rnn:Generating realistic graphs with deep auto-regressive models”</strong> 将Graph RNN应用到图生成问题，这篇文章采用了两个RNN，一个用于生成节点，另外一个用于以自回归的方式生成新加入节点的边。结果发现，这种分层RNN框架相对于传统基于规则的的图生成模型来说从输入图学习效率更高，同时具有合理的时间复杂度。</p>
@@ -360,51 +365,74 @@
 <div align=center><img src="GNN5.PNG"></div>
 
 <h3 id="4-1-Convolution-Operations"><a href="#4-1-Convolution-Operations" class="headerlink" title="4.1 Convolution Operations"></a>4.1 Convolution Operations</h3><p>图卷积操作可以被分为两组：<strong>谱域卷积，它通过使用图傅里叶变换将节点的表示转换到谱域执行卷积操作</strong>；和<strong>空域卷积，它通过节点邻域执行卷积操作。注意，这两种可能重合，例如当使用多项式谱核时</strong>。</p>
-<h4 id="4-1-1-Spectral-Methods"><a href="#4-1-1-Spectral-Methods" class="headerlink" title="4.1.1 Spectral Methods"></a>4.1.1 Spectral Methods</h4><p>在卷积神经网络中，卷积操作是最基本的操作。然而，<strong>使用在图像或文本中的标准卷积操作不能被直接应用到图上，因为图缺少网格框架</strong>。“Spectral networks and locally connected networks on graphs”<strong>首先使用拉普拉斯矩阵从谱域对图数据引入了卷积操作，它和在信号处理中的傅里叶变换扮演着相似的角色</strong>。图卷积操作，$<em>G$，如下定义：$$\mathbf{u}_1</em>G\;\mathbf{u}_2=Q((Q^T \mathbf{u}_1)\odot (Q^T\mathbf{u}_2)\tag{5})$$</p>
-<p>其中，$\mathbf{u}_1,\mathbf{u}_2$表示定义在节点上的两个信号，$Q$ 是拉普拉斯矩阵的特征向量。简而言之，<strong>$Q^T$ 乘以图信号 $\mathbf{u}_1,\mathbf{u}_2$ 进入光谱域（即图傅立叶变换），同时乘以 $Q$ 进行逆变换</strong>。 此定义的有效性基于卷积定理，即卷积运算的傅立叶变换是其傅立叶变换的逐元素乘积。 然后，信号 $\mathbf{u}$ 可以通过如下公式过滤：<script type="math/tex">\mathbf{u}^{\prime}=Q\Theta Q^T\mathbf{u}\tag{6}</script></p>
-<p>其中 $\mathbf{u}^{\prime}$ 是输出信号，$\Theta=\Theta(\Lambda) \in \mathbb{R}^{N \times N}$ 是一个可学习的对角矩阵滤波器, $\Lambda$ 是拉普拉斯矩阵 $L$ 的特征向量，通过将不同的滤波器应用于不同的输入-输出信号对来定义卷积层，如下所示：</p>
-<script type="math/tex; mode=display">\mathbf{u}_j^{l+1}=\rho(\sum_{i=1}^{f_l}Q\Theta_{i,j}^lQ^T\mathbf{u}_i^l)\;j=1,\cdots,f_{l+1}\tag{7}</script><p>其中 $l$ 代表层，$\mathbf{u}_j^l\in\mathbb{R}^N$ 代表在第 $l$ 层的节点的第 $j$ 个隐藏表示，$\Theta_{i,j}^l$ 是可学习的滤波器，公式（7）的思想和传统卷积相似：它使输入信号通过一组可学习的滤波器，以汇总信息，然后进行一些非线性转换。Graph CNN和CNN框架基本相似，使用节点特征 $F^V$ 作为输入层，然后堆叠多个卷积层。理论分析表明，图卷积运算的这种定义可以模仿CNN的某些几何特性，我们请读者参考“Geometric deep learning: going beyond euclidean data”进行全面的调查。</p>
+<h4 id="4-1-1-Spectral-Methods"><a href="#4-1-1-Spectral-Methods" class="headerlink" title="4.1.1 Spectral Methods"></a>4.1.1 Spectral Methods</h4><p>在卷积神经网络中，卷积操作是最基本的操作。然而，<strong>使用在图像或文本中的标准卷积操作不能被直接应用到图上，因为图缺少网格框架</strong>。“Spectral networks and locally connected networks on graphs”<strong>首先使用拉普拉斯矩阵从谱域对图数据引入了卷积操作，它和在信号处理中的傅里叶变换扮演着相似的角色</strong>。图卷积操作，$*G$，如下定义：</p>
+<script type="math/tex; mode=display">
+\mathbf{u}_1*G\;\mathbf{u}_2=Q((Q^T \mathbf{u}_1)\odot (Q^T\mathbf{u}_2)\tag{5})</script><p>其中，$\mathbf{u}_1,\mathbf{u}_2$表示定义在节点上的两个信号，$Q$ 是拉普拉斯矩阵的特征向量。简而言之，<strong>$Q^T$ 乘以图信号 $\mathbf{u}_1,\mathbf{u}_2$ 进入光谱域（即图傅立叶变换），同时乘以 $Q$ 进行逆变换</strong>。 此定义的有效性基于卷积定理，即卷积运算的傅立叶变换是其傅立叶变换的逐元素乘积。 然后，信号 $\mathbf{u}$ 可以通过如下公式过滤：</p>
+<script type="math/tex; mode=display">
+\mathbf{u}^{\prime}=Q\Theta Q^T\mathbf{u}\tag{6}</script><p>其中 $\mathbf{u}^{\prime}$ 是输出信号，$\Theta=\Theta(\Lambda) \in \mathbb{R}^{N \times N}$ 是一个可学习的对角矩阵滤波器, $\Lambda$ 是拉普拉斯矩阵 $L$ 的特征向量，通过将不同的滤波器应用于不同的输入-输出信号对来定义卷积层，如下所示：</p>
+<script type="math/tex; mode=display">
+\mathbf{u}_j^{l+1}=\rho(\sum_{i=1}^{f_l}Q\Theta_{i,j}^lQ^T\mathbf{u}_i^l)\;j=1,\cdots,f_{l+1}\tag{7}</script><p>其中 $l$ 代表层，$\mathbf{u}_j^l\in\mathbb{R}^N$ 代表在第 $l$ 层的节点的第 $j$ 个隐藏表示，$\Theta_{i,j}^l$ 是可学习的滤波器，公式（7）的思想和传统卷积相似：它使输入信号通过一组可学习的滤波器，以汇总信息，然后进行一些非线性转换。Graph CNN和CNN框架基本相似，使用节点特征 $F^V$ 作为输入层，然后堆叠多个卷积层。理论分析表明，图卷积运算的这种定义可以模仿CNN的某些几何特性，我们请读者参考“Geometric deep learning: going beyond euclidean data”进行全面的调查。</p>
 <p>然而，直接使用公式（7）要求学习 $O(N)$ 的参数，这在实践中可能不可行。此外，光谱域中的滤波器可能不会位于空间域中，此外，频谱域中的滤波器可能不位于空间域中，即，每个节点可能会受到所有其他节点的影响，而不是仅受较小区域中的节点的影响。为了减轻这个问题，“Spectral networks and locally connected networks on graphs”建议使用下面的平滑滤波器：</p>
-<script type="math/tex; mode=display">diag(\Theta_{i,j}^l)=\mathcal{K}\;\alpha_{l.i.j}\tag{8}</script><p>其中 $\mathcal{K}$ 是固定插值内核，$\alpha_{l,i,j}$ 是可学习的插值系数。作者还把这种想法推广到没有给出图而是使用有监督或无监督方法从原始特征构造图形的情况“Deep convolutional networks on graph-structured data”。</p>
+<script type="math/tex; mode=display">
+diag(\Theta_{i,j}^l)=\mathcal{K}\;\alpha_{l.i.j}\tag{8}</script><p>其中 $\mathcal{K}$ 是固定插值内核，$\alpha_{l,i,j}$ 是可学习的插值系数。作者还把这种想法推广到没有给出图而是使用有监督或无监督方法从原始特征构造图形的情况“Deep convolutional networks on graph-structured data”。</p>
 <p>然而，有两个基本问题没有解决。首先，由于每次计算都需要拉普拉斯矩阵的完整特征向量，因此每次向前和向后传播的时间复杂度至少为 $O(N^2)$，更不用说计算特征分解所需的 $O(N^3)$复杂度，这意味着 这种方法无法扩展到大型图形。其次，由于过滤器取决于图的本征基 $Q$，因此无法在具有不同大小和结构的多个图之间共享参数。接下来，我们回顾两个尝试解决这些局限性的工作，然后使用一些通用框架将它们统一起来。</p>
 <h4 id="4-1-2-效率方面"><a href="#4-1-2-效率方面" class="headerlink" title="4.1.2 效率方面"></a>4.1.2 效率方面</h4><p>为了解决效率问题，ChebNet提出使用如下多项式滤波器：</p>
-<script type="math/tex; mode=display">\Theta(\Lambda)=\sum_{k=0}^K\theta_k\Lambda^k\tag{9}</script><p>其中，$\theta_0,\cdots,\theta_K$ 是可学习的参数，$K$ 是多项式阶数，作者使用切比雪夫展开重写了公式（9）代替执行特征分解：</p>
-<script type="math/tex; mode=display">\Theta(\Lambda)=\sum_{k=0}^K\theta_k\mathcal{T}_k(\hat{\Lambda})\tag{10}</script><p>其中，$\hat{\Lambda}=2\Lambda/\lambda_{max}-\mathbf{I}$ 是重新缩放的特征值，$\lambda_{max}$ 是最大特征值，$\mathbf{I}\in\mathbb{R}^{N\times N}$ 单位矩阵，$\mathcal{T}_k(x)$ 是 $k$ 阶的切比雪夫多项式，由于Chebyshev多项式的正交基础，因此重新缩放是必要的。利用拉普拉斯矩阵的多项式作为其特征值的多项式（即$L_k = Q\Lambda^kQ^T$）的事实，在公式（6）中的滤波操作可以被重写为以下公式：</p>
-<script type="math/tex; mode=display">\mathbf{u}^{\prime}=Q\Theta(\Lambda)Q^T\mathbf{u}=\sum_{k=0}^K\theta_kQ\mathcal{T}_k(\tilde{\Lambda})Q^T\mathbf{u}\\=\sum_{k=0}^K\theta_k\mathcal{T}_k(\tilde{L})\mathbf{u}=\sum_{k=0}^K\theta_k\bar{\mathbf{u}}_k\tag{11}</script><p>其中，$\bar{\mathbf{u}}_k=\mathcal{T}_k(\tilde{L})\mathbf{u},\;\tilde{L}=2L/\lambda_{max}-\mathbf{I}$，使用切比雪夫多项式的递推关系 $\mathcal{T}_k(x)=2x\mathcal{T}_{k-1}(x)-\mathcal{T}_{k-2}$ 和 $\mathcal{T}_0(x)=1,\;\mathcal{T}_1(x)=x$，$\bar{\mathbf{u}}_k$ 也可以递归计算：</p>
-<script type="math/tex; mode=display">\bar{\mathbf{u}}_k=2\tilde{L}\bar{\mathbf{u}}_{k-1}-\bar{\mathbf{u}}_{k-2}\tag{12}</script><p>其中，$\bar{\mathbf{u}}_0=\mathbf{u},\;\bar{\mathbf{u}}_1=\tilde{L}\mathbf{u}$。现在，因为仅需要计算稀疏矩阵 $\tilde{L}$ 的矩阵乘法和一些矢量，所以当使用稀疏矩阵乘法时，时间复杂度变为 $O(KM)$，其中 $M,K$ 分别是边的数量和多项式的阶数，即时间复杂度相对于边数是线性的。可以看出，这样的多项式滤波器是严格 $K$ 局部化的：在一次卷积之后，节点 $v_i$ 的表示将仅受其 $K$ 阶领域 $\mathcal{N}_K(i)$。有趣的是，该思想在网络嵌入中被独立使用以保持高阶邻近度。为了简洁，我们省略了细节。</p>
+<script type="math/tex; mode=display">
+\Theta(\Lambda)=\sum_{k=0}^K\theta_k\Lambda^k\tag{9}</script><p>其中，$\theta_0,\cdots,\theta_K$ 是可学习的参数，$K$ 是多项式阶数，作者使用切比雪夫展开重写了公式（9）代替执行特征分解：</p>
+<script type="math/tex; mode=display">
+\Theta(\Lambda)=\sum_{k=0}^K\theta_k\mathcal{T}_k(\hat{\Lambda})\tag{10}</script><p>其中，$\hat{\Lambda}=2\Lambda/\lambda_{max}-\mathbf{I}$ 是重新缩放的特征值，$\lambda_{max}$ 是最大特征值，$\mathbf{I}\in\mathbb{R}^{N\times N}$ 单位矩阵，$\mathcal{T}_k(x)$ 是 $k$ 阶的切比雪夫多项式，由于Chebyshev多项式的正交基础，因此重新缩放是必要的。利用拉普拉斯矩阵的多项式作为其特征值的多项式（即$L_k = Q\Lambda^kQ^T$）的事实，在公式（6）中的滤波操作可以被重写为以下公式：</p>
+<script type="math/tex; mode=display">
+\mathbf{u}^{\prime}=Q\Theta(\Lambda)Q^T\mathbf{u}=\sum_{k=0}^K\theta_kQ\mathcal{T}_k(\tilde{\Lambda})Q^T\mathbf{u}\\=\sum_{k=0}^K\theta_k\mathcal{T}_k(\tilde{L})\mathbf{u}=\sum_{k=0}^K\theta_k\bar{\mathbf{u}}_k\tag{11}</script><p>其中，$\bar{\mathbf{u}}_k=\mathcal{T}_k(\tilde{L})\mathbf{u},\;\tilde{L}=2L/\lambda_{max}-\mathbf{I}$，使用切比雪夫多项式的递推关系 $\mathcal{T}_k(x)=2x\mathcal{T}_{k-1}(x)-\mathcal{T}_{k-2}$ 和 $\mathcal{T}_0(x)=1,\;\mathcal{T}_1(x)=x$，$\bar{\mathbf{u}}_k$ 也可以递归计算：</p>
+<script type="math/tex; mode=display">
+\bar{\mathbf{u}}_k=2\tilde{L}\bar{\mathbf{u}}_{k-1}-\bar{\mathbf{u}}_{k-2}\tag{12}</script><p>其中，$\bar{\mathbf{u}}_0=\mathbf{u},\;\bar{\mathbf{u}}_1=\tilde{L}\mathbf{u}$。现在，因为仅需要计算稀疏矩阵 $\tilde{L}$ 的矩阵乘法和一些矢量，所以当使用稀疏矩阵乘法时，时间复杂度变为 $O(KM)$，其中 $M,K$ 分别是边的数量和多项式的阶数，即时间复杂度相对于边数是线性的。可以看出，这样的多项式滤波器是严格 $K$ 局部化的：在一次卷积之后，节点 $v_i$ 的表示将仅受其 $K$ 阶领域 $\mathcal{N}_K(i)$。有趣的是，该思想在网络嵌入中被独立使用以保持高阶邻近度。为了简洁，我们省略了细节。</p>
 <p>“Semi-supervised classification with graph convolutional networks”仅使用一阶邻居进一步简化了滤波器：</p>
-<script type="math/tex; mode=display">h_i^{l+1}=\rho\left(\sum_{j\in\tilde{\mathcal{N}}_i}\frac{h_j^l\Theta^l}{\sqrt{\tilde{\mathbf{D}}(i,i)\tilde{\mathbf{D}}(j,j)}}\right)\tag{13}</script><p>其中，$h_i^l\in\mathbb{R}^{f_l}$ 是节点 $v_i$ 在第 $l$ 层的隐藏表示，$\tilde{\mathbf{D}}=\mathbf{D}+\mathbf{I},\;\tilde{\mathcal{N}}(i)=\mathcal{N}(i)\cup\{i\}$，这可以等效地以矩阵形式重写为以下公式：</p>
-<script type="math/tex; mode=display">\mathbf{H}^{l+1}=\rho\left(\tilde{\mathbf{D}}^{-\frac{1}{2}}\tilde{\mathbf{A}}\tilde{\mathbf{D}}^{-\frac{1}{2}}\mathbf{H}^l\Theta^l\right)\tag{14}</script><p>其中，$\tilde{\mathbf{A}}=\mathbf{A}+\mathbf{I}$，即添加自连接，作者通过设置 $K=1$ 这一个细小的改变表明公式（14）是公式（9）的一种特殊形式。然后，作者认为，如图3所示，堆叠足够数量的层具有类似于ChebNet的建模能力，但会带来更好的结果。</p>
+<script type="math/tex; mode=display">
+h_i^{l+1}=\rho\left(\sum_{j\in\tilde{\mathcal{N}}_i}\frac{h_j^l\Theta^l}{\sqrt{\tilde{\mathbf{D}}(i,i)\tilde{\mathbf{D}}(j,j)}}\right)\tag{13}</script><p>其中，$h_i^l\in\mathbb{R}^{f_l}$ 是节点 $v_i$ 在第 $l$ 层的隐藏表示，$\tilde{\mathbf{D}}=\mathbf{D}+\mathbf{I},\;\tilde{\mathcal{N}}(i)=\mathcal{N}(i)\cup\{i\}$，这可以等效地以矩阵形式重写为以下公式：</p>
+<script type="math/tex; mode=display">
+\mathbf{H}^{l+1}=\rho\left(\tilde{\mathbf{D}}^{-\frac{1}{2}}\tilde{\mathbf{A}}\tilde{\mathbf{D}}^{-\frac{1}{2}}\mathbf{H}^l\Theta^l\right)\tag{14}</script><p>其中，$\tilde{\mathbf{A}}=\mathbf{A}+\mathbf{I}$，即添加自连接，作者通过设置 $K=1$ 这一个细小的改变表明公式（14）是公式（9）的一种特殊形式。然后，作者认为，如图3所示，堆叠足够数量的层具有类似于ChebNet的建模能力，但会带来更好的结果。</p>
 <div align=center><img src="GNN6.PNG"></div>
 
 <p>ChebNet及其扩展的重要见解是它们将频谱图卷积与空间体系结构联系在一起。具体而言，他们表明，当谱卷积函数是多项式或一阶时，谱图卷积等效于空间卷积。 另外，公式（13）中的卷积与公式（1）中GNN中的状态定义高度相似。只是用卷积定义代替了递归定义。 从这个方面来说，GNN可以看作是具有大量相同层以达到稳定状态的GCN，即GNN使用具有固定参数的固定函数来迭代更新节点的隐藏状态，直到达到平衡为止； 而GCN具有预设的层数，并且每个层包含不同的参数。</p>
 <p>目前已经提出了一些谱方法解决效率问题。例如，不像等式（10）中那样使用切比雪夫展开，CayleyNet [44]采用Cayley多项式定义图卷积：</p>
-<script type="math/tex; mode=display">\Theta(\Lambda)=\theta_{0}+2 R e\left\{\sum_{k=1}^{K} \theta_{k}\left(\theta_{h} \Lambda-i \mathbf{I}\right)^{k}\left(\theta_{h} \Lambda+i \mathbf{I}\right)^{k}\right\}\tag{15}</script><p>其中，$i=\sqrt{-1}$ 表示虚数单位，$\theta$ 是另一个光谱缩放参数。除了证明CayleyNet的效率与ChebNet一样，作者还证明了Cayley多项式可以检测“重要的窄频带”以获得更好的结果。图小波神经网络（GWNN）[45]被进一步提出，通过重写等式，用图小波变换代替频谱滤波器中的傅立叶变换。重写公式（5）如下：</p>
-<script type="math/tex; mode=display">\mathbf{u}_{1} *_{G} \mathbf{u}_{2}=\psi\left(\left(\psi^{-1} \mathbf{u}_{1}\right) \odot\left(\psi^{-1} \mathbf{u}_{2}\right)\right)\tag{16}</script><p>其中 $\psi$ 表示图小波基。 通过使用快速逼近算法进行计算 $\psi$ 和 $\psi^{-1}$加1，<strong>GWNN</strong>的计算复杂度也为 $O(KM)$，即，相对于边数而言是线性的。</p>
+<script type="math/tex; mode=display">
+\Theta(\Lambda)=\theta_{0}+2 R e\left\{\sum_{k=1}^{K} \theta_{k}\left(\theta_{h} \Lambda-i \mathbf{I}\right)^{k}\left(\theta_{h} \Lambda+i \mathbf{I}\right)^{k}\right\}\tag{15}</script><p>其中，$i=\sqrt{-1}$ 表示虚数单位，$\theta$ 是另一个光谱缩放参数。除了证明CayleyNet的效率与ChebNet一样，作者还证明了Cayley多项式可以检测“重要的窄频带”以获得更好的结果。图小波神经网络（GWNN）[45]被进一步提出，通过重写等式，用图小波变换代替频谱滤波器中的傅立叶变换。重写公式（5）如下：</p>
+<script type="math/tex; mode=display">
+\mathbf{u}_{1} *_{G} \mathbf{u}_{2}=\psi\left(\left(\psi^{-1} \mathbf{u}_{1}\right) \odot\left(\psi^{-1} \mathbf{u}_{2}\right)\right)\tag{16}</script><p>其中 $\psi$ 表示图小波基。 通过使用快速逼近算法进行计算 $\psi$ 和 $\psi^{-1}$加1，<strong>GWNN</strong>的计算复杂度也为 $O(KM)$，即，相对于边数而言是线性的。</p>
 <h4 id="4-1-3-多图方面"><a href="#4-1-3-多图方面" class="headerlink" title="4.1.3 多图方面"></a>4.1.3 多图方面</h4><p>一系列并行的工作着重于将图卷积泛化为任意大小的多个图。 Neural FPs 【“Convolutional networks on graphs for learning molecular fingerprints”】提出了一种也使用一阶邻居的空间方法：</p>
-<script type="math/tex; mode=display">\mathbf{h}_{i}^{l+1}=\sigma\left(\sum_{j \in \hat{\mathcal{N}}(i)} \mathbf{h}_{j}^{l} \Theta^{l}\right)\tag{17}</script><p>因为参数 $\Theta$ 可以在不同的图形之间共享并且与图形大小无关，所以Neural FP可以处理任意大小的多个图形。注意，公式（17）和公式（13）非常相似。Neural FPs 通过对不同度的节点学习不同的参数，而不是通过添加归一化项来考虑节点度的影响。<strong>该策略对于较小的图，例如分子图（即原子作为节点，键作为边）表现良好，但可能无法扩展到更大的图。</strong></p>
+<script type="math/tex; mode=display">
+\mathbf{h}_{i}^{l+1}=\sigma\left(\sum_{j \in \hat{\mathcal{N}}(i)} \mathbf{h}_{j}^{l} \Theta^{l}\right)\tag{17}</script><p>因为参数 $\Theta$ 可以在不同的图形之间共享并且与图形大小无关，所以Neural FP可以处理任意大小的多个图形。注意，公式（17）和公式（13）非常相似。Neural FPs 通过对不同度的节点学习不同的参数，而不是通过添加归一化项来考虑节点度的影响。<strong>该策略对于较小的图，例如分子图（即原子作为节点，键作为边）表现良好，但可能无法扩展到更大的图。</strong></p>
 <p>PATCHY-SAN 【“Learning convolutional neural networks for graphs”】 采用了新的想法。它使用诸如Weisfeiler-Lehman内核【“Weisfeiler-lehman graph kernels”】之类的图形标注过程分配了唯一的节点顺序，然后使用此预定义的顺序将节点邻居布置在一条直线上。此外，PATCHY-SAN 还通过从对每个节点的 $K$ 步邻居 $\mathcal{N}_k(i)$ 中选择固定数量的节点来定义了一个接收域。然后采用具有适当归一化的标准一维CNN。使用这种方法，不同图中的节点都具有固定大小和顺序的“接收域”。 因此，PATCHY-SAN可以从多个图形中学习，就像正常的CNN从多个图像中学习一样。缺点是卷积在很大程度上取决于图形标注过程，而图形标注过程是一个尚未学习的预处理步骤。LGCN 【“Large-scale learnable graph convolutional networks”】进一步建议通过按字典顺序简化排序过程（即根据邻居在最后一层 $\mathbf{H}^L$ 中的隐藏表示对邻居进行排序）。作者没有使用一个单一的顺序，而是分别对 $\mathbf{H}^L$ 的不同通道进行了排序。SortPooling 【“An end-to-end deep learning architecture for graph classification”】采取了类似的方法，但作者没有对每个节点的邻居进行排序，而是提议对所有节点进行排序（即，对所有邻域使用单一顺序）。 尽管这些方法之间存在差异，但对于图形来说，强制执行一维节点顺序可能不是自然选择。</p>
 <p>DCNN 【“Diffusion-convolutional neural networks”】采用了另一种方法，即用扩散基础代替了图卷积的本征基础，即节点的邻域由节点之间的扩散转移概率确定。 具体来说，卷积定义如下：</p>
-<script type="math/tex; mode=display">\mathbf{H}^{l+1}=\rho\left(\mathbf{P}^{K} \mathbf{H}^{l} \mathbf{\Theta}^{l}\right)\tag{18}</script><p>其中，$\mathbf{P}^K=(\mathbf{P})^K$ 是长为 $K$ 的扩散过程（即随机游走）的转移概率，$K$ 是预设的扩散长度，$\Theta^l$ 是可学习参数。因为只有 $\mathbf{P}^K$ 依赖于图结构，参数 $\theta^l$ 可以在任意大小的图之间共享，然而计算 $\mathbf{P}^K$ 的时间复杂度是 $O(N^2K)$；因此该方法无法扩展到大图。</p>
+<script type="math/tex; mode=display">
+\mathbf{H}^{l+1}=\rho\left(\mathbf{P}^{K} \mathbf{H}^{l} \mathbf{\Theta}^{l}\right)\tag{18}</script><p>其中，$\mathbf{P}^K=(\mathbf{P})^K$ 是长为 $K$ 的扩散过程（即随机游走）的转移概率，$K$ 是预设的扩散长度，$\Theta^l$ 是可学习参数。因为只有 $\mathbf{P}^K$ 依赖于图结构，参数 $\theta^l$ 可以在任意大小的图之间共享，然而计算 $\mathbf{P}^K$ 的时间复杂度是 $O(N^2K)$；因此该方法无法扩展到大图。</p>
 <p>DGCN 【“Dual graph convolutional networks for graphbased semi-supervised classification”】进一步提出了使用对偶图卷积网络联合采用扩散和邻接基础。 具体地说，DGCN使用了两个卷积：一个是等式（14），另一个用转移概率的正点想互信息（PPMI）矩阵【“Neural word embedding as implicit matrix factorization,”】替换了邻接矩阵，如下所示：</p>
-<script type="math/tex; mode=display">\mathbf{Z}^{l+1}=\rho\left(\mathbf{D}_{P}^{-\frac{1}{2}} \mathbf{X}_{P} \mathbf{D}_{P}^{-\frac{1}{2}} \mathbf{Z}^{l} \mathbf{\Theta}^{l}\right)\tag{19}</script><p>其中，$\mathbf{X}_P$ 是正点互信息（PPMI）矩阵，按如下公式计算：</p>
-<script type="math/tex; mode=display">\mathbf{X}_{P}(i, j)=\max \left(\log \left(\frac{\mathbf{P}(i, j) \sum_{i; j} \mathbf{P}(i, j)}{\sum_{i} \mathbf{P}(i, j) \sum_{j} \mathbf{P}(i, j)}\right), 0\right)\tag{20}</script><p>其中，$\mathbf{D}_P(i,j)=\sum_j\mathbf{X}_P(i,j)$ 是 $\mathbf{X}_P$ 的对角度矩阵。然后，通过最小化 $\mathbf{H}$ 和 $\mathbf{Z}$ 之间的均方差来合并这两个卷积。DGCN采用随机游走采样技术来加快转移概率的计算。 实验表明，这种双重卷积甚至对于单图问题也是有效的。</p>
+<script type="math/tex; mode=display">
+\mathbf{Z}^{l+1}=\rho\left(\mathbf{D}_{P}^{-\frac{1}{2}} \mathbf{X}_{P} \mathbf{D}_{P}^{-\frac{1}{2}} \mathbf{Z}^{l} \mathbf{\Theta}^{l}\right)\tag{19}</script><p>其中，$\mathbf{X}_P$ 是正点互信息（PPMI）矩阵，按如下公式计算：</p>
+<script type="math/tex; mode=display">
+\mathbf{X}_{P}(i, j)=\max \left(\log \left(\frac{\mathbf{P}(i, j) \sum_{i; j} \mathbf{P}(i, j)}{\sum_{i} \mathbf{P}(i, j) \sum_{j} \mathbf{P}(i, j)}\right), 0\right)\tag{20}</script><p>其中，$\mathbf{D}_P(i,j)=\sum_j\mathbf{X}_P(i,j)$ 是 $\mathbf{X}_P$ 的对角度矩阵。然后，通过最小化 $\mathbf{H}$ 和 $\mathbf{Z}$ 之间的均方差来合并这两个卷积。DGCN采用随机游走采样技术来加快转移概率的计算。 实验表明，这种双重卷积甚至对于单图问题也是有效的。</p>
 <h4 id="4-1-4-框架"><a href="#4-1-4-框架" class="headerlink" title="4.1.4 框架"></a>4.1.4 框架</h4><p>基于以上两点工作，提出了MPNN 【“Neural message passing for quantum chemistry”】作为使用消息传递函数的空间域图卷积操作的统一框架：</p>
-<script type="math/tex; mode=display">\begin{array}{c}
+<script type="math/tex; mode=display">
+\begin{array}{c}
 \mathbf{m}_{i}^{l+1}=\sum_{j \in \mathcal{N}(i)} \mathcal{F}^{l}\left(\mathbf{h}_{i}^{l}, \mathbf{h}_{j}^{l}, \mathbf{F}_{i, j}^{E}\right) \\
 \mathbf{h}_{i}^{l+1}=\mathcal{G}^{l}\left(\mathbf{h}_{i}^{l}, \mathbf{m}_{i}^{l+1}\right)
 \end{array}\tag{21}</script><p>其中，$\mathcal{F}^l(\cdot),\;\mathcal{G}^l(\cdot)$ 分别表示要学习的消息函数和节点更新函数，$\mathbf{m}^l$ 代表两个节点间传递的信息。从概念上讲，MPNNs是一个框架，在该框架中，每个节点都根据其状态发送消息，并根据从直接邻居收到的消息来更新其状态。 作者表明，上述框架已经包括了许多现有方法，例如GGSNNs 【“Gated graph sequence neural networks”】，Bruna等 【““Spectral networks and locally connected networks on graphs”】，Henaff等 【“Deep convolutional networks on graph-structured data”】，Neural FPs 【“Convolutional networks on graphs for learning molecular fingerprints”】，Kipf和Welling 【“Semi-supervised classification with graph convolutional networks”】和Kearnes等 【“Molecular graph convolutions: moving beyond fingerprints”】作为特殊情况。 此外，作者建议添加一个“主”节点，该节点连接到所有节点以加速长距离消息传递，并且他们将隐藏的表示形式拆分为不同的“塔”以提高泛化能力。 作者表明，MPNNs的特定变体可以在预测分子特性方面达到最先进的性能。</p>
 <p>同时，GraphSAGE 【“Inductive representation learning on large graphs”】提出了与公式（21）类似的想法，使用多个聚合函数，如下所示：</p>
-<script type="math/tex; mode=display">\begin{array}{c}
+<script type="math/tex; mode=display">
+\begin{array}{c}
 \mathbf{m}_{i}^{l+1}= \text { AGGREGATE }^{l}\left(\left\{\mathbf{h}_{j}^{l}, \forall j \in \mathcal{N}(i)\right\}\right)\\
 \mathbf{h}_{i}^{l+1}=\rho\left(\mathbf{\Theta}^{l}\left[\mathbf{h}_{i}^{l}, \mathbf{m}_{i}^{l+1}\right]\right)
 \end{array}\tag{22}</script><p>其中，$[\cdot,\cdot]$ 表示级联操作，$\text{AGGREGATE}(\cdot)$ 表示聚合函数。作者推荐了三个聚合函数：按元素的均值，LSTM和最大池化如下：</p>
-<script type="math/tex; mode=display">\text { AGGREGATE }^{l}=\max \left\{\rho\left(\Theta_{\text {pool }} \mathbf{h}_{j}^{l}+\mathbf{b}_{\text {pool }}\right), \forall j \in \mathcal{N}(i)\right\}\tag{23}</script><p>其中，$\Theta_{pool},\;\mathbf{b}_{pool}$ 是要学习的参数，$\max\{\cdot\}$ 是逐元素取最大值。对于 LSTM 聚合函数，因为需要对邻居排序，作者才用了随机排序。</p>
+<script type="math/tex; mode=display">
+\text { AGGREGATE }^{l}=\max \left\{\rho\left(\Theta_{\text {pool }} \mathbf{h}_{j}^{l}+\mathbf{b}_{\text {pool }}\right), \forall j \in \mathcal{N}(i)\right\}\tag{23}</script><p>其中，$\Theta_{pool},\;\mathbf{b}_{pool}$ 是要学习的参数，$\max\{\cdot\}$ 是逐元素取最大值。对于 LSTM 聚合函数，因为需要对邻居排序，作者才用了随机排序。</p>
 <p>混合模型网络（MoNet）【“Geometric deep learning on graphs and manifolds using mixture model cnns”】还尝试使用“模板匹配”将现有的GCN模型以及用于歧管的CNN统一到一个通用框架中：</p>
-<script type="math/tex; mode=display">h_{i k}^{l+1}=\sum_{j \in \mathcal{N}(i)} \mathcal{F}_{k}^{l}(\mathbf{u}(i, j)) \mathbf{h}_{j}^{l}, k=1, \ldots, f_{l+1}\tag{24}</script><p>其中，$\mathbf{u}(i,j)$ 是节点对 $(v_i,v_j)$ 的伪坐标，$\mathcal{F}_k^l(\mathbf{u})$ 是要学习的参数函数，$h_{ik}^l$ 是 $h_i^l$ 的第 $k$ 维，换句话说，$\mathcal{F}_k^l(\mathbf{u})$ 用作组合领域的加权内核。然后，MoNet采用了以下高斯内核：</p>
-<script type="math/tex; mode=display">\mathcal{F}_{k}^{l}(\mathbf{u})=\exp \left(-\frac{1}{2}\left(\mathbf{u}-\boldsymbol{\mu}_{k}^{l}\right)^{T}\left(\boldsymbol{\Sigma}_{k}^{l}\right)^{-1}\left(\mathbf{u}-\boldsymbol{\mu}_{k}^{l}\right)\right)\tag{25}</script><p>其中，$\mu_k^l,\;\sum_k^l$ 分别是均值向量和对角协方差矩阵。伪坐标是度数，如Kipf和Welling 【“Semi-supervised classification with graph convolutional networks”】，即</p>
-<script type="math/tex; mode=display">\mathbf{u}(i, j)=\left(\frac{1}{\sqrt{\mathbf{D}(i, i)}}, \frac{1}{\sqrt{\mathbf{D}(j, j)}}\right)\tag{26}</script><p>图网络（GNs）【“Relational inductive biases, deep learning, and graph networks”】为GCN和GNN提出了一个更通用的框架，该框架学习了三组表示：$\mathbf{h}_i^l,\mathbf{e}_{ij}^l,\mathbf{z}^l$ 分别表示节点，边和整个图。 这些表示是使用三个聚合函数和三个更新函数来学习的：</p>
-<script type="math/tex; mode=display">\begin{array}{c}
+<script type="math/tex; mode=display">
+h_{i k}^{l+1}=\sum_{j \in \mathcal{N}(i)} \mathcal{F}_{k}^{l}(\mathbf{u}(i, j)) \mathbf{h}_{j}^{l}, k=1, \ldots, f_{l+1}\tag{24}</script><p>其中，$\mathbf{u}(i,j)$ 是节点对 $(v_i,v_j)$ 的伪坐标，$\mathcal{F}_k^l(\mathbf{u})$ 是要学习的参数函数，$h_{ik}^l$ 是 $h_i^l$ 的第 $k$ 维，换句话说，$\mathcal{F}_k^l(\mathbf{u})$ 用作组合领域的加权内核。然后，MoNet采用了以下高斯内核：</p>
+<script type="math/tex; mode=display">
+\mathcal{F}_{k}^{l}(\mathbf{u})=\exp \left(-\frac{1}{2}\left(\mathbf{u}-\boldsymbol{\mu}_{k}^{l}\right)^{T}\left(\boldsymbol{\Sigma}_{k}^{l}\right)^{-1}\left(\mathbf{u}-\boldsymbol{\mu}_{k}^{l}\right)\right)\tag{25}</script><p>其中，$\mu_k^l,\;\sum_k^l$ 分别是均值向量和对角协方差矩阵。伪坐标是度数，如Kipf和Welling 【“Semi-supervised classification with graph convolutional networks”】，即</p>
+<script type="math/tex; mode=display">
+\mathbf{u}(i, j)=\left(\frac{1}{\sqrt{\mathbf{D}(i, i)}}, \frac{1}{\sqrt{\mathbf{D}(j, j)}}\right)\tag{26}</script><p>图网络（GNs）【“Relational inductive biases, deep learning, and graph networks”】为GCN和GNN提出了一个更通用的框架，该框架学习了三组表示：$\mathbf{h}_i^l,\mathbf{e}_{ij}^l,\mathbf{z}^l$ 分别表示节点，边和整个图。 这些表示是使用三个聚合函数和三个更新函数来学习的：</p>
+<script type="math/tex; mode=display">
+\begin{array}{c}
 \mathbf{m}_{i}^{l}=\mathcal{G}^{E \rightarrow V}\left(\left\{\mathbf{e}_{i j}^{l}, \forall j \in \mathcal{N}(i)\right\}\right), \mathbf{m}_{V}^{l}=\mathcal{G}^{V \rightarrow G}\left(\left\{\mathbf{h}_{i}^{l}, \forall v_{i} \in V\right\}\right) \\
 \mathbf{m}_{E}^{l}=\mathcal{G}^{E \rightarrow G}\left(\left\{\mathbf{e}_{i j}^{l}, \forall\left(v_{i}, v_{j}\right) \in E\right\}\right), \mathbf{h}_{i}^{l+1}=\mathcal{F}^{V}\left(\mathbf{m}_{i}^{l}, \mathbf{h}_{i}^{l}, \mathbf{z}^{l}\right) \\
 \mathbf{e}_{i j}^{l+1}=\mathcal{F}^{E}\left(\mathbf{e}_{i j}^{l}, \mathbf{h}_{i}^{l}, \mathbf{h}_{j}^{l}, \mathbf{z}^{l}\right), \mathbf{z}^{l+1}=\mathcal{F}^{G}\left(\mathbf{m}_{E}^{l}, \mathbf{m}_{V}^{l}, \mathbf{z}^{l}\right)
@@ -413,22 +441,30 @@
 <h3 id="4-2-Readout-OPeration"><a href="#4-2-Readout-OPeration" class="headerlink" title="4.2 Readout OPeration"></a>4.2 Readout OPeration</h3><p>使用图卷积运算，可以学习有用的节点特征来解决许多以节点为中心的任务。但是，为了处理以图形为中心的任务，需要将节点信息进行汇总以形成图形级别的表示。 在文献中，这种程序通常称为<strong>读出操作</strong>。基于常规和本地邻域，标准CNN会进行多次跨步卷积或池化以逐渐降低分辨率。 由于图形缺乏网格结构，因此这些现有方法无法直接使用。</p>
 <p><strong>阶数不变</strong>：图读取操作的关键要求是该操作应不依赖于节点顺序，即，如果我们使用两个节点集之间的双射函数来更改节点和边的索引，则整个图的表示不应更改。 例如，一种药物是否可以治疗某些疾病取决于其固有结构。 因此，如果我们使用不同的节点索引表示药物，我们应该得到相同的结果。 注意，因为这个问题与图同构问题有关，其中最著名的算法是拟多项式判【“Graph isomorphism in quasipolynomial time”】，所以我们只能找到在多项式时间内阶不变的函数，反之亦然，即两个结构不同的函数 图可能具有相同的表示形式。</p>
 <h4 id="4-2-1-统计"><a href="#4-2-1-统计" class="headerlink" title="4.2.1 统计"></a>4.2.1 统计</h4><p>最基本的阶数不变运算涉及简单的统计信息，例如求和，求平均值或最大池化【“Convolutional networks on graphs for learning molecular fingerprints”】，【“Diffusion-convolutional neural networks”】，即</p>
-<script type="math/tex; mode=display">\mathbf{h}_{G}=\sum_{i=1}^{N} \mathbf{h}_{i}^{L} \text { or } \mathbf{h}_{G}=\frac{1}{N} \sum_{i=1}^{N} \mathbf{h}_{i}^{L} \text { or } \mathbf{h}_{G}=\max \left\{\mathbf{h}_{i}^{L}, \forall i\right\}\tag{28}</script><p>其中，$\mathbf{h}_{G}$ 是图 $G$ 的表示，$h_i^L$ 表示节点 $v_i$ 在最后一层 $L$ 的表示.但是，这样的第一刻统计数据可能不足以代表不同的图。</p>
+<script type="math/tex; mode=display">
+\mathbf{h}_{G}=\sum_{i=1}^{N} \mathbf{h}_{i}^{L} \text { or } \mathbf{h}_{G}=\frac{1}{N} \sum_{i=1}^{N} \mathbf{h}_{i}^{L} \text { or } \mathbf{h}_{G}=\max \left\{\mathbf{h}_{i}^{L}, \forall i\right\}\tag{28}</script><p>其中，$\mathbf{h}_{G}$ 是图 $G$ 的表示，$h_i^L$ 表示节点 $v_i$ 在最后一层 $L$ 的表示.但是，这样的第一刻统计数据可能不足以代表不同的图。</p>
 <p>【“Molecular graph convolutions: moving beyond fingerprints”】建议使用模糊直方图考虑节点表示的分布【“Fuzzy sets and fuzzy logic”】。 模糊直方图背后的基本思想是构造几个“直方图箱”，然后计算 $h_i^L$ 到这些箱子的隶属度，即通过将节点表示视为样本并将它们与一些预定义的模板进行匹配，最后返回最终直方图的级联。 以这种方式，可以区分具有相同的总和/平均/最大但具有不同分布的节点。</p>
 <p>聚合节点表示的另一种常用方法是添加一个完全连接的（FC）层作为最终层【“Spectral networks and locally connected networks on graphs,”】，即</p>
-<script type="math/tex; mode=display">\mathbf{h}_{G}=\rho\left(\left[\mathbf{H}^{L}\right] \boldsymbol{\Theta}_{F C}\right)\tag{29}</script><p>其中，$[\mathbf{H}^L]\in\mathbb{R}^{Nf_l}$ 是最终节点表示 $\mathbf{H}^L$ 的级联，$\Theta_{FC}\in\mathbb{R}^{Nf_l\times f_{output}}$ 是参数，且 $f_{output}$ 是输出的维度，公式（29）可以看做节点级特征的加权和。一个优点就是可以对不同的节点学习不同的权重值；但是，此功能是以无法保证阶数不变为代价的。</p>
+<script type="math/tex; mode=display">
+\mathbf{h}_{G}=\rho\left(\left[\mathbf{H}^{L}\right] \boldsymbol{\Theta}_{F C}\right)\tag{29}</script><p>其中，$[\mathbf{H}^L]\in\mathbb{R}^{Nf_l}$ 是最终节点表示 $\mathbf{H}^L$ 的级联，$\Theta_{FC}\in\mathbb{R}^{Nf_l\times f_{output}}$ 是参数，且 $f_{output}$ 是输出的维度，公式（29）可以看做节点级特征的加权和。一个优点就是可以对不同的节点学习不同的权重值；但是，此功能是以无法保证阶数不变为代价的。</p>
 <h4 id="4-2-2-层次聚类"><a href="#4-2-2-层次聚类" class="headerlink" title="4.2.2 层次聚类"></a>4.2.2 层次聚类</h4><p>众所周知，图显示出丰富的层次结构，而不是节点和图的层次结构之间的二分法【“Hierarchical taxonomy aware network embedding”】，可以通过图4所示的层次聚类方法进行探索。</p>
 <div align=center><img src=".\Deep-Learning-on-Graphs-A-Survey\GNN7.png"></div>
 <br>
 例如，在Bruna等人【“Spectral networks and locally connected networks on graphs”】中使用了基于密度的聚集聚类【“The elements of statistical learning: Data mining, inference, and prediction”】和在Henaff等【“Deep convolutional networks on graph-structured data”】中使用的多分辨率光谱聚类【“A tutorial on spectral clustering”】。ChebNet 【“Convolutional neural networks on graphs with fast localized spectral filtering”】和MoNet 【“Geometric deep learning on graphs and manifolds using mixture model cnns”】采用了另一种贪婪的层次聚类算法Graclus 【“Weighted graph cuts without eigenvectors a multilevel approach”】来一次合并两个节点，并采用快速池化方法将节点重新排列为平衡的二叉树。ECC 【“Dynamic edgeconditioned filters in convolutional neural networks on graphs”】通过执行特征分解【““A multiscale pyramid transform for graph signals”】采用了另一种层次聚类方法。 但是，这些分层聚类方法都与图卷积无关（即，它们可以作为预处理步骤执行，并且不能以端到端的方式进行训练）。
 
 为了解决这个问题，DiffPool 【“Hierarchical graph representation learning with differentiable pooling”】提出了一种与图卷积联合训练的可微层次聚类算法。 具体来说，作者建议使用如下公式在每一层中学习软聚类分配矩阵隐藏表示法在，如下所示：
-$$\mathbf{S}^{l}=\mathcal{F}\left(\mathbf{A}^{l}, \mathbf{H}^{l}\right)\tag{30}$$
+
+$$
+\mathbf{S}^{l}=\mathcal{F}\left(\mathbf{A}^{l}, \mathbf{H}^{l}\right)\tag{30}
+$$
 
 其中，$\mathbf{S}^l\in\mathbb{R}^{N_l\times N_{l+1}}$ 是聚类分配矩阵，$N_l$ 是 $l$ 层的簇数，$\mathcal{F}(\cdot)$ 是要学习的函数。然后，可以通过根据 $S^1$ 取平均值来获得此“粗化”图的节点表示和新的邻接矩阵：
-$$\mathbf{H}^{l+1}=\left(\mathbf{S}^{l}\right)^{T} \hat{\mathbf{H}}^{l+1}, \mathbf{A}^{l+1}=\left(\mathbf{S}^{l}\right)^{T} \mathbf{A}^{l} \mathbf{S}^{l}\tag{31}$$
 
-其中，$\hat{\mathbf{H}}^{l+1}$ 是通过 $\mathbf{H}^l$ 经过一次图卷积后得到的，即，在卷积操作之后，将图从每层中的 $N^1$ 个节点粗化到 $N^{1 + 1}$ 个节点。 节点的初始数量为 $N_0 = N$，最后一层为 $N_L = 1$，即代表整个图的单个节点。 因为聚类分配操作很软，所以集群之间的连接并不稀疏。 
+$$
+\mathbf{H}^{l+1}=\left(\mathbf{S}^{l}\right)^{T} \hat{\mathbf{H}}^{l+1}, \mathbf{A}^{l+1}=\left(\mathbf{S}^{l}\right)^{T} \mathbf{A}^{l} \mathbf{S}^{l}\tag{31}
+$$
+
+其中，$\hat{\mathbf{H}}^{l+1}$ 是通过 $\mathbf{H}^l$ 经过一次图卷积后得到的，即，在卷积操作之后，将图从每层中的 $N^1$ 个节点粗化到 $N^{1 + 1}$ 个节点。 节点的初始数量为 $N_0 = N$，最后一层为 $N_L = 1$，即代表整个图的单个节点。 因为聚类分配操作很软，所以集群之间的连接并不稀疏。
 
 #### 4.2.3 Imposing Orders and Others
 
@@ -437,7 +473,6 @@ $$\mathbf{H}^{l+1}=\left(\mathbf{S}^{l}\right)^{T} \hat{\mathbf{H}}^{l+1}, \math
 除上述方法外，还有一些启发式方法。 在GNN中【“The graph neural network model”】，作者建议添加一个连接到所有节点的特殊节点以表示整个图。 同样，GNs 【“Relational inductive biases, deep learning, and graph networks”】提出通过从所有节点和边接收消息来直接学习整个图的表示。
 
 MPNNs采用set2set 【“Order matters: Sequence to sequence for sets”】，这是对seq2seq模型的修改。 具体而言，set2set使用“读取-处理-写入”模型，该模型同时接收所有输入，使用注意机制和LSTM计算内部存储器，然后写入输出。 与seq2seq是顺序敏感的不同，set2set对于输入顺序是不变的。
-
 
 #### 4.2.4 Summary
 
@@ -450,10 +485,16 @@ MPNNs采用set2set 【“Order matters: Sequence to sequence for sets”】，�
 #### 4.3.1 Attention Mechanism
 
 在上述GCN中，节点邻域以相等或预定义的权重进行聚合。 但是，邻居的影响可能相差很大。 因此，应该在训练过程中学习它们，而不是预先确定。 受注意力机制【“Attention is all you need”】的启发，图注意力网络（GAT）【“Graph attention networks”】通过修改公式（13）中的卷积运算将注意力机制引入了GCN如下：
-$$\mathbf{h}_{i}^{l+1}=\rho\left(\sum_{j \in \hat{\mathcal{N}}(i)} \alpha_{i j}^{l} \mathbf{h}_{j}^{l} \mathbf{\Theta}^{l}\right)\tag{32}$$
+
+$$
+\mathbf{h}_{i}^{l+1}=\rho\left(\sum_{j \in \hat{\mathcal{N}}(i)} \alpha_{i j}^{l} \mathbf{h}_{j}^{l} \mathbf{\Theta}^{l}\right)\tag{32}
+$$
 
 其中，$\alpha_{i,j}^l$ 是在第 $l$ 层节点 $v_i$  到节点 $v_j$ 的注意力：
-$$\alpha_{i j}^{l}=\frac{\exp \left(\text { LeakyReLU }\left(\mathcal{F}\left(\mathbf{h}_{i}^{l} \mathbf{\Theta}^{l}, \mathbf{h}_{j}^{l} \Theta^{l}\right)\right)\right)}{\sum_{k \in \mathcal{N}(i)} \exp \left(\text { LeakyReLU }\left(\mathcal{F}\left(\mathbf{h}_{i}^{l} \mathbf{\Theta}^{l}, \mathbf{h}_{k}^{l} \Theta^{l}\right)\right)\right)}\tag{33}$$
+
+$$
+\alpha_{i j}^{l}=\frac{\exp \left(\text { LeakyReLU }\left(\mathcal{F}\left(\mathbf{h}_{i}^{l} \mathbf{\Theta}^{l}, \mathbf{h}_{j}^{l} \Theta^{l}\right)\right)\right)}{\sum_{k \in \mathcal{N}(i)} \exp \left(\text { LeakyReLU }\left(\mathcal{F}\left(\mathbf{h}_{i}^{l} \mathbf{\Theta}^{l}, \mathbf{h}_{k}^{l} \Theta^{l}\right)\right)\right)}\tag{33}
+$$
 
 其中，$\mathcal{F}(\cdot)$ 是一个像多层感知机那样要学习的函数。为了提高模型的容量和稳定性，作者还建议使用多个独立注意力并将其结果进行合并，即，如图5所示的多头注意力机制【“Attention is all you need”】。GaAN【“Gaan: Gated attention networks for learning on large and spatiotemporal graphs”】进一步建议针对不同的头和头学习不同的权重。 将这种方法应用于交通预测问题。
 
@@ -461,25 +502,32 @@ $$\alpha_{i j}^{l}=\frac{\exp \left(\text { LeakyReLU }\left(\mathcal{F}\left(\m
 
 <p>HAN 【“Heterogeneous graph attention network”】提出了一种针对异构图的两级关注机制，即节点级和语义级的关注机制。 具体来说，节点级别的关注机制与GAT类似，但也考虑了节点类型。 因此，它可以分配不同的权重来聚合基于元路径的邻居。 然后，语义层面的注意了解了不同元路径的重要性，并输出了最终结果。</p>
 <h4 id="4-3-2-Residual-and-Jumping-Connections"><a href="#4-3-2-Residual-and-Jumping-Connections" class="headerlink" title="4.3.2 Residual and Jumping Connections"></a>4.3.2 Residual and Jumping Connections</h4><p>许多研究已经观察到，现有GCN的最合适深度通常非常有限，例如2或3层。 这个问题可能是由于训练深层GCN时遇到的实际困难或过度平滑的问题所致，即，深层中的所有节点都具有相同的表示形式【“Representation learning on graphs with jumping knowledge networks”】，【“Deeper insights into graph convolutional networks for semi-supervised learning”】。 为了解决这个问题，可以将类似于ResNet 【“Deep residual learning for image recognition”】的剩余连接添加到GCN。 例如，Kipf和Welling 【“Semi-supervised classification with graph convolutional networks”】在公式（14）中增加了剩余的连接如下：</p>
-<script type="math/tex; mode=display">\mathbf{H}^{l+1}=\rho\left(\tilde{\mathbf{D}}^{-\frac{1}{2}} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-\frac{1}{2}} \mathbf{H}^{l} \mathbf{\Theta}^{l}\right)+\mathbf{H}^{l}\tag{34}</script><p>他们通过实验表明，添加此类残差连接可以使网络深度增加，这与ResNet的结果类似。</p>
+<script type="math/tex; mode=display">
+\mathbf{H}^{l+1}=\rho\left(\tilde{\mathbf{D}}^{-\frac{1}{2}} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-\frac{1}{2}} \mathbf{H}^{l} \mathbf{\Theta}^{l}\right)+\mathbf{H}^{l}\tag{34}</script><p>他们通过实验表明，添加此类残差连接可以使网络深度增加，这与ResNet的结果类似。</p>
 <p>列网络（CLN）【““Column networks for collective classification”】通过使用以下具有可学习权重的残差连接采用了类似的思想：</p>
-<script type="math/tex; mode=display">\mathbf{h}_{i}^{l+1}=\boldsymbol{\alpha}_{i}^{l} \odot \widetilde{\mathbf{h}}_{i}^{l+1}+\left(1-\boldsymbol{\alpha}_{i}^{l}\right) \odot \mathbf{h}_{i}^{l}\tag{35}</script><script type="math/tex; mode=display">\alpha_i^l=\rho\left(\mathbf{b}_{\alpha}^l+\Theta_{\alpha}^lh_i^l+\Theta_{\alpha}^{\prime l}\sum_{j\in\mathcal{N}(i)}\mathbf{h}_j^l\right)\tag{36}</script><p>其中，$\mathbf{b}_{\alpha}^l,\Theta_{\alpha}^l,\Theta_{\alpha}^{\prime l}$ 是参数。注意，公式（34）和在GGS-NNs中的GRU相似。不同之处在于，CLN中的上标代表层数，并且不同的层包含不同的参数；而GGS-NNs中的上标代表伪时间和在时间步中使用的一个参数集合。</p>
+<script type="math/tex; mode=display">
+\mathbf{h}_{i}^{l+1}=\boldsymbol{\alpha}_{i}^{l} \odot \widetilde{\mathbf{h}}_{i}^{l+1}+\left(1-\boldsymbol{\alpha}_{i}^{l}\right) \odot \mathbf{h}_{i}^{l}\tag{35}</script><script type="math/tex; mode=display">
+\alpha_i^l=\rho\left(\mathbf{b}_{\alpha}^l+\Theta_{\alpha}^lh_i^l+\Theta_{\alpha}^{\prime l}\sum_{j\in\mathcal{N}(i)}\mathbf{h}_j^l\right)\tag{36}</script><p>其中，$\mathbf{b}_{\alpha}^l,\Theta_{\alpha}^l,\Theta_{\alpha}^{\prime l}$ 是参数。注意，公式（34）和在GGS-NNs中的GRU相似。不同之处在于，CLN中的上标代表层数，并且不同的层包含不同的参数；而GGS-NNs中的上标代表伪时间和在时间步中使用的一个参数集合。</p>
 <p>受到个性化PageRank的启发，PPNP 【“Predict then propagate: Graph neural networks meet personalized pagerank”】定义了通过隐形传送到初始层的图卷积：</p>
-<script type="math/tex; mode=display">\mathbf{H}^{l+1}=(1-\alpha) \tilde{\mathbf{D}}^{-\frac{1}{2}} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-\frac{1}{2}} \mathbf{H}^{l}+\alpha \mathbf{H}^{0}\tag{37}</script><p>其中，$\mathbf{H}_0=\mathcal{F}(\mathbf{F}^V),\alpha$ 是超参数。注意，所有参数在 $\mathcal{F}_{\theta}(\cdot)$，而不是在图卷积中。</p>
+<script type="math/tex; mode=display">
+\mathbf{H}^{l+1}=(1-\alpha) \tilde{\mathbf{D}}^{-\frac{1}{2}} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-\frac{1}{2}} \mathbf{H}^{l}+\alpha \mathbf{H}^{0}\tag{37}</script><p>其中，$\mathbf{H}_0=\mathcal{F}(\mathbf{F}^V),\alpha$ 是超参数。注意，所有参数在 $\mathcal{F}_{\theta}(\cdot)$，而不是在图卷积中。</p>
 <div align=center><img src="GNN9.png"/></div>
 
 <p>跳跃式知识网络（JK-Nets）[62]提出了另一种体系结构，以将网络的最后一层与所有较低的隐藏层相连，即，通过将所有表示“跳跃”到最终输出，如图6所示。 这样，模型可以学习选择性地利用来自不同层的信息。 JK-Nets的正式表述如下：</p>
-<script type="math/tex; mode=display">\mathbf{h}_{i}^{\text {final }}=\operatorname{AGGREGATE}\left(\mathbf{h}_{i}^{0}, \mathbf{h}_{i}^{1}, \ldots, \mathbf{h}_{i}^{L}\right)</script><p>其中，$\mathbf{h}_{i}^{\text {final }}$ 是节点 $v_i$ 的最终表示，$\operatorname{AGGREGATE}(\cdot)$ 是聚合函数，$L$ 是隐藏层的层数。JK-Nets使用了三个类似于GraphSAGE 【“Inductive representation learning on large graphs”】的聚合函数：级联，最大池化和LSTM注意。 实验结果表明，添加跳转连接可以提高多个GCN的性能。</p>
+<script type="math/tex; mode=display">
+\mathbf{h}_{i}^{\text {final }}=\operatorname{AGGREGATE}\left(\mathbf{h}_{i}^{0}, \mathbf{h}_{i}^{1}, \ldots, \mathbf{h}_{i}^{L}\right)</script><p>其中，$\mathbf{h}_{i}^{\text {final }}$ 是节点 $v_i$ 的最终表示，$\operatorname{AGGREGATE}(\cdot)$ 是聚合函数，$L$ 是隐藏层的层数。JK-Nets使用了三个类似于GraphSAGE 【“Inductive representation learning on large graphs”】的聚合函数：级联，最大池化和LSTM注意。 实验结果表明，添加跳转连接可以提高多个GCN的性能。</p>
 <h4 id="4-3-3-Edge-Features"><a href="#4-3-3-Edge-Features" class="headerlink" title="4.3.3 Edge Features"></a>4.3.3 Edge Features</h4><p>前面提到的GCN大多集中在利用节点特征和图结构上。 在本小节中，我们简要讨论如何使用另一个重要的信息源：边特征。</p>
 <p>对于具有离散值（例如边类型）的简单边特征，一种直接的方法是为不同的边类型训练不同的参数并汇总结果。 例如，Neural FPs 【“Convolutional networks on graphs for learning molecular fingerprints”】为不同度的节点训练了不同的参数，这对应于分子图中键类型的隐式边特征，然后对结果求和。 CLN 【“Column networks for collective classification”】在异构图中为不同的边类型训练了不同的参数，并对结果取平均值。 边条件卷积（ECC）【“Dynamic edgeconditioned filters in convolutional neural networks on graphs”】还基于边类型训练了不同的参数，并将其应用于图形分类。 关系GCN（R-GCN）【“Modeling relational data with graph convolutional networks”】通过为不同的关系类型训练不同的权重，对知识图采用了类似的想法。 但是，这些方法仅适用于有限数量的离散边特征。</p>
 <p>DCNN 【“Diffusion-convolutional neural networks”】提出了另一种将每个边转换为连接到该边的头尾节点的节点的方法。进行此转换后，可以将边要素视为节点要素。</p>
 <p>LGCN 【“Supervised community detection with line graph neural networks”】构造了一个折线图 $\mathbf{B}\in\mathbb{R}^{2M\times 2M}$，以合并边特征，如下所示：</p>
-<script type="math/tex; mode=display">\mathbf{B}_{i \rightarrow j, i^{\prime} \rightarrow j^{\prime}}=\left\{\begin{array}{ll}
+<script type="math/tex; mode=display">
+\mathbf{B}_{i \rightarrow j, i^{\prime} \rightarrow j^{\prime}}=\left\{\begin{array}{ll}
 1 & \text { if } j=i^{\prime} \text { and } j^{\prime} \neq i \\
 0 & \text { otherwise }
 \end{array}\right.\tag{39}</script><p>换句话说，折线图中的节点是原始图中的有向边，如果信息可以流过折线图中的相应边，则折线图中的两个节点是连接的。 然后，LGCN采用了两个GCN：一个位于原始图上，另一个位于线图上。</p>
 <p>Kearnes等【“Molecular graph convolutions: moving beyond fingerprints”】提出了一种使用“编织模块”的架构。 具体来说，他们学习了节点和边的表示形式，并使用四个不同的功能在每个编织模块中交换了它们之间的信息：节点到节点（NN），节点到边（NE），边到边（EE）和边到节点（EN）：</p>
-<script type="math/tex; mode=display">\begin{array}{l}
+<script type="math/tex; mode=display">
+\begin{array}{l}
 \mathbf{h}_{i}^{l^{\prime}}=\mathcal{F}_{N N}\left(\mathbf{h}_{i}^{0}, \mathbf{h}_{i}^{1}, \ldots, \mathbf{h}_{i}^{l}\right), \mathbf{h}_{i}^{l^{\prime \prime}}=\mathcal{F}_{E N}\left(\left\{\mathbf{e}_{i j}^{l} | j \in \mathcal{N}(i)\right\}\right) \\
 \mathbf{e}_{i j}^{l^{\prime}}=\mathcal{F}_{E E}\left(\mathbf{e}_{i j}^{0}, \mathbf{e}_{i j}^{1}, \ldots, \mathbf{e}_{i j}^{l}\right), \mathbf{e}_{i j}^{l^{\prime \prime}}=\mathcal{F}_{N E}\left(\mathbf{h}_{i}^{l}, \mathbf{h}_{j}^{l}\right) \\
 \mathbf{h}_{i}^{l+1}=\mathcal{F}_{N N}\left(\mathbf{h}_{i}^{l^{\prime}}, \mathbf{h}_{i}^{l^{\prime \prime}}\right), \mathbf{e}_{i j}^{l+1}=\mathcal{F}_{E E}\left(\mathbf{e}_{i j}^{l^{\prime}}, \mathbf{e}_{i j}^{l^{\prime \prime}}\right)
@@ -492,56 +540,73 @@ $$\alpha_{i j}^{l}=\frac{\exp \left(\text { LeakyReLU }\left(\mathcal{F}\left(\m
 <h4 id="4-3-5-Inductive-Setting"><a href="#4-3-5-Inductive-Setting" class="headerlink" title="4.3.5 Inductive Setting"></a>4.3.5 Inductive Setting</h4><p>GCN的另一个重要方面是它们是否可以应用于归纳设置，即在一组节点或图上进行训练，并在另一组没见过的节点或图上进行测试。 原则上，此目标是通过在不依赖于图的基础上学习给定特征的映射函数来实现的，并且可以跨节点或图进行传递。 归纳设置在GraphSAGE 【“Inductive representation learning on large graphs”】，GAT 【“Graph attention networks”】，GaAN 【“Gaan: Gated attention networks for learning on large and spatiotemporal graphs”】和FastGCN 【“Fastgcn: fast learning with graph convolutional networks via importance sampling”】中得到了验证。 但是，现有的归纳GCN仅适用于具有显式特征的图。 如何对没有显着特征的图进行归纳学习，通常被称为样本外问题【“Depthlgp: Learning embeddings of out-ofsample nodes in dynamic networks”】，在文献中仍处于很大程度上开放的状态。</p>
 <h4 id="4-3-6-Theoretical-Analysis"><a href="#4-3-6-Theoretical-Analysis" class="headerlink" title="4.3.6 Theoretical Analysis"></a>4.3.6 Theoretical Analysis</h4><p>为了了解GCN的有效性，已提出了一些理论分析，这些理论分析可分为三类：以节点为中心的任务，以图为中心的任务和常规分析。</p>
 <p>对于以节点为中心的任务，Li等人【“Deeper insights into graph convolutional networks for semi-supervised learning”】首先通过使用一种特殊的拉普拉斯平滑法来分析GCN的性能，这使得同一簇中节点的特征相似。 原始拉普拉斯平滑操作的公式如下：</p>
-<script type="math/tex; mode=display">\mathbf{h}_{i}^{\prime}=(1-\gamma) \mathbf{h}_{i}+\gamma \sum_{j \in \mathcal{N}(i)} \frac{1}{d_{i}} \mathbf{h}_{j}\tag{41}</script><p>其中，$\mathbf{h}_i,\mathbf{h}_i^{\prime}$ 是节点 $v_i$ 的原始特征和平滑特征。我们可以看到公式（41）和图卷积公式（13）非常相似。基于这种见解，Li等还提出了GCN的共同训练和自我训练方法。</p>
+<script type="math/tex; mode=display">
+\mathbf{h}_{i}^{\prime}=(1-\gamma) \mathbf{h}_{i}+\gamma \sum_{j \in \mathcal{N}(i)} \frac{1}{d_{i}} \mathbf{h}_{j}\tag{41}</script><p>其中，$\mathbf{h}_i,\mathbf{h}_i^{\prime}$ 是节点 $v_i$ 的原始特征和平滑特征。我们可以看到公式（41）和图卷积公式（13）非常相似。基于这种见解，Li等还提出了GCN的共同训练和自我训练方法。</p>
 <p>最近，Wu等【“Simplifying graph convolutional networks”】从信号处理的角度分析了GCN。通过将节点特征视为图形信号，他们表明等式（13）基本上是一个固定的低通滤波器。利用这一见解，他们通过消除所有非线性并将学习参数折叠为一个矩阵，提出了一种极为简化的图卷积（SGC）架构：</p>
-<script type="math/tex; mode=display">\mathbf{H}^{L}=\left(\tilde{\mathbf{D}}^{-\frac{1}{2}} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-\frac{1}{2}}\right)^{L} \mathbf{F}_{V} \mathbf{\Theta}\tag{42}</script><p>作者表明，这种“非深度学习” GCN变体在许多任务上都可以与现有GCN媲美。 Maehara 【“Revisiting graph neural networks”】通过显示低通滤波操作并没有为GCN配备非线性流形学习能力来增强此结果，并进一步提出了GFNN模型来解决此问题，方法是在图卷积层之后添加MLP。</p>
+<script type="math/tex; mode=display">
+\mathbf{H}^{L}=\left(\tilde{\mathbf{D}}^{-\frac{1}{2}} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-\frac{1}{2}}\right)^{L} \mathbf{F}_{V} \mathbf{\Theta}\tag{42}</script><p>作者表明，这种“非深度学习” GCN变体在许多任务上都可以与现有GCN媲美。 Maehara 【“Revisiting graph neural networks”】通过显示低通滤波操作并没有为GCN配备非线性流形学习能力来增强此结果，并进一步提出了GFNN模型来解决此问题，方法是在图卷积层之后添加MLP。</p>
 <p>对于以图形为中心的任务，Kipf和Welling【“Semi-supervised classification with graph convolutional networks”】以及SortPooling【“An end-to-end deep learning architecture for graph classification,”】的作者都考虑了GCN与图形内核（例如Weisfeiler-Lehman（WL）内核【“Weisfeiler-lehman graph kernels”】）之间的关系，该关系已广泛用于图形同构测试中。他们表明，GCN从概念上讲是WL内核的概括，因为这两种方法都会迭代地聚合来自节点邻居的信息。 Xu等【“How powerful are graph neural networks?”】通过证明WL内核在区分图结构方面为GCN提供了上限，从而使这一思想形式化。基于此分析，他们提出了图形同构网络（GIN），并表明使用求和和MLP的读出操作可以实现可证明的最大判别力，即在图形分类任务中具有最高的训练精度。</p>
 <p>对于一般分析，Scarselli等【“The vapnik– chervonenkis dimension of graph and recursive neural networks”】表明，具有不同激活函数的GCN的Vapnik-Chervonenkis维度（VC-dim）具有与现有RNN相同的规模。 Chen等【“Supervised community detection with line graph neural networks”】分析了线性GCN的优化情况，并表明在某些简化下，任何局部最小值都相对接近于全局最小值。 Verma和Zhang【“Stability and generalization of graph convolutional neural networks”】分析了GCN的算法稳定性和泛化边界。 他们表明，如果图卷积滤波器的最大绝对特征值与图大小无关，则单层GCN会满足强烈的均匀稳定性概念。</p>
 <h2 id="5-Graph-Autoencoder"><a href="#5-Graph-Autoencoder" class="headerlink" title="5. Graph Autoencoder"></a>5. Graph Autoencoder</h2><p><strong>自动编码机（AE）和它的变体已经被广泛应用于无监督学习任务，并且适合学习图节点的表示</strong>。隐含的假设是，图具有固有的，潜在的非线性低秩结构。在本节中，我们首先详细介绍图自动编码机，然后介绍图形变分自动编码机和其他改进。 表5总结了GAEs的主要特征。</p>
 <div align=center><img src="GNN11.png"/></div>
 
-
 <h3 id="5-1-Autoencoders"><a href="#5-1-Autoencoders" class="headerlink" title="5.1 Autoencoders"></a>5.1 Autoencoders</h3><p>图AE的使用源自稀疏自动编码器（SAE）。 基本思想是，通过将邻接矩阵或其变体视为节点的原始特征，可以利用AE作为降维技术来学习低维节点表示。 具体来说，SAE采用了以下L2重建损失：</p>
-<script type="math/tex; mode=display">\begin{array}{c}
+<script type="math/tex; mode=display">
+\begin{array}{c}
 \min _{\Theta} \mathcal{L}_{2}=\sum_{i=1}^{N}\|\mathbf{P}(i,:)-\hat{\mathbf{P}}(i,:)\|_{2} \\
 \hat{\mathbf{P}}(i,:)=\mathcal{G}\left(\mathbf{h}_{i}\right), \mathbf{h}_{i}=\mathcal{F}(\mathbf{P}(i,:))
 \end{array}\tag{43}</script><p>其中，$\mathbf{P}$ 是转移矩阵，$\hat{\mathbf{P}}$ 是重构矩阵，$\mathbf{h}_i\in\mathbb{R}^d$ 是节点 $v_i$ 的低维表示，$\mathcal{F}(\cdot)$ 是编码器，$\mathcal{G}(\cdot)$ 是解码器，$d\ll N$ 是维度，$\Theta$ 是参数，编码器和解码器都是包含多个隐含层的多层感知机。换句话说，SAE将 $P(i; :)$ 的信息压缩为低维向量hi，然后从该向量重构原始特征。 还添加了另一个稀疏正则化术语。 <strong>在获得低维表示 $h_i$ 之后，将 $k-means$用于节点聚类任务。</strong> 实验证明，SAE优于非深度学习基准。<strong>但是，SAE是基于不正确的理论分析得出的。其有效性的潜在机制仍无法解释。</strong></p>
 <p>通过显示公式（43）中的L2重构损失，结构深层网络嵌入（SDNE）【“Structural deep network embedding”】填补了难题。实际上对应于节点之间的二阶接近度，即，如果两个节点具有相似的邻域，它们将共享相似的潜在的表示，这是网络科学中经过充分研究的概念，称为协作过滤或三角形闭合【“The emerging field of signal processing on graphs: Extending high-dimensional data analysis to networks and other irregular domains”】。 由于网络嵌入方法表明一阶邻近度也很重要【“Line: Large-scale information network embedding”】，因此SDNE通过添加另一个Laplacian特征图项【“Laplacian eigenmaps and spectral techniques for embedding and clustering”】修改了目标函数：</p>
-<script type="math/tex; mode=display">\min _{\Theta} \mathcal{L}_{2}+\alpha \sum_{i, j=1}^{N} \mathbf{A}(i, j)\left\|\mathbf{h}_{i}-\mathbf{h}_{j}\right\|_{2}\tag{44}</script><p>即，如果两个节点直接连接，它们也共享相似的潜在表示。 作者还通过使用邻接矩阵并为零元素和非零元素分配了不同的权重来修改L2重构损失：</p>
-<script type="math/tex; mode=display">\mathcal{L}_{2}=\sum_{i=1}^{N}\left\|\left(\mathbf{A}(i,:)-\mathcal{G}\left(\mathbf{h}_{i}\right)\right) \odot \mathbf{b}_{i}\right\|_{2}\tag{45}</script><p>其中，$\mathbf{h}_i=\mathcal{F}(\mathbf{A}(i,:)),b_{ij}=1\;if\; \mathbf{A}(i,j)=0\; else\;b_{ij}=\beta&gt; 1$，$\beta$ 是另外的超参数。SDNE的总体架构如图8所示。</p>
+<script type="math/tex; mode=display">
+\min _{\Theta} \mathcal{L}_{2}+\alpha \sum_{i, j=1}^{N} \mathbf{A}(i, j)\left\|\mathbf{h}_{i}-\mathbf{h}_{j}\right\|_{2}\tag{44}</script><p>即，如果两个节点直接连接，它们也共享相似的潜在表示。 作者还通过使用邻接矩阵并为零元素和非零元素分配了不同的权重来修改L2重构损失：</p>
+<script type="math/tex; mode=display">
+\mathcal{L}_{2}=\sum_{i=1}^{N}\left\|\left(\mathbf{A}(i,:)-\mathcal{G}\left(\mathbf{h}_{i}\right)\right) \odot \mathbf{b}_{i}\right\|_{2}\tag{45}</script><p>其中，$\mathbf{h}_i=\mathcal{F}(\mathbf{A}(i,:)),b_{ij}=1\;if\; \mathbf{A}(i,j)=0\; else\;b_{ij}=\beta&gt; 1$，$\beta$ 是另外的超参数。SDNE的总体架构如图8所示。</p>
 <div align=center><img src="GNN12.png"/></div>
 
 <p>受另一类研究的启发，当代著作DNGR【“Deep neural networks for learning graph representations”】用公式（20）中定义的正点向互信息（PPMI）【“Neural word embedding as implicit matrix factorization”】矩阵取代了公式（43）中的转移矩阵 $\mathbf{P}$ 与。这样，原始特征可以与图的某些随机游走概率相关联【“Random walks on graphs: A survey”】。 但是，构造输入矩阵的时间复杂度为 $O(N^2)$，无法扩展到大型图。</p>
 <p>GC-MC【“Graph convolutional matrix completion”】通过使用Kipf和Welling【“Semi-supervised classification with graph convolutional networks”】提出的GCN作为编码器采用了不同的方法：</p>
-<script type="math/tex; mode=display">\mathbf{H}=GCN(\mathbf{F}^V,\mathbf{A})\tag{46}</script><p>并使用简单的双线性函数作为解码器：</p>
-<script type="math/tex; mode=display">\hat{\mathbf{A}}(i, j)=\mathbf{H}(i,:) \boldsymbol{\Theta}_{d e} \mathbf{H}(j,:)^{T}\tag{47}</script><p>其中，$\Theta_{de}$ 是解码器参数。使用这种方法，自然可以合并节点功能。对于没有节点特征的图，使用节点ID的one-hot编码。作者证明了GC-MC在二部图推荐问题上的有效性。</p>
+<script type="math/tex; mode=display">
+\mathbf{H}=GCN(\mathbf{F}^V,\mathbf{A})\tag{46}</script><p>并使用简单的双线性函数作为解码器：</p>
+<script type="math/tex; mode=display">
+\hat{\mathbf{A}}(i, j)=\mathbf{H}(i,:) \boldsymbol{\Theta}_{d e} \mathbf{H}(j,:)^{T}\tag{47}</script><p>其中，$\Theta_{de}$ 是解码器参数。使用这种方法，自然可以合并节点功能。对于没有节点特征的图，使用节点ID的one-hot编码。作者证明了GC-MC在二部图推荐问题上的有效性。</p>
 <p>代替重构邻接矩阵或其变体，DRNE【“Deep recursive network embedding with regular equivalence”】提出了另一种修改，该修改通过使用LSTM聚合邻域信息来直接重构低维节点向量。 具体而言，DRNE采用了以下目标函数：</p>
-<script type="math/tex; mode=display">\mathcal{L}=\sum_{i=1}^{N}\left\|\mathbf{h}_{i}-\mathrm{L} \operatorname{STM}\left(\left\{\mathbf{h}_{j} | j \in \mathcal{N}(i)\right\}\right)\right\|\tag{48}</script><p>由于LSTM要求其输入必须为序列，因此作者建议根据节点邻域的程度对其进行排序。他们还对具有较大程度的节点采用了邻域采样技术，以防止内存过长。作者证明，这种方法可以保留规则的等价性以及节点的许多中心性度量，例如PageRank。</p>
+<script type="math/tex; mode=display">
+\mathcal{L}=\sum_{i=1}^{N}\left\|\mathbf{h}_{i}-\mathrm{L} \operatorname{STM}\left(\left\{\mathbf{h}_{j} | j \in \mathcal{N}(i)\right\}\right)\right\|\tag{48}</script><p>由于LSTM要求其输入必须为序列，因此作者建议根据节点邻域的程度对其进行排序。他们还对具有较大程度的节点采用了邻域采样技术，以防止内存过长。作者证明，这种方法可以保留规则的等价性以及节点的许多中心性度量，例如PageRank。</p>
 <p>与上述将节点映射到低维向量的工作不同，Graph2Gauss（G2G）【“Deep gaussian embedding of graphs: Unsupervised inductive learning via ranking”】建议将每个节点编码为高斯分布 $h_i = N(M(i; :); diag((i; :)))$ 捕获节点的不确定性。 具体来说，作者使用从节点属性到高斯分布的均值和方差的深度映射作为编码器：</p>
-<script type="math/tex; mode=display">\mathbf{M}(i,:)=\mathcal{F}_{\mathbf{M}}\left(\mathbf{F}^{V}(i,:)\right), \mathbf{\Sigma}(i,:)=\mathcal{F}_{\Sigma}\left(\mathbf{F}^{V}(i,:)\right)\tag{49}</script><p>其中，$\mathcal{F}_M(\cdot),\mathcal{F}_{\sum}(\cdot)$ 是要学习的参数函数。然后，他们使用成对约束来学习模型，而不是使用显式解码器函数：</p>
-<script type="math/tex; mode=display">\begin{array}{c}
+<script type="math/tex; mode=display">
+\mathbf{M}(i,:)=\mathcal{F}_{\mathbf{M}}\left(\mathbf{F}^{V}(i,:)\right), \mathbf{\Sigma}(i,:)=\mathcal{F}_{\Sigma}\left(\mathbf{F}^{V}(i,:)\right)\tag{49}</script><p>其中，$\mathcal{F}_M(\cdot),\mathcal{F}_{\sum}(\cdot)$ 是要学习的参数函数。然后，他们使用成对约束来学习模型，而不是使用显式解码器函数：</p>
+<script type="math/tex; mode=display">
+\begin{array}{c}
 \mathrm{KL}\left(\mathrm{h}_{j} \| \mathrm{h}_{i}\right)<\mathrm{KL}\left(\mathrm{h}_{j^{\prime}} \| \mathrm{h}_{i}\right) \\
 \forall i, \forall j, \forall j^{\prime} \text { s.t. } d(i, j)<d\left(i, j^{\prime}\right)
 \end{array}\tag{50}</script><p>其中，$d(i,j)$ 是节点 $v_i$ 到节点 $v_j$ 的最短距离，$\mathbf{KL}(q(\cdot)|p(\cdot))$ 是 $q(\cdot)$ 和 $p(\cdot)$ 之间的Kullback-Leibler（KL）散度【“On information and sufficiency”】。换句话说，约束条件确保节点表示之间的KL散度具有与图距离相同的相对顺序。 但是，因为公式（50）难以优化，因此采用了基于能量的损失【“A tutorial on energy-based learning”】：</p>
-<script type="math/tex; mode=display">\mathcal{L}=\sum_{\left(i, j, j^{\prime}\right) \in \mathcal{D}}\left(E_{i j}^{2}+\exp ^{-E_{i j^{\prime}}}\right)\tag{51}</script><p>其中，$\mathcal{D}=\{(i,j,j^{\prime})|d(i,j)&lt;d(i,j^{\prime})\},E_{ij}=\mathbf{KL}(\mathbf{h}_j|\mathbf{h}_i)$。作者进一步提出了一种无偏的采样策略，以加快训练过程。</p>
+<script type="math/tex; mode=display">
+\mathcal{L}=\sum_{\left(i, j, j^{\prime}\right) \in \mathcal{D}}\left(E_{i j}^{2}+\exp ^{-E_{i j^{\prime}}}\right)\tag{51}</script><p>其中，$\mathcal{D}=\{(i,j,j^{\prime})|d(i,j)&lt;d(i,j^{\prime})\},E_{ij}=\mathbf{KL}(\mathbf{h}_j|\mathbf{h}_i)$。作者进一步提出了一种无偏的采样策略，以加快训练过程。</p>
 <h3 id="5-2-Variational-Autoencoders"><a href="#5-2-Variational-Autoencoders" class="headerlink" title="5.2 Variational Autoencoders"></a>5.2 Variational Autoencoders</h3><p>与上述自动编码器不同，变异自动编码器（VAE）是将降维与生成模型结合在一起的另一种深度学习方法。 它的潜在好处包括容忍噪声和学习平滑表示【“Auto-encoding variational bayes”】。 VAE首先被引入VGAEs【“Variational graph auto-encoders”】中的图形数据，其中解码器是一个简单的线性乘积：</p>
-<script type="math/tex; mode=display">p(\mathbf{A} | \mathbf{H})=\prod_{i, j=1}^{N} \sigma\left(\mathbf{h}_{i} \mathbf{h}_{j}^{T}\right)\tag{52}</script><p>其中假定节点表示遵循高斯分布 $q(\mathbf{h}_i|\mathbf{M},\sum)= \mathcal{N}(\mathbf{h}_i|\mathbf{M}(i; :), diag(\sum(i; :)))$。 对于均值和方差矩阵的编码器，作者还采用了Kipf和Welling提出的GCN【“Semi-supervised classification with graph convolutional networks”】：</p>
-<script type="math/tex; mode=display">\mathbf{M}=G C N_{\mathrm{M}}\left(\mathbf{F}^{V}, \mathbf{A}\right), \log \mathbf{\Sigma}=G C N_{\Sigma}\left(\mathbf{F}^{V}, \mathbf{A}\right)\tag{53}</script><p>然后，通过最小化变分下界来学习模型参数【“Auto-encoding variational bayes”】：</p>
-<script type="math/tex; mode=display">\mathcal{L}=\mathbb{E}_{q\left(\mathbf{H} | \mathbf{F}^{V}, \mathbf{A}\right)}[\log p(\mathbf{A} | \mathbf{H})]-\operatorname{KL}\left(q\left(\mathbf{H} | \mathbf{F}^{V}, \mathbf{A}\right) \| p(\mathbf{H})\right)\tag{54}</script><p>但这个方法要求重构整个图，所以复杂度为 $O(N^2)$。</p>
+<script type="math/tex; mode=display">
+p(\mathbf{A} | \mathbf{H})=\prod_{i, j=1}^{N} \sigma\left(\mathbf{h}_{i} \mathbf{h}_{j}^{T}\right)\tag{52}</script><p>其中假定节点表示遵循高斯分布 $q(\mathbf{h}_i|\mathbf{M},\sum)= \mathcal{N}(\mathbf{h}_i|\mathbf{M}(i; :), diag(\sum(i; :)))$。 对于均值和方差矩阵的编码器，作者还采用了Kipf和Welling提出的GCN【“Semi-supervised classification with graph convolutional networks”】：</p>
+<script type="math/tex; mode=display">
+\mathbf{M}=G C N_{\mathrm{M}}\left(\mathbf{F}^{V}, \mathbf{A}\right), \log \mathbf{\Sigma}=G C N_{\Sigma}\left(\mathbf{F}^{V}, \mathbf{A}\right)\tag{53}</script><p>然后，通过最小化变分下界来学习模型参数【“Auto-encoding variational bayes”】：</p>
+<script type="math/tex; mode=display">
+\mathcal{L}=\mathbb{E}_{q\left(\mathbf{H} | \mathbf{F}^{V}, \mathbf{A}\right)}[\log p(\mathbf{A} | \mathbf{H})]-\operatorname{KL}\left(q\left(\mathbf{H} | \mathbf{F}^{V}, \mathbf{A}\right) \| p(\mathbf{H})\right)\tag{54}</script><p>但这个方法要求重构整个图，所以复杂度为 $O(N^2)$。</p>
 <p>受SDNE和G2G的推动，DVNE [103]为图数据提出了另一个VAE，该图也将每个节点都表示为高斯分布。 与现有的采用KLdivergence作为度量的工作不同，DVNE使用Wasserstein距离[114]来保留节点相似性的传递性。 与SDNE和G2G相似，DVNE在其目标函数中还保留了一阶和二阶接近度：</p>
-<script type="math/tex; mode=display">\min _{\Theta} \sum_{\left(i, j, j^{\prime}\right) \in \mathcal{D}}\left(E_{i j}^{2}+\exp ^{-E_{i j^{\prime}}}\right)+\alpha \mathcal{L}_{2}\tag{55}</script><p>其中，$E_{ij}=W_2(\mathbf{h}_j|\mathbf{h}_i)$ 是两个高斯分布 $\mathbf{h}_i,\mathbf{h}_j$之间的第二个Wasserstein距离。$D = \{(i, j, j^{\prime})|j\in\mathcal{N}(i), j^{\prime}\notin \mathcal{N}(i)\}$是一组对应于一阶接近度的秩损失的三元组。 构损失定义如下：</p>
-<script type="math/tex; mode=display">\mathcal{L}_{2}=\inf _{q(\mathbf{Z} | \mathbf{P})} \mathbb{E}_{p(\mathbf{P})} \mathbb{E}_{q(\mathbf{Z} | \mathbf{P})}\|\mathbf{P} \odot(\mathbf{P}-\mathcal{G}(\mathbf{Z}))\|_{2}^{2}\tag{56}</script><p>其中，$\mathbf{P}$ 是转移矩阵，$\mathbf{Z}$ 代表对 $\mathbf{H}$ 的采样。框架如图9所示。使用这种方法，可以将目标函数最小化，就像在常规VAE中重新参数化技巧一样【“Auto-encoding variational bayes”】。</p>
+<script type="math/tex; mode=display">
+\min _{\Theta} \sum_{\left(i, j, j^{\prime}\right) \in \mathcal{D}}\left(E_{i j}^{2}+\exp ^{-E_{i j^{\prime}}}\right)+\alpha \mathcal{L}_{2}\tag{55}</script><p>其中，$E_{ij}=W_2(\mathbf{h}_j|\mathbf{h}_i)$ 是两个高斯分布 $\mathbf{h}_i,\mathbf{h}_j$之间的第二个Wasserstein距离。$D = \{(i, j, j^{\prime})|j\in\mathcal{N}(i), j^{\prime}\notin \mathcal{N}(i)\}$是一组对应于一阶接近度的秩损失的三元组。 构损失定义如下：</p>
+<script type="math/tex; mode=display">
+\mathcal{L}_{2}=\inf _{q(\mathbf{Z} | \mathbf{P})} \mathbb{E}_{p(\mathbf{P})} \mathbb{E}_{q(\mathbf{Z} | \mathbf{P})}\|\mathbf{P} \odot(\mathbf{P}-\mathcal{G}(\mathbf{Z}))\|_{2}^{2}\tag{56}</script><p>其中，$\mathbf{P}$ 是转移矩阵，$\mathbf{Z}$ 代表对 $\mathbf{H}$ 的采样。框架如图9所示。使用这种方法，可以将目标函数最小化，就像在常规VAE中重新参数化技巧一样【“Auto-encoding variational bayes”】。</p>
 <div align=center><img src="GNN13.png"></div>
-
 
 <h3 id="5-3-Improvements-and-Discussions"><a href="#5-3-Improvements-and-Discussions" class="headerlink" title="5.3 Improvements and Discussions"></a>5.3 Improvements and Discussions</h3><p>针对GAME提出了一些改进。</p>
 <h4 id="5-3-1-Adversarial-Training"><a href="#5-3-1-Adversarial-Training" class="headerlink" title="5.3.1 Adversarial Training"></a>5.3.1 Adversarial Training</h4><div align=center><img src="GNN14.png"></div>
 
 <p>对抗训练计划9被纳入GAEs，作为ARGA中的附加正则化项【“Adversarially regularized graph autoencoder for graph embedding”】。 总体架构如图10所示。具体地说，GAEs的编码器用作生成器，而判别器旨在区分潜在表示是来自生成器还是来自先验分布。 以这种方式，自动编码器被迫匹配先前的分布作为正则化。 目标函数是：</p>
-<script type="math/tex; mode=display">\min _{\Theta} \mathcal{L}_{2}+\alpha \mathcal{L}_{G A N}\tag{57}</script><p>其中，$\mathcal{L}_2$ 在GAEss中是重构损失，$\mathcal{L}_{GAN}$ 是：</p>
-<script type="math/tex; mode=display">\min _{\mathcal{G}} \max _{\mathcal{D}} \mathbb{E}_{\mathbf{h} \sim p_{\mathbf{h}}}[\log \mathcal{D}(\mathbf{h})]+\mathbb{E}_{\mathbf{z} \sim \mathcal{G}\left(\mathbf{F}^{V}, \mathbf{A}\right)}[\log (1-\mathcal{D}(\mathbf{z}))]\tag{58}</script><p>其中，$\mathcal{G}(\mathbf{F}^V,\mathbf{A})$是使用公式（53）中的图卷积编码器的生成器，$D(\cdot)$ 是基于交叉熵损失的判别器，$p_h$ 是先验分布。该研究采用了简单的高斯先验，实验结果证明了对抗训练方案的有效性。</p>
+<script type="math/tex; mode=display">
+\min _{\Theta} \mathcal{L}_{2}+\alpha \mathcal{L}_{G A N}\tag{57}</script><p>其中，$\mathcal{L}_2$ 在GAEss中是重构损失，$\mathcal{L}_{GAN}$ 是：</p>
+<script type="math/tex; mode=display">
+\min _{\mathcal{G}} \max _{\mathcal{D}} \mathbb{E}_{\mathbf{h} \sim p_{\mathbf{h}}}[\log \mathcal{D}(\mathbf{h})]+\mathbb{E}_{\mathbf{z} \sim \mathcal{G}\left(\mathbf{F}^{V}, \mathbf{A}\right)}[\log (1-\mathcal{D}(\mathbf{z}))]\tag{58}</script><p>其中，$\mathcal{G}(\mathbf{F}^V,\mathbf{A})$是使用公式（53）中的图卷积编码器的生成器，$D(\cdot)$ 是基于交叉熵损失的判别器，$p_h$ 是先验分布。该研究采用了简单的高斯先验，实验结果证明了对抗训练方案的有效性。</p>
 <p>同时，NetRA【“Learning deep network representations with adversarially regularized autoencoders,”】还提出使用生成对抗网络（GAN）【“Generative adversarial nets”】来增强图自动编码器的泛化能力。 具体来说，作者使用了以下目标函数：</p>
-<script type="math/tex; mode=display">\min _{\Theta} \mathcal{L}_{2}+\alpha_{1} \mathcal{L}_{L E}+\alpha_{2} \mathcal{L}_{G A N}\tag{59}</script><p>其中，$L_{LE}$ 是公式（44）中所示的拉普拉斯特征图目标函数。另外，作者采用LSTM作为编码器，以汇总来自类似于公式（48）的邻域的信息。与其像DRNE【“Deep recursive network embedding with regular equivalence”】中那样仅对直接邻居采样并使用度对节点进行排序，作者还使用了随机游走来生成输入序列。与ARGA相比，NetRA认为GAEs中的表示形式是真实的，并采用了随机的高斯噪声，然后是MLP作为生成器。</p>
+<script type="math/tex; mode=display">
+\min _{\Theta} \mathcal{L}_{2}+\alpha_{1} \mathcal{L}_{L E}+\alpha_{2} \mathcal{L}_{G A N}\tag{59}</script><p>其中，$L_{LE}$ 是公式（44）中所示的拉普拉斯特征图目标函数。另外，作者采用LSTM作为编码器，以汇总来自类似于公式（48）的邻域的信息。与其像DRNE【“Deep recursive network embedding with regular equivalence”】中那样仅对直接邻居采样并使用度对节点进行排序，作者还使用了随机游走来生成输入序列。与ARGA相比，NetRA认为GAEs中的表示形式是真实的，并采用了随机的高斯噪声，然后是MLP作为生成器。</p>
 <h4 id="5-3-2-Inductive-Learning"><a href="#5-3-2-Inductive-Learning" class="headerlink" title="5.3.2 Inductive Learning"></a>5.3.2 Inductive Learning</h4><p>与GCN相似，如果将节点属性合并到编码器中，则GAE可以应用于归纳学习设置。 这可以通过使用GCN作为编码器来实现，例如在GC-MC【“Graph convolutional matrix completion”】，VGAE【“Variational graph auto-encoders”】和VGAE【“Adversarially regularized graph autoencoder for graph embedding”】中，或者通过像G2G【“Deep gaussian embedding of graphs: Unsupervised inductive learning via ranking”】中那样直接从节点特征中学习映射函数来实现。 由于仅在学习参数时才使用边缘信息，因此该模型也可以应用于训练期间未看到的节点。 这些工作还表明，尽管GCN和GAE基于不同的体系结构，但可以将它们组合使用，我们认为这是一个有希望的未来方向。</p>
 <h4 id="5-3-3-Similarity-Measures"><a href="#5-3-3-Similarity-Measures" class="headerlink" title="5.3.3 Similarity Measures"></a>5.3.3 Similarity Measures</h4><p>在GAE中，已采用了许多相似性度量，例如L2重建损失，Laplacian特征图和图AE的秩损失，以及图VAE的KL散度和Wasserstein距离。 尽管这些相似性度量基于不同的动机，但是如何为给定的任务和模型体系结构选择合适的相似性度量仍未研究。 需要更多的研究来了解这些指标之间的根本差异。</p>
 <h2 id="6-Graph-Reinforcement-Learning"><a href="#6-Graph-Reinforcement-Learning" class="headerlink" title="6. Graph Reinforcement Learning"></a>6. Graph Reinforcement Learning</h2><p>深度学习的一个方面尚未讨论，即强化学习（RL），它已被证明在诸如玩游戏之类的AI任务中是有效的。众所周知，RL善于从反馈中学习，尤其是在处理可微分的目标和约束时。在本节中，我们回顾了Graph RL方法。表6总结了它们的主要特性。</p>
@@ -551,24 +616,28 @@ $$\alpha_{i j}^{l}=\frac{\exp \left(\text { LeakyReLU }\left(\mathcal{F}\left(\m
 <p>一项并行的工作，MolGAN【“MolGAN: An implicit generative model for small molecular graphs”】，采用了类似的想法，即使用RL生成分子图。但是，MolGAN建议不要通过一系列动作来生成图，而是直接生成完整图。这种方法对小分子特别有效。</p>
 <p>GTPN【“Graph transformation policy network for chemical reaction prediction”】采用RL预测化学反应产物。具体来说，该代理负责选择分子图中的节点对并预测它们的新键合类型，并根据预测是否正确对它们进行即时和最终奖励。GTPN使用GCN来学习节点表示，并使用RNN来存储预测序列。</p>
 <p>GAM【“Graph classification using structural attention”】通过使用随机游走将RL应用于图分类。 作者将随机游走的产生建模为部分可观察到的马尔可夫决策过程（POMDP）。该代理执行了两项操作：首先，它预测了图的标签,然后，它选择了随机游走中的下一个节点。奖励的确定仅取决于代理人是否对图表进行了正确分类，即</p>
-<script type="math/tex; mode=display">\mathcal{J}(\theta)=\mathbb{E}_{P\left(S_{1: T} ; \theta\right)} \sum_{t=1}^{T} r_{t}\tag{60}</script><p>其中，$r_t=1$ 表示一个正确的预测，$r_t=-1$ 表示错误的预测。$T$ 是总时间步长，$S_t$ 是环境。</p>
+<script type="math/tex; mode=display">
+\mathcal{J}(\theta)=\mathbb{E}_{P\left(S_{1: T} ; \theta\right)} \sum_{t=1}^{T} r_{t}\tag{60}</script><p>其中，$r_t=1$ 表示一个正确的预测，$r_t=-1$ 表示错误的预测。$T$ 是总时间步长，$S_t$ 是环境。</p>
 <p>DeepPath【“Deeppath: A reinforcement learning method for knowledge graph reasoning”】和MINERVA【“Go for a walk and arrive at the answer: Reasoning over paths in knowledge bases using reinforcement learning”】都采用RL进行知识图（KG）推理。 具体来说，DeepPath的目标是寻路，即在两个目标节点之间找到最有信息的路径，而MINERVA则负责解决问答任务，即在给定问题节点和关系的情况下找到正确的答案节点。 在这两种方法中，RL代理都需要在每个步骤中预测路径中的下一个节点，并在KG中输出推理路径。 如果路径到达正确的目的地，座席将获得奖励。 DeepPath还添加了一个正则化术语来鼓励路径的多样性。</p>
 <h2 id="7-GRAPH-ADVERSARIAL-METHODS"><a href="#7-GRAPH-ADVERSARIAL-METHODS" class="headerlink" title="7. GRAPH ADVERSARIAL METHODS"></a>7. GRAPH ADVERSARIAL METHODS</h2><p>近年来，诸如GAN等对抗方法和对抗攻击在机器学习社区中引起了越来越多的关注。在本节中，我们将介绍如何将对抗方法应用于图形。表7总结了图对抗方法的主要特征。</p>
 <div align=center><img src="GNN16.png"/></div>
 
 <h3 id="7-1-Adversarial-Training"><a href="#7-1-Adversarial-Training" class="headerlink" title="7.1 Adversarial Training"></a>7.1 Adversarial Training</h3><p>GAN的基本思想是建立两个链接的模型：判别器和生成器。生成器的目标是通过生成假数据来“欺骗”判别器，而判别器的目的是区分样本是来自真实数据还是由生成器生成。随后，两个模型通过使用minimax游戏进行联合训练而彼此受益。对抗训练已被证明在生成模型中有效，并增强了判别模型的泛化能力。在第5.3.1节和第6节中，我们回顾了如何分别在GAE和Graph RL中使用对抗训练方案。在这里，我们详细回顾了图上的其他几种对抗训练方法。</p>
 <p>GraphGAN [124]提出使用GAN来增强图嵌入方法[17]，其目标函数如下：</p>
-<script type="math/tex; mode=display">\begin{array}{c}
+<script type="math/tex; mode=display">
+\begin{array}{c}
 \min _{\mathcal{G}} \max _{\mathcal{D}} \sum_{i=1}^{N}\left(\mathbb{E}_{v \sim p_{g r a p h}\left(\cdot | v_{i}\right)}\left[\log \mathcal{D}\left(v, v_{i}\right)\right]\right.\\
 +\left.\mathbb{E}_{v \sim \mathcal{G}\left(\cdot | v_{i}\right)}\left[\log \left(1-\mathcal{D}\left(v, v_{i}\right)\right)\right]\right)
 \end{array}\tag{61}</script><p>其中，判别器 $\mathcal{D}(\cdot)$ 和生成器 $\mathcal{G}(\cdot)$ 如下：</p>
-<script type="math/tex; mode=display">\mathcal{D}(v,v_i)=\sigma(\mathbf{d}_v\mathbf{d}_{v_i}^T),\mathcal{G}(v|v_i)=\frac{\exp(\mathbf{g}_v\mathbf{g}_{v_i}^T)}{\sum_{v^{\prime}\neq v_i}\exp(\mathbf{g}_{v^{\prime}}\mathbf{g}_{v_i}^T)}\tag{62}</script><p>其中，$\mathbf{d}_v$ 和 $\mathbf{g}_v$ 分别是判别器和生成器中节点 $v$ 的低维嵌入向量。结合以上等式，判别器实际上具有两个目标：原始图中的节点对应具有较大的相似性，而生成器生成的节点对应具有较小的相似性。该架构与网络嵌入方法（如LINE [108]）相似，除了负节点对由生成器 $\mathcal{G}(\cdot)} 而不是由随机采样生成。作者表明，该方法增强了节点嵌入向量的推断能力。</p>
+<script type="math/tex; mode=display">
+\mathcal{D}(v,v_i)=\sigma(\mathbf{d}_v\mathbf{d}_{v_i}^T),\mathcal{G}(v|v_i)=\frac{\exp(\mathbf{g}_v\mathbf{g}_{v_i}^T)}{\sum_{v^{\prime}\neq v_i}\exp(\mathbf{g}_{v^{\prime}}\mathbf{g}_{v_i}^T)}\tag{62}</script><p>其中，$\mathbf{d}_v$ 和 $\mathbf{g}_v$ 分别是判别器和生成器中节点 $v$ 的低维嵌入向量。结合以上等式，判别器实际上具有两个目标：原始图中的节点对应具有较大的相似性，而生成器生成的节点对应具有较小的相似性。该架构与网络嵌入方法（如LINE [108]）相似，除了负节点对由生成器 $\mathcal{G}(\cdot)} 而不是由随机采样生成。作者表明，该方法增强了节点嵌入向量的推断能力。</p>
 <p>对抗网络嵌入（ANE）[125]也采用对抗训练方案来改进网络嵌入方法。类似于ARGA [104]，ANE通过将先验分布作为真实数据并将嵌入矢量视为生成的样本，将GAN用作现有网络嵌入方法（如DeepWalk [131]）的附加正则项。</p>
 <p>GraphSGAN [126]使用GAN来增强图的半监督学习。特别是，作者观察到，应该在子图之间的密度间隙中生成伪节点，以削弱现有模型不同簇之间的传播效果。为了实现该目标，作者设计了一种新颖的优化目标，该目标具有精心设计的损失项，以确保生成器在平衡时的密度间隙中生成样本。</p>
 <p>NetGAN [127]为图生成任务采用了GAN。具体来说，作者将图生成作为学习有偏随机游走分布的一项任务，并采用GAN框架使用LSTM生成和区分随机游走。实验表明，使用随机游走还可以学习全局网络模式。</p>
 <h3 id="7-2-Adversarial-Attacks"><a href="#7-2-Adversarial-Attacks" class="headerlink" title="7.2 Adversarial Attacks"></a>7.2 Adversarial Attacks</h3><p>对抗攻击是另一类对抗方法，旨在通过向数据添加较小的扰动来故意“欺骗”目标方法。 研究对抗性攻击可以加深我们对现有模型的理解，并激发出更强大的体系结构。 我们在下面回顾基于图的对抗攻击。</p>
 <p>Nettack [128]首先提出了通过修改图结构和节点属性来攻击节点分类模型（例如GCN）的方法。 表示目标节点为 $v_0$，其真实类为 $c_{true}$，目标模型为 $\mathcal{F}(\mathbf{A}; \mathbf{F}^V)$，其损失函数为 $\mathcal{L}_F(\mathbf{A}; \mathbf{F}^V)$，该模型采用以下目标函数：</p>
-<script type="math/tex; mode=display">\begin{array}{c}
+<script type="math/tex; mode=display">
+\begin{array}{c}
     \argmax_{(\mathbf{A}^{\prime},\mathbf{F}^{V\prime})\in\mathcal{P}}\max_{c\neq c_{true}}\log\mathbf{Z}_{v_0,c}^*-\log\mathbf{Z}_{v_0,c_{true}}^*\\
     s.t.\;\mathbf{Z}^*=\mathcal{F}_{\theta^*}(\mathbf{A}^{\prime},\mathbf{F}^{V\prime}), \theta^*=\argmin_{\theta}\mathcal{L}_{\mathcal{F}}(\mathbf{A}^{\prime},\mathbf{F}^{V\prime})
 \end{array}\tag{63}</script><p>其中，$\mathbf{A}^{\prime},\mathbf{F}^{V\prime}$ 是修改的邻接矩阵和节点特征矩阵， $\mathbf{Z}$ 表示由 $\mathcal{F}(\cdot)$ 预测的分类概率，$\mathbf{P}$ 表示由攻击约束条件确定的空间。 简单来说，优化的目的是找到图结构和节点属性中的最佳合法更改，以使 $v_0$ 被错误分类。$\theta^*$ 表示攻击是起因的，即攻击发生在训练目标模型之前。 作者提出了一些针对攻击的约束条件。最重要的约束条件是，攻击应该是“不明显的”，即应该只进行很小的更改。具体来说，作者提议保留数据特征，例如节点度分布和特征共现。作者还提出了两种攻击方案：直接攻击（直接攻击 $v_0$）和影响攻击（仅攻击其他节点），并提出了几种放宽措施以使优化易于处理。</p>
@@ -646,11 +715,11 @@ $$\alpha_{i j}^{l}=\frac{\exp \left(\text { LeakyReLU }\left(\mathcal{F}\left(\m
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GNN</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GNN</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DL</a>
         		</li>
       		
 		</ul>
@@ -970,11 +1039,11 @@ $$\alpha_{i j}^{l}=\frac{\exp \left(\text { LeakyReLU }\left(\mathcal{F}\left(\m
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">DL</a>
+                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
+                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -986,11 +1055,11 @@ $$\alpha_{i j}^{l}=\frac{\exp \left(\text { LeakyReLU }\left(\mathcal{F}\left(\m
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
+                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
+                <a href="javascript:void(0)" class="js-tag color3">DL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -999,6 +1068,14 @@ $$\alpha_{i j}^{l}=\frac{\exp \left(\text { LeakyReLU }\left(\mathcal{F}\left(\m
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1011,14 +1088,6 @@ $$\alpha_{i j}^{l}=\frac{\exp \left(\text { LeakyReLU }\left(\mathcal{F}\left(\m
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">word2vec</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
               </li>
             
             <div class="clearfix"></div>

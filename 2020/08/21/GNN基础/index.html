@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="GNN基础图的属性 节点的度分布 $P(k)$随机选择的节点度为 $k$ 的概率归一化：$P(k)&#x3D;\frac{N_k}{N}$，$N_k$ 是度为 $k$ 的节点的数量，$N$ 是总的节点数">
+  <meta name="description" content="GNN基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GNN基础">
 <meta property="og:url" content="https://over-shine.github.io/2020/08/21/GNN%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="吃了睡的程序猪">
-<meta property="og:description" content="GNN基础图的属性 节点的度分布 $P(k)$随机选择的节点度为 $k$ 的概率归一化：$P(k)&#x3D;\frac{N_k}{N}$，$N_k$ 是度为 $k$ 的节点的数量，$N$ 是总的节点数">
+<meta property="og:description" content="GNN基础">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-21T14:20:55.000Z">
-<meta property="article:modified_time" content="2020-08-24T05:02:22.483Z">
+<meta property="article:modified_time" content="2021-11-06T06:56:01.941Z">
 <meta property="article:author" content="程序猪-渔枫">
 <meta property="article:tag" content="GNN">
 <meta name="twitter:card" content="summary">
@@ -280,12 +280,15 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="GNN基础"><a href="#GNN基础" class="headerlink" title="GNN基础"></a>GNN基础</h1><h2 id="图的属性"><a href="#图的属性" class="headerlink" title="图的属性"></a>图的属性</h2><ol>
+    <h1 id="GNN基础"><a href="#GNN基础" class="headerlink" title="GNN基础"></a>GNN基础</h1><a id="more"></a>
+<h2 id="图的属性"><a href="#图的属性" class="headerlink" title="图的属性"></a>图的属性</h2><ol>
 <li><strong>节点的度分布 $P(k)$</strong><br>随机选择的节点度为 $k$ 的概率<br>归一化：$P(k)=\frac{N_k}{N}$，$N_k$ 是度为 $k$ 的节点的数量，$N$ 是总的节点数</li>
 </ol>
-<a id="more"></a>
+<!-- more -->
 <ol>
-<li><strong>路径长度 $h$</strong><br><strong>距离（无向图）</strong>：一对节点之间的距离定义为沿着连接这些节点的最短路径的边数<br><strong>直径</strong>：图中任意节点对之间的最大距离<br><strong>平均路径长度（连接图或强连接有向图）</strong>：$\bar{h}=\frac{\sum_{i,j\neq i}h_{ij}}{2E_{max}}$，$h_{ij}$ 是节点 $v_i$ 到节点 $v_j$ 的距离，$E_{max}=\frac{n(n-1)}{2}$ 是最大边数（全连接图的边数）</li>
+<li><strong>路径长度 $h$**</strong>距离（无向图）<strong>：一对节点之间的距离定义为沿着连接这些节点的最短路径的边数
+</strong>直径<strong>：图中任意节点对之间的最大距离
+</strong>平均路径长度（连接图或强连接有向图）**：$\bar{h}=\frac{\sum_{i,j\neq i}h_{ij}}{2E_{max}}$，$h_{ij}$ 是节点 $v_i$ 到节点 $v_j$ 的距离，$E_{max}=\frac{n(n-1)}{2}$ 是最大边数（全连接图的边数）</li>
 <li><strong>聚类系数（无向图）</strong>：领居之间的联系如何？$C_i=\frac{2e_i}{K_i(K_i-1)}$，$e_i$ 是节点 $v_i$ 邻居之间的边数，$K_i$ 是节点 $v_i$ 的度数，$K_i(K_i-1)$ 是节点 $v_i$ 邻居之间的最大边数<br><strong>平均聚类系数</strong>：$C=\frac{\sum_i^NC_i}{N}$</li>
 </ol>
 <h2 id="G-np-的属性"><a href="#G-np-的属性" class="headerlink" title="$G_{np}$ 的属性"></a>$G_{np}$ 的属性</h2><p>包含 $n$ 个节点的无向图中，每个边以概率 $p$ 出现，$n$ 和 $p$ 不能唯一确定图！该图是随机过程的结果。给定相同的n和p，我们可以有许多不同的实现。</p>
@@ -672,11 +675,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">DL</a>
+                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
+                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -688,11 +691,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
+                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
+                <a href="javascript:void(0)" class="js-tag color3">DL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,6 +704,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -713,14 +724,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">word2vec</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
               </li>
             
             <div class="clearfix"></div>

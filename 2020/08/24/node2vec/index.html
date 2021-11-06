@@ -10,18 +10,18 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="node2vec： Scalable Feature Learning for Networks1. node2vec介绍node2vec是一种用于学习网络中节点连续特征表示的算法框架，是一种在玩网络中可扩展的半监督特征学习学习算法，学习了节点特征的低维空间的映射，该映射最大程度地保留了节点的网络邻域，定义了网络邻域的灵活概念，并设计了一种有偏的随机游走程序，该程序可以有效地探索各种邻域。">
+  <meta name="description" content="node2vec： Scalable Feature Learning for Networks">
 <meta property="og:type" content="article">
 <meta property="og:title" content="node2vec">
 <meta property="og:url" content="https://over-shine.github.io/2020/08/24/node2vec/index.html">
 <meta property="og:site_name" content="吃了睡的程序猪">
-<meta property="og:description" content="node2vec： Scalable Feature Learning for Networks1. node2vec介绍node2vec是一种用于学习网络中节点连续特征表示的算法框架，是一种在玩网络中可扩展的半监督特征学习学习算法，学习了节点特征的低维空间的映射，该映射最大程度地保留了节点的网络邻域，定义了网络邻域的灵活概念，并设计了一种有偏的随机游走程序，该程序可以有效地探索各种邻域。">
+<meta property="og:description" content="node2vec： Scalable Feature Learning for Networks">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://over-shine.github.io/2020/08/24/node2vec/g1.png">
 <meta property="og:image" content="https://over-shine.github.io/2020/08/24/node2vec/g2.png">
 <meta property="og:image" content="https://over-shine.github.io/2020/08/24/node2vec/node2vec.png">
 <meta property="article:published_time" content="2020-08-24T08:00:00.000Z">
-<meta property="article:modified_time" content="2020-08-24T12:52:10.062Z">
+<meta property="article:modified_time" content="2021-11-06T06:57:07.776Z">
 <meta property="article:author" content="程序猪-渔枫">
 <meta property="article:tag" content="GNN">
 <meta name="twitter:card" content="summary">
@@ -284,8 +284,9 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="node2vec：-Scalable-Feature-Learning-for-Networks"><a href="#node2vec：-Scalable-Feature-Learning-for-Networks" class="headerlink" title="node2vec： Scalable Feature Learning for Networks"></a>node2vec： Scalable Feature Learning for Networks</h1><h2 id="1-node2vec介绍"><a href="#1-node2vec介绍" class="headerlink" title="1. node2vec介绍"></a>1. node2vec介绍</h2><p>node2vec是一种用于学习网络中节点连续特征表示的算法框架，是一种在玩网络中可扩展的半监督特征学习学习算法，学习了节点特征的低维空间的映射，该映射最大程度地保留了节点的网络邻域，定义了网络邻域的灵活概念，并设计了一种有偏的随机游走程序，该程序可以有效地探索各种邻域。</p>
-<a id="more"></a>
+    <h1 id="node2vec：-Scalable-Feature-Learning-for-Networks"><a href="#node2vec：-Scalable-Feature-Learning-for-Networks" class="headerlink" title="node2vec： Scalable Feature Learning for Networks"></a>node2vec： Scalable Feature Learning for Networks</h1><a id="more"></a>
+<h2 id="1-node2vec介绍"><a href="#1-node2vec介绍" class="headerlink" title="1. node2vec介绍"></a>1. node2vec介绍</h2><p>node2vec是一种用于学习网络中节点连续特征表示的算法框架，是一种在玩网络中可扩展的半监督特征学习学习算法，学习了节点特征的低维空间的映射，该映射最大程度地保留了节点的网络邻域，定义了网络邻域的灵活概念，并设计了一种有偏的随机游走程序，该程序可以有效地探索各种邻域。</p>
+<!-- more -->
 <p>node2vec学习节点的特征表示遵循<strong>两个原则</strong>：</p>
 <ol>
 <li>来自相同网络社区的节点的特征应该相似</li>
@@ -294,13 +295,19 @@
 <h2 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2. 相关工作"></a>2. 相关工作</h2><h3 id="2-1-特征学习框架"><a href="#2-1-特征学习框架" class="headerlink" title="2.1 特征学习框架"></a>2.1 特征学习框架</h3><p>网络中的特征学习可以看做是一个最大可能性优化问题。</p>
 <p>给定一个图 $G=(V,E)$，$f: V\rightarrow\mathbb{R}^d$ 是从节点到特征表示的映射函数，它是通过下游的预测任务来学习的一个 $|V|\times d$ 的矩阵。对于每个源节点 $u\in V$，$N_S(u)\subset V$ 是源节点通过邻域策略 $S$ 采样的得到的邻域节点。</p>
 <p>我们寻求优化以下目标函数，该函数最大化源节点 $u$ 特征表示 $f(u)$ 的网络邻域 $N_S(u)$ 的对数概率:</p>
-<script type="math/tex; mode=display">\max_f\sum_{u\in V}\log Pr(N_S(u)|f(u))\tag{1}</script><p>为了便于处理，做出如下两个假设：</p>
+<script type="math/tex; mode=display">
+\max_f\sum_{u\in V}\log Pr(N_S(u)|f(u))\tag{1}</script><p>为了便于处理，做出如下两个假设：</p>
 <ol>
-<li>条件独立性：假设观察到邻域节点的可能性独立于观察任何其他邻域节点：<script type="math/tex; mode=display">Pr(N_S(u)|f(u))=\prod_{n_i\in N_S(u)}Pr(n_i|f(u))</script></li>
-<li>特征空间对称：源节点和邻域节点在特征空间中彼此对称。因此，我们将每个源-邻节点对的条件似然概率建模为由其特征的点乘参数化的softmax单元：<script type="math/tex; mode=display">Pr(n_i|f(u))=\frac{\exp(f(n_i)\cdot f(u))}{\sum_{v\in V}\exp(f(v)\cdot f(u))}</script></li>
+<li>条件独立性：假设观察到邻域节点的可能性独立于观察任何其他邻域节点：</li>
 </ol>
-<p>根据上面两个假设，公式 (1) 可以简化为：</p>
-<script type="math/tex; mode=display">\max_f\sum_{u\in v}\bigg [-\log Z_u+\sum_{n_i\in N_S(u)}f(n_i)\cdot f(u)\bigg]\tag{2}</script><p>其中，$Z_u=\sum_{v\in V}\exp(f(u)\cdot f(v))$，由于该公式对于大规模的网络运算量太大，因此采用负采样来逼近它。</p>
+<script type="math/tex; mode=display">
+N_S(u)|f(u))=\prod_{n_i\in N_S(u)}Pr(n_i|f(u))</script><ol>
+<li>特征空间对称：源节点和邻域节点在特征空间中彼此对称。因此，我们将每个源-邻节点对的条件似然概率建模为由其特征的点乘参数化的softmax单元：</li>
+</ol>
+<script type="math/tex; mode=display">
+n_i|f(u))=\frac{\exp(f(n_i)\cdot f(u))}{\sum_{v\in V}\exp(f(v)\cdot f(u))}</script><p>根据上面两个假设，公式 (1) 可以简化为：</p>
+<script type="math/tex; mode=display">
+\max_f\sum_{u\in v}\bigg [-\log Z_u+\sum_{n_i\in N_S(u)}f(n_i)\cdot f(u)\bigg]\tag{2}</script><p>其中，$Z_u=\sum_{v\in V}\exp(f(u)\cdot f(v))$，由于该公式对于大规模的网络运算量太大，因此采用负采样来逼近它。</p>
 <h2 id="2-2-经典的搜索策略"><a href="#2-2-经典的搜索策略" class="headerlink" title="2.2 经典的搜索策略"></a>2.2 经典的搜索策略</h2><p>我们将对源节点的邻域进行采样的问题视为局部搜索的一种形式。下图展示了一个简单图，其中给定一个源节点 $u$，目的是采样出它的邻域节点 $N_S(u)$，为了公平比较不同的采样策略，将 $N_S(u)$ 的采样大小设为 $k$。</p>
 <div align=center><img src="g1.png"/></div>
 
@@ -308,7 +315,8 @@
 <h3 id="2-2-2-深度优先采样策略（DFS）"><a href="#2-2-2-深度优先采样策略（DFS）" class="headerlink" title="2.2.2 深度优先采样策略（DFS）"></a>2.2.2 深度优先采样策略（DFS）</h3><p>邻域 $N_S(u)$ 由在距源节点越来越远的节点顺序采样组成。 如上图，DFS采样 $s_4,s_5,s_6$。在DFS中，采样的节点可以更准确地反映邻域的宏观视图，这对于基于同构性推断社区至关重要。 但是，DFS的问题在于，不仅要推断网络中存在哪些节点到节点依赖关系，而且要表征这些依赖关系的确切性质，这一点很重要。 鉴于我们在样本数量上有一个限制，并且要探索的邻域很大，所以很难做到这一点。 其次，移动到更大的深度会导致复杂的依赖性，因为采样的节点可能离源头很远，并且<strong>代表性可能降低</strong>。</p>
 <h2 id="2-3-偏随机游走（BRW）"><a href="#2-3-偏随机游走（BRW）" class="headerlink" title="2.3 偏随机游走（BRW）"></a>2.3 偏随机游走（BRW）</h2><p>基于以上观察，我们设计了一种灵活的邻域采样策略，该策略使我们能够在BFS和DFS之间进行平衡。</p>
 <h4 id="2-2-3-1-随机游走（Random-Walk）"><a href="#2-2-3-1-随机游走（Random-Walk）" class="headerlink" title="2.2.3.1 随机游走（Random Walk）"></a>2.2.3.1 随机游走（Random Walk）</h4><p>对于给定的源节点 $u$，模拟一个长度为 $l$ 的随机游走。让 $c_i$ 代表随机游走的的第 $i$ 个节点，$c_0=u$，节点 $c_i$ 有以下公式生成：</p>
-<script type="math/tex; mode=display">P(c_i=x|c_{i-1}=v)=
+<script type="math/tex; mode=display">
+P(c_i=x|c_{i-1}=v)=
 \begin{cases}
     \frac{\pi_{vx}}{Z}, & \mathbf{if}(v,x)\in E\\
     0, &\mathbf{otherwise}
@@ -317,7 +325,8 @@
 <div align=center><img src="g2.png"></div>
 
 <p>本文定义了带参数 $p$ 和 $q$ 的二阶随机游走来知道采样。假设当前节点 $u$ 刚经过边 $(t, v)$，并且现在需要根据边 $(v, x)$ 的转移概率 $\pi_{vx}$ 来决定下一步往哪走。令未归一化的转移概率为 $\pi_{vx}=\alpha_{pq}(t,x)\cdot w_{vx}$,</p>
-<script type="math/tex; mode=display">\alpha_{pq}(t,x)=\begin{cases}
+<script type="math/tex; mode=display">
+\alpha_{pq}(t,x)=\begin{cases}
     \frac{1}{p},& \mathbf{if}\ d_{tx}=0\\
     1, &\mathbf{if}\ d_{tx}=1\\
     \frac{1}{q},&\mathbf{if}\ d_{tx}=2
@@ -705,11 +714,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">DL</a>
+                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
+                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -721,11 +730,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
+                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
+                <a href="javascript:void(0)" class="js-tag color3">DL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -734,6 +743,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -746,14 +763,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">word2vec</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
               </li>
             
             <div class="clearfix"></div>

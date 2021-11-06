@@ -10,12 +10,12 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="GPT-GNN: Generative Pre-Training of Graph Neural Networks摘要预训练模型在CV和NLP中已经得到了广泛的应用，这篇文章提出了在GNN使用自监督的方法预训练GNN的方法。训练GNN需要任务大量的标注数据，这是一个及其费力的事情。减少标注工作量的一种有效方法是使用自监督方法对未标注数据预先训练表达性的GNN模型，然后将学习到的模型转移到仅带有少量">
+  <meta name="description" content="GPT-GNN: Generative Pre-Training of Graph Neural Networks">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GPT-GNN: Generative Pre-Training of Graph Neural Networks">
 <meta property="og:url" content="https://over-shine.github.io/2020/08/29/GPT-GNN-Generative-Pre-Training-of-Graph-Neural-Networks/index.html">
 <meta property="og:site_name" content="吃了睡的程序猪">
-<meta property="og:description" content="GPT-GNN: Generative Pre-Training of Graph Neural Networks摘要预训练模型在CV和NLP中已经得到了广泛的应用，这篇文章提出了在GNN使用自监督的方法预训练GNN的方法。训练GNN需要任务大量的标注数据，这是一个及其费力的事情。减少标注工作量的一种有效方法是使用自监督方法对未标注数据预先训练表达性的GNN模型，然后将学习到的模型转移到仅带有少量">
+<meta property="og:description" content="GPT-GNN: Generative Pre-Training of Graph Neural Networks">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://over-shine.github.io/2020/08/29/GPT-GNN-Generative-Pre-Training-of-Graph-Neural-Networks/1.png">
 <meta property="og:image" content="https://over-shine.github.io/2020/08/29/GPT-GNN-Generative-Pre-Training-of-Graph-Neural-Networks/2.png">
@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://over-shine.github.io/2020/08/29/GPT-GNN-Generative-Pre-Training-of-Graph-Neural-Networks/5.png">
 <meta property="og:image" content="https://over-shine.github.io/2020/08/29/GPT-GNN-Generative-Pre-Training-of-Graph-Neural-Networks/6.png">
 <meta property="article:published_time" content="2020-08-29T08:35:06.000Z">
-<meta property="article:modified_time" content="2020-09-08T12:33:24.801Z">
+<meta property="article:modified_time" content="2021-11-06T06:56:23.161Z">
 <meta property="article:author" content="程序猪-渔枫">
 <meta property="article:tag" content="GNN">
 <meta name="twitter:card" content="summary">
@@ -287,8 +287,9 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="GPT-GNN-Generative-Pre-Training-of-Graph-Neural-Networks"><a href="#GPT-GNN-Generative-Pre-Training-of-Graph-Neural-Networks" class="headerlink" title="GPT-GNN: Generative Pre-Training of Graph Neural Networks"></a>GPT-GNN: Generative Pre-Training of Graph Neural Networks</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>预训练模型在CV和NLP中已经得到了广泛的应用，这篇文章提出了在GNN使用自监督的方法预训练GNN的方法。训练GNN需要任务大量的标注数据，这是一个及其费力的事情。减少标注工作量的一种有效方法是使用自监督方法对未标注数据预先训练表达性的GNN模型，然后将学习到的模型转移到仅带有少量标记的下游任务。本文GPT-GNN 框架，通过生成式预训练来初始化GNN。GPT-GNN引入了自监督的图属性生成任务来预训练GNN，以便它可以捕获图的结构和语义属性。它将图生成的可能性分解为两个部分：节点属性生成和边属性生成。</p>
-<a id="more"></a>
+    <h1 id="GPT-GNN-Generative-Pre-Training-of-Graph-Neural-Networks"><a href="#GPT-GNN-Generative-Pre-Training-of-Graph-Neural-Networks" class="headerlink" title="GPT-GNN: Generative Pre-Training of Graph Neural Networks"></a>GPT-GNN: Generative Pre-Training of Graph Neural Networks</h1><a id="more"></a>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>预训练模型在CV和NLP中已经得到了广泛的应用，这篇文章提出了在GNN使用自监督的方法预训练GNN的方法。训练GNN需要任务大量的标注数据，这是一个及其费力的事情。减少标注工作量的一种有效方法是使用自监督方法对未标注数据预先训练表达性的GNN模型，然后将学习到的模型转移到仅带有少量标记的下游任务。本文GPT-GNN 框架，通过生成式预训练来初始化GNN。GPT-GNN引入了自监督的图属性生成任务来预训练GNN，以便它可以捕获图的结构和语义属性。它将图生成的可能性分解为两个部分：节点属性生成和边属性生成。</p>
+<!-- more -->
 <p>通过对两个组件进行建模，GPT-GNN可以在生成过程中捕获节点属性和图结构之间的固有依赖性。对数十亿规模的Open Academic Graph和Amazon推荐数据进行的综合实验表明，GPT-GNN在不进行各种下游任务的预训练的情况下，显着优于最先进的GNN模型。</p>
 <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>图神经网络（GNN）的突破已经彻底改变了图挖掘从结构特征工程到表示学习。最近 GNN 已经被证明了有利于各种图应用和网络任务，如半监督的节点分类、推荐系统和知识推理等。</p>
 <p>通常，GNN将具有属性的图作为输入，并应用卷积过滤器逐层生成节点的表示。通常，针对输入图上的一项任务，以端到端的方式用监督信息训练GNN模型。也就是说，对于同一张图上的不同任务，需要具有足够多且不同的标记数据集，以训练对应于每个任务的专用GNN。通常，对于特定任务、特别是对于大规模图来说，很难找到合适的标注数据。例如，对于学术作者消歧任务来说，它仍然面临一个巨大的挑战。</p>
@@ -301,7 +302,8 @@
 <li>GPT-GNN 在两个大型图，1.79亿个节点和20亿条边的开放学术图（OAG）和1.13亿个节点的Amazon建议数据上对 GNN 进行了预训练。大量实验表明，GPT-GNN预训练框架可以显著是各种下游任务受益。例如，通过在 OAG 上应用预训练模型，与没有进行预训练的最新 GNN 模型相比，节点分类和链接预测性能平均提高了9.1％。此外，我们证明了 GPT-GNN 可以在各种设置下持续改善不同基础GNN的性能。</li>
 </ol>
 <h2 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2. 相关工作"></a>2. 相关工作</h2><p>预训练的目标是使得一个模型的权重可以使用预训练的权重来初始化。GNN可以被视作使用输入图结构作为计算图进行信息传递，在这个过程中领域信息被聚合获得更多的语境表示。本文中，用 $H_t^{(l)}$ 表示节点 $t$ 在第 $l$ 层的节点表示，从第 $(l-1)$ 层到第 $(l)$ 层的更新过程如下：</p>
-<script type="math/tex; mode=display">H_t^{l}\leftarrow\mathbf{Aggregate}_{\forall s\in N(t), \forall e\in E(s,t)}\big(\{\mathbf{Extract}(H_s^{(l-1)};H_t^{(l-1)};e)\}\big)\tag{1}</script><p>其中，$N_(t)$ 表示节点 $t$ 的所有源节点，$E(s,t)$ 表示节点 $s$ 到节点 $t$ 的边；$\mathbf{Extract}(\cdot)$ 表示领域信息提取操作，它使用目标节点 $t$ 的表示和两节点间的边作为 $query$，并从源节点 $H_s^{(l-1)}$ 提取有用的信息；$\mathbf{Aggregate}(\cdot)$ 作为领域信息的聚合函数，它的常见基本操作是取均值、取和、取最大值，也可以设计池化、正则化等聚合函数。</p>
+<script type="math/tex; mode=display">
+H_t^{l}\leftarrow\mathbf{Aggregate}_{\forall s\in N(t), \forall e\in E(s,t)}\big(\{\mathbf{Extract}(H_s^{(l-1)};H_t^{(l-1)};e)\}\big)\tag{1}</script><p>其中，$N_(t)$ 表示节点 $t$ 的所有源节点，$E(s,t)$ 表示节点 $s$ 到节点 $t$ 的边；$\mathbf{Extract}(\cdot)$ 表示领域信息提取操作，它使用目标节点 $t$ 的表示和两节点间的边作为 $query$，并从源节点 $H_s^{(l-1)}$ 提取有用的信息；$\mathbf{Aggregate}(\cdot)$ 作为领域信息的聚合函数，它的常见基本操作是取均值、取和、取最大值，也可以设计池化、正则化等聚合函数。</p>
 <p>基于注意力模型完成 $\mathbf{Extract}(\cdot)$ 通过评估每个源节点重要性，基于此，加权的聚合操作被提出。如 GAT 采用自适应的机制计算注意力并使用相同的权重计算信息；HGT对不同的关系类型使用多头注意力得到类型独立的注意力。GPT-GNN 可以所有的这些模型当中。</p>
 <h3 id="2-1-图的预训练"><a href="#2-1-图的预训练" class="headerlink" title="2.1 图的预训练"></a>2.1 图的预训练</h3><p>曾经的研究利用预训练学习节点表示，大致分为两类。</p>
 <ol>
@@ -310,17 +312,20 @@
 </ol>
 <p>随着对 GNN 关注的增多，研究人员已经探索 GNN 在无标签数据上的预训练。Kipf 等人提出 Variational Graph Auto-Encoders 去重构图结构；Hamilton 等人提出 GraphSAGE 通过使用基于随机游动的相似性度量，可以通过无监督的损失进行优化。Velickovic 等人提出 Graph Infomax，它最大化来自于 GNNs 和一个池化的图表示的节点表示之间的交互信息。尽管这些方法显示了对纯监督学习的增强，但通过迫使附近的节点具有相似的嵌入来实现学习任务，会忽略图丰富语义和高阶结构。 GPT-GNN 通过排列的生成目标对GNN进行预训练，这是一项更困难的图任务，因此可以指导模型学习输入图的更复杂的语义和结构。</p>
 <p>另外，尝试对 GNN 进行预训练以提取图级表示。Sun 等人提出的 InfoGraph 最大化来自于图表示和子结构表示之间的交互信息。Hu 等人引入不同的策略在节点和图两个级别上预训练 GPT-GNN，并表明将它们组合在一起可以提高图分类任务的性能。与它们不同的是，GPT-GNN 的目标是在一个大规模图上预训练 GNN 并进行节点级别的迁移。</p>
-<h2 id="3-通用-GNN-预训练"><a href="#3-通用-GNN-预训练" class="headerlink" title="3. 通用 GNN 预训练"></a>3. 通用 GNN 预训练</h2><h3 id="3-1-GNN-预训练问题"><a href="#3-1-GNN-预训练问题" class="headerlink" title="3.1 GNN 预训练问题"></a>3.1 GNN 预训练问题</h3><p>GNN 的输入通常是一个属性图 $G=(\mathcal{V}, \mathcal{E}, \mathcal{X})$，其中 $\mathcal{V}$ 和 $\mathcal{E}$ 代表图的节点集合边集，$\mathcal{X}$ 代表节点的特征矩阵。 </p>
+<h2 id="3-通用-GNN-预训练"><a href="#3-通用-GNN-预训练" class="headerlink" title="3. 通用 GNN 预训练"></a>3. 通用 GNN 预训练</h2><h3 id="3-1-GNN-预训练问题"><a href="#3-1-GNN-预训练问题" class="headerlink" title="3.1 GNN 预训练问题"></a>3.1 GNN 预训练问题</h3><p>GNN 的输入通常是一个属性图 $G=(\mathcal{V}, \mathcal{E}, \mathcal{X})$，其中 $\mathcal{V}$ 和 $\mathcal{E}$ 代表图的节点集合边集，$\mathcal{X}$ 代表节点的特征矩阵。</p>
 <p>GNN 模型在一个下游任务（如节点分类）的监督下学习输出节点的表示。有时在一个图上存在多个任务，并且大部分 GNN 对每一个下游任务要求足够的标注数据。然而，这是这是一个很大的阻碍。因此期望得到一个仅使用较少的标注数据就可以泛化的预训练模型，从理论上讲，这个模型应该可以捕获图潜在的结构和属性模式，并且在这张图上，可以使得各种下游任务受益。</p>
 <p>本文 GNN 预训练目标涉及仅基于单个（大型）图 $G =(\mathcal{V}, \mathcal{E}, \mathcal{X})$ 而不具有标注数据的通用 GNN 模型 $f_\theta$ 的学习，因此 $f_\theta$ 是在相同领域图或相同图上各种下游任务的一个好的初始权重。为了在图上训练一个不带标签的数据的通用 GNN 模型，提出了一个首要问题：<strong>如何在图上设计一个无监督学习任务来预训练 GNN 模型？</strong></p>
 <h3 id="3-2-通用预训练框架"><a href="#3-2-通用预训练框架" class="headerlink" title="3.2 通用预训练框架"></a>3.2 通用预训练框架</h3><p>受 NLP 和 CV 使用自监督方法预训练模型的启发，本文提出 GPT-GNN 模型，它通过重构/生成输入图的框架和属性来预训练 GNN 模型。</p>
 <p>形式上，给定一个输入图 $G =(\mathcal{V}, \mathcal{E}, \mathcal{X})$ 和一个 GNN 模型 $f_\theta$，我们将 GNN 在该图上的似然建模为 $p(G;θ)$，表示图 $G$ 中的节点如何分配和连接。 GPT-GNN 旨在通过最大化图的似然（即 $\theta^*=\max_\theta p(G;\theta)$）来预训练GNN 模型。</p>
 <p>然后，首要问题就变成了：<strong>如何正确建模$p(G;\theta)$ ？</strong></p>
 <p>目前，大多数现有的图生成方法都遵循以自回归的方式来分解概率目标，即图中的节点按顺序排列，并通过将每个新出现的节点链接到现有的边来生成边。类似，本文以一个排列向量 $\pi$ 来确定节点的顺序，其中 $i^\pi$ 表示排列向量 $\pi$ 中的第 $i$ 个位置的节点 $id$。因此，图分布 $p(G;\theta)$ 等价于所有可能排列的期望概率，即</p>
-<script type="math/tex; mode=display">p(G;\theta)=\mathbb{E}_\pi\big[p_\theta(X^\pi, E^\pi)\big]</script><p>其中，$X^\pi\in\mathbb{R}^{|\mathcal{V}|\times d}$ 表示排列的节点属性，$E$ 表示边集，$E_i^\pi$ 表示连接节点 $i^\pi$ 的所有边的集合。为简单起见，我们假定观察任意节点的顺序 $\pi$ 的概率均等，并且在以下各节中说明一个排列的生成过程时，也省略了下标 $\pi$。 给定一个排列顺序，我们可以自回归分解对数似然（每次迭代生成一个节点），如下所示：</p>
-<script type="math/tex; mode=display">\log p_\theta(X,E)=\sum_{i=1}^{|\mathcal{V}|}\log p_\theta(X_i,E_i|X_{<i}, E_{<i})\tag{2}</script><p>在每次迭代步骤 $i$，使用在之前迭代步骤生成的所有节点，它们的属性 $X_{&lt;i}$，这些节点之间的结构（边）$E_{&lt;i}$ 来生成新节点，包括节点属性 $X_i$ 和新节点与已存在节点之间的边集 $E_i$。本质上，在公式(2)中，的目标描述了一个属性图的自回归生成过程。问题变成了：<strong>怎样对条件概率 $p_\theta(X_i,E_i|X_{&lt;i},E_{&lt;i})$ 建模？</strong></p>
+<script type="math/tex; mode=display">
+p(G;\theta)=\mathbb{E}_\pi\big[p_\theta(X^\pi, E^\pi)\big]</script><p>其中，$X^\pi\in\mathbb{R}^{|\mathcal{V}|\times d}$ 表示排列的节点属性，$E$ 表示边集，$E_i^\pi$ 表示连接节点 $i^\pi$ 的所有边的集合。为简单起见，我们假定观察任意节点的顺序 $\pi$ 的概率均等，并且在以下各节中说明一个排列的生成过程时，也省略了下标 $\pi$。 给定一个排列顺序，我们可以自回归分解对数似然（每次迭代生成一个节点），如下所示：</p>
+<script type="math/tex; mode=display">
+\log p_\theta(X,E)=\sum_{i=1}^{|\mathcal{V}|}\log p_\theta(X_i,E_i|X_{<i}, E_{<i})\tag{2}</script><p>在每次迭代步骤 $i$，使用在之前迭代步骤生成的所有节点，它们的属性 $X_{&lt;i}$，这些节点之间的结构（边）$E_{&lt;i}$ 来生成新节点，包括节点属性 $X_i$ 和新节点与已存在节点之间的边集 $E_i$。本质上，在公式(2)中，的目标描述了一个属性图的自回归生成过程。问题变成了：<strong>怎样对条件概率 $p_\theta(X_i,E_i|X_{&lt;i},E_{&lt;i})$ 建模？</strong></p>
 <h3 id="3-3-分解属性图"><a href="#3-3-分解属性图" class="headerlink" title="3.3 分解属性图"></a>3.3 分解属性图</h3><p>为了计算条件概率 $p_\theta(X_i,E_i|X_{&lt;i},E_{&lt;i})$，一个简单方法是假设 $X_i$ 和 $E_i$ 是独立的，</p>
-<script type="math/tex; mode=display">p_\theta(X_i,E_i|X_{<i},E_{<i})=p_\theta(X_i|X_{<i},E_{<i})\cdot p_\theta(E_i|X_{<i},E_{<i})</script><p>这样分解，对于每个节点，它的属性和连接是完全忽略的，然而，忽略的这种依赖关系是属性图的核心属性，并且也是 GNN 中卷积聚合的基础。因此，这样简单的分解不能为预训练 GNN 提供信息指导。</p>
+<script type="math/tex; mode=display">
+p_\theta(X_i,E_i|X_{<i},E_{<i})=p_\theta(X_i|X_{<i},E_{<i})\cdot p_\theta(E_i|X_{<i},E_{<i})</script><p>这样分解，对于每个节点，它的属性和连接是完全忽略的，然而，忽略的这种依赖关系是属性图的核心属性，并且也是 GNN 中卷积聚合的基础。因此，这样简单的分解不能为预训练 GNN 提供信息指导。</p>
 <p>为了解决这个问题，为属性图生成过程提出了<strong>依赖感知的因式分解机制</strong>。具体来说，在估算新节点的属性时，我们会得到其结构信息，反之亦然。 在此过程中，已经观察到（或生成了）部分边缘。 然后可以将生成分解为两个耦合部分：</p>
 <ol>
 <li>给定观察的边，生成节点属性；</li>
@@ -342,10 +347,13 @@ p_{\theta}\left(X_{i}, E_{i} \mid X_{<i}, E_{<i}\right)
 </ol>
 <p>把修正过的图输入到 GNN 模型并生成输出表示，用 $h^{Attr}$ 和 $h^{Edge}$ 表示属性生成和变生成节点的输出嵌入。由于属性生成节点的属性被屏蔽掉，因此 $h^{Attr}$ 通常包含的信息少于 $h^{Edge}$。 因此，在进行 GNN 消息传递时，我们仅将边生成节点的输出 $h^{Edge}$ 用作向外消息。然后使用两组节点的表示来生成具有不同解码器的属性和边。</p>
 <p><strong>对于属性生成：</strong> 用 $Dec^{Attr}(\cdot)$ 代表它的编码器，它使用 $h^{Attr}$ 作为输入并且生成被 mask 的属性。建模选择取决于属性的类型。例如，如果节点的输入属性是文本，则可以使用文本生成器模型（例如LSTM）来生成它。 如果输入属性是标准向量，则可以应用多层感知器来生成它。 另外，我们定义了距离函数作为生成的属性和真实属性之间的度量，例如文本的困惑或向量的L2距离。 因此，我们通过以下方式计算属性生成损失：</p>
-<script type="math/tex; mode=display">\mathcal{L}_i^{Attr}=Distance(Dec^{Attr}(h_i^{Attr}),X_i)\tag{4}</script><p>通过最小化生成属性和遮盖属性之间的距离，就等价于最大化观察每个节点属性的似然（即 $p_\theta(X_i|E_{i,o},X_{&lt;i},E_{&lt;i})$），因此这个与训练模型可以捕获图的语义。</p>
+<script type="math/tex; mode=display">
+\mathcal{L}_i^{Attr}=Distance(Dec^{Attr}(h_i^{Attr}),X_i)\tag{4}</script><p>通过最小化生成属性和遮盖属性之间的距离，就等价于最大化观察每个节点属性的似然（即 $p_\theta(X_i|E_{i,o},X_{&lt;i},E_{&lt;i})$），因此这个与训练模型可以捕获图的语义。</p>
 <p><strong>对于边生成：</strong> 每条边的生成是相互独立的，因此可以分解似然如下：</p>
-<script type="math/tex; mode=display">p_\theta(E_{i,\lnot o}|E_{i,o},X_{\leq i},E_{<i})=\prod_{j^+\in E_{i,\lnot o}}p_\theta(j^+|E_{i,o},X_{\leq i}, E_{<i})\tag{5}</script><p>之后，在得到边生成节点表示 $h^{Edge}$ 后，通过 $Dec^{Edge}(h_i^{Edge}, h_j^{Edge})$ 对节点 $i$ 与节点 $j$ 的连接可能性进行建模，其中 $Dec^{Edge}$ 是一个成对的得分函数。最后，采用负对比估计来计算每个连接节点 $j^+$ 的可能性。我们将所有未连接的节点设为 $S_i^-$ 并通过如下公式计算对比损失：</p>
-<script type="math/tex; mode=display">\mathcal{L}_{i}^{E d g e}=-\sum_{j^{+} \in E_{i, \neg o}} \log \frac{\exp \left(\operatorname{Dec}^{E d g e}\left(h_{i}^{E d g e}, h_{j^{+}}^{E d g e}\right)\right)}{\sum_{j \in S_{i}^{-} \cup\left\{j^{+}\right\}} \exp \left(\operatorname{Dec}^{E d g e}\left(h_{i}^{E d g e}, h_{j}^{E d g e}\right)\right)}\tag{6}</script><p>通过优化 $\mathcal{L}_i^{Edge}$，等价于最大化生成所有边的可能性，因此这个预训练模型可以捕获图的内在可够。</p>
+<script type="math/tex; mode=display">
+p_\theta(E_{i,\lnot o}|E_{i,o},X_{\leq i},E_{<i})=\prod_{j^+\in E_{i,\lnot o}}p_\theta(j^+|E_{i,o},X_{\leq i}, E_{<i})\tag{5}</script><p>之后，在得到边生成节点表示 $h^{Edge}$ 后，通过 $Dec^{Edge}(h_i^{Edge}, h_j^{Edge})$ 对节点 $i$ 与节点 $j$ 的连接可能性进行建模，其中 $Dec^{Edge}$ 是一个成对的得分函数。最后，采用负对比估计来计算每个连接节点 $j^+$ 的可能性。我们将所有未连接的节点设为 $S_i^-$ 并通过如下公式计算对比损失：</p>
+<script type="math/tex; mode=display">
+\mathcal{L}_{i}^{E d g e}=-\sum_{j^{+} \in E_{i, \neg o}} \log \frac{\exp \left(\operatorname{Dec}^{E d g e}\left(h_{i}^{E d g e}, h_{j^{+}}^{E d g e}\right)\right)}{\sum_{j \in S_{i}^{-} \cup\left\{j^{+}\right\}} \exp \left(\operatorname{Dec}^{E d g e}\left(h_{i}^{E d g e}, h_{j}^{E d g e}\right)\right)}\tag{6}</script><p>通过优化 $\mathcal{L}_i^{Edge}$，等价于最大化生成所有边的可能性，因此这个预训练模型可以捕获图的内在可够。</p>
 <div align=center><img src="1.png"/></div>
 
 <p>上图展示了属性图的生成过程：</p>
@@ -394,8 +402,8 @@ p_{\theta}\left(X_{i}, E_{i} \mid X_{<i}, E_{<i}\right)
 <p>在表1中，我们进一步将边生成任务与其他基于边的预训练方法（GAE和GraphSage（未分解））进行了比较。在OAG上，由 GPT-GNN 的边生成，GAE和GraphSage在不进行预训练的情况下所带来的性能改进分别为10.3％，7.4％和4.0％。在Amazon上，收益分别为5.2％，3.1％和1.3％。从比较中，我们有以下观察。首先，在两个数据集上，GAE和GPT-GNN的边生成都比GraphSage提供更好的结果，这表明在边上进行遮盖是用于自我监督的图表示学习的有效策略。如果没有边遮盖，该模型将为连接的节点保留类似的嵌入，因为我们希望预测的标签（是否链接了两个节点）已经在输入图结构中进行了编码。这样的信息泄漏会将边预测任务降级为一个小问题。其次，提出的的边生成任务始终胜过GAE。GPT-GNN边生成的主要优势在于，它学会自动生成缺失的边，从而可以捕获被掩盖的边之间的依赖关系，这些依赖关系已被GAE丢弃。总之，结果表明，提出的图生成任务可以为 GNN 预训练提供丰富信息的自我监督。</p>
 <p><strong>在基础GNN上的 Ablation Study：</strong> 我们调查其他GNN架构是否可以从建议的预训练框架中受益。 因此，除了HGT，我们还尝试使用GCN，GAT ，RGCN 和 HAN 作为基础模型。具体来说，我们在OAG上对它们进行预训练，然后在组合迁移设置下使用论文-领域预测任务，其中10％训练数据以进行微调和测试。与模型无关的超参数（如隐藏的尺寸大小和优化）设置为相同。结果记录在表2中。我们可以观察到：</p>
 <ul>
-<li>1）HGT在所有非预训练的GNN模型中均达到最佳性能； </li>
-<li>2）带有HGT的GPT-GNN对于相关下游任务产生了最有希望的结果； </li>
+<li>1）HGT在所有非预训练的GNN模型中均达到最佳性能；</li>
+<li>2）带有HGT的GPT-GNN对于相关下游任务产生了最有希望的结果；</li>
 <li>3）<strong>更重要的是，提出的GPT-GNN预训练框架可以增强所有GNN体系结构的下游性能</strong>。</li>
 </ul>
 <div align=center><img src="4.png"></div>
@@ -407,8 +415,8 @@ p_{\theta}\left(X_{i}, E_{i} \mid X_{<i}, E_{<i}\right)
 
 <p><strong>同构图的结果：</strong> 除了异构图之外，我们还测试了GPT-GNN预训练框架是否可以使同构图上的下游任务受益。具体来说，我们在两个同构图上进行预训练和微调：</p>
 <ul>
-<li>1）从OAG的CS领域中提取的论文引文网络，对每个论文的主题进行预测； </li>
-<li>2）由Reddit帖子组成的Reddit网络，从中可以推断每个帖子的社区。 </li>
+<li>1）从OAG的CS领域中提取的论文引文网络，对每个论文的主题进行预测；</li>
+<li>2）由Reddit帖子组成的Reddit网络，从中可以推断每个帖子的社区。</li>
 </ul>
 <p>由于在同构图中只有一种类型的节点和边，因此我们需要一组边和属性解码器进行预训练。 HGT通过忽略其异质成分而用作基本的预训练模型。 表3中列出了带有10％标记数据的优化结果。我们可以观察到，两个同构图上的下游任务都可以从所有预训练框架中受益，其中建议的GPT-GNN提供最大的性能提升。</p>
 <div align=center><img src="6.png"></div>
@@ -792,11 +800,11 @@ p_{\theta}\left(X_{i}, E_{i} \mid X_{<i}, E_{<i}\right)
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">DL</a>
+                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
+                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -808,11 +816,11 @@ p_{\theta}\left(X_{i}, E_{i} \mid X_{<i}, E_{<i}\right)
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
+                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
+                <a href="javascript:void(0)" class="js-tag color3">DL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -821,6 +829,14 @@ p_{\theta}\left(X_{i}, E_{i} \mid X_{<i}, E_{<i}\right)
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -833,14 +849,6 @@ p_{\theta}\left(X_{i}, E_{i} \mid X_{<i}, E_{<i}\right)
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">word2vec</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
               </li>
             
             <div class="clearfix"></div>

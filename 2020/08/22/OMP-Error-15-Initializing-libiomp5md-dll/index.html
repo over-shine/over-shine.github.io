@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="OMP: Error #15: Initializing libiomp5md.dll报错信息如下：12OMP: Error #15: Initializing libiomp5md.dll, but found libiomp5md.dll already initialized.OMP: Hint This means that multiple copies of the OpenMP ru">
+  <meta name="description" content="OMP: Error #15: Initializing libiomp5md.dll">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OMP: Error #15: Initializing libiomp5md.dll">
 <meta property="og:url" content="https://over-shine.github.io/2020/08/22/OMP-Error-15-Initializing-libiomp5md-dll/index.html">
 <meta property="og:site_name" content="吃了睡的程序猪">
-<meta property="og:description" content="OMP: Error #15: Initializing libiomp5md.dll报错信息如下：12OMP: Error #15: Initializing libiomp5md.dll, but found libiomp5md.dll already initialized.OMP: Hint This means that multiple copies of the OpenMP ru">
+<meta property="og:description" content="OMP: Error #15: Initializing libiomp5md.dll">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-22T10:40:14.000Z">
-<meta property="article:modified_time" content="2020-08-24T04:59:31.810Z">
+<meta property="article:modified_time" content="2021-11-06T06:57:22.689Z">
 <meta property="article:author" content="程序猪-渔枫">
 <meta property="article:tag" content="Error">
 <meta property="article:tag" content="Python">
@@ -281,9 +281,12 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="OMP-Error-15-Initializing-libiomp5md-dll"><a href="#OMP-Error-15-Initializing-libiomp5md-dll" class="headerlink" title="OMP: Error #15: Initializing libiomp5md.dll"></a>OMP: Error #15: Initializing libiomp5md.dll</h1><p>报错信息如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OMP: Error <span class="comment">#15: Initializing libiomp5md.dll, but found libiomp5md.dll already initialized.</span></span><br><span class="line">OMP: Hint This means that multiple copies of the OpenMP runtime have been linked into the program. That <span class="keyword">is</span> dangerous, since it can degrade performance <span class="keyword">or</span> cause incorrect results. The best thing to do <span class="keyword">is</span> to ensure that only a single OpenMP runtime <span class="keyword">is</span> linked into the process, e.g. by avoiding static linking of the OpenMP runtime <span class="keyword">in</span> any library. As an unsafe, unsupported, undocumented workaround you can set the environment variable KMP_DUPLICATE_LIB_OK=TRUE to allow the program to <span class="keyword">continue</span> to execute, but that may cause crashes <span class="keyword">or</span> silently produce incorrect results. For more information, please see http://www.intel.com/software/products/support/.</span><br></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p><strong>解决方法：</strong> 在文件中添加下面代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">&#x27;KMP_DUPLICATE_LIB_OK&#x27;</span>] = <span class="string">&#x27;True&#x27;</span></span><br></pre></td></tr></table></figure></p>
+    <h1 id="OMP-Error-15-Initializing-libiomp5md-dll"><a href="#OMP-Error-15-Initializing-libiomp5md-dll" class="headerlink" title="OMP: Error #15: Initializing libiomp5md.dll"></a>OMP: Error #15: Initializing libiomp5md.dll</h1><a id="more"></a>
+<p>报错信息如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OMP: Error <span class="comment">#15: Initializing libiomp5md.dll, but found libiomp5md.dll already initialized.</span></span><br><span class="line">OMP: Hint This means that multiple copies of the OpenMP runtime have been linked into the program. That <span class="keyword">is</span> dangerous, since it can degrade performance <span class="keyword">or</span> cause incorrect results. The best thing to do <span class="keyword">is</span> to ensure that only a single OpenMP runtime <span class="keyword">is</span> linked into the process, e.g. by avoiding static linking of the OpenMP runtime <span class="keyword">in</span> any library. As an unsafe, unsupported, undocumented workaround you can set the environment variable KMP_DUPLICATE_LIB_OK=TRUE to allow the program to <span class="keyword">continue</span> to execute, but that may cause crashes <span class="keyword">or</span> silently produce incorrect results. For more information, please see http://www.intel.com/software/products/support/.</span><br></pre></td></tr></table></figure>
+<!-- more -->
+<p><strong>解决方法：</strong> 在文件中添加下面代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">&#x27;KMP_DUPLICATE_LIB_OK&#x27;</span>] = <span class="string">&#x27;True&#x27;</span></span><br></pre></td></tr></table></figure>
 
     
 
@@ -655,11 +658,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">DL</a>
+                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
+                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,11 +674,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">pytorch</a>
+                <a href="javascript:void(0)" class="js-tag color4">GNN</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tensorflow</a>
+                <a href="javascript:void(0)" class="js-tag color3">DL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -684,6 +687,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -696,14 +707,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">word2vec</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Pytorch</a>
               </li>
             
             <div class="clearfix"></div>
